@@ -577,10 +577,8 @@ console.log(result);
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = <span class="string">"hello"</span>.replace(<span class="regexp">/(?=l)/g</span>, <span class="string">'#'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(result);</span><br><span class="line"><span class="comment">// =&gt; "he#l#lo"</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>(?!p) 就是 (?=p) 的反面意思，要求当前是一个位置，但不是 \b 前面的位置，其实 (?!\b) 说的就是 \B。</p>
-<pre><code>var result = &quot;hello&quot;.replace(/(?!l)/g, &apos;#&apos;);
-console.log(result);
-// =&gt; &quot;#h#ell#o#&quot; 
-</code></pre></li>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = <span class="string">"hello"</span>.replace(<span class="regexp">/(?!l)/g</span>, <span class="string">'#'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(result);</span><br><span class="line"><span class="comment">// =&gt; "#h#ell#o#"</span></span><br></pre></td></tr></table></figure>
+</li>
 </ul>
 <h4 id="lt-p-和-lt-p"><a href="#lt-p-和-lt-p" class="headerlink" title="(?&lt;=p) 和 (?&lt;!p)"></a>(?&lt;=p) 和 (?&lt;!p)</h4>
           
@@ -742,74 +740,21 @@ console.log(result);
 <h3 id="方法总结"><a href="#方法总结" class="headerlink" title="方法总结"></a>方法总结</h3><h5 id="1-test"><a href="#1-test" class="headerlink" title="1. test"></a>1. test</h5><ul>
 <li>如果字符串 string 中含有与 RegExpObject 匹配的文本，则返回 true，否则返回 false。</li>
 </ul>
-<pre><code>RegExpObject.test(string)
-
-var str = &quot;Visit W3School&quot;;
-var patt1 = new RegExp(&quot;W3School&quot;);
-
-var result = patt1.test(str);
-
-document.write(&quot;Result: &quot; + result);
-//匹配ip
-/((25[0-5])|(2[0-4]\d)|(1\d{2})|([1-9]?\d)\.){3}(25[0-5])|(2[0-4]\d)|(1\d{2})|([1-9]?\d)/.test(&quot;10.243.19.86&quot;); //true
-</code></pre><h5 id="2-match"><a href="#2-match" class="headerlink" title="2. match"></a>2. match</h5><ul>
-<li><p>存放匹配结果的数组。该数组的内容依赖于 regexp 是否具有全局标志 g。</p>
-<pre><code>var str=&quot;1 plus 2 equal 3&quot;
-str.match(/\d+/g)//[1,2,3]
-</code></pre></li>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">RegExpObject.test(string)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> str = <span class="string">"Visit W3School"</span>;</span><br><span class="line"><span class="keyword">var</span> patt1 = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">"W3School"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> result = patt1.test(str);</span><br><span class="line"></span><br><span class="line"><span class="built_in">document</span>.write(<span class="string">"Result: "</span> + result);</span><br><span class="line"><span class="comment">//匹配ip</span></span><br><span class="line">/((<span class="number">25</span>[<span class="number">0</span><span class="number">-5</span>])|(<span class="number">2</span>[<span class="number">0</span><span class="number">-4</span>]\d)|(<span class="number">1</span>\d&#123;<span class="number">2</span>&#125;)|([<span class="number">1</span><span class="number">-9</span>]?\d)\.)&#123;<span class="number">3</span>&#125;(<span class="number">25</span>[<span class="number">0</span><span class="number">-5</span>])|(<span class="number">2</span>[<span class="number">0</span><span class="number">-4</span>]\d)|(<span class="number">1</span>\d&#123;<span class="number">2</span>&#125;)|([<span class="number">1</span><span class="number">-9</span>]?\d)/.test(<span class="string">"10.243.19.86"</span>); <span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+<h5 id="2-match"><a href="#2-match" class="headerlink" title="2. match"></a>2. match</h5><ul>
+<li>存放匹配结果的数组。该数组的内容依赖于 regexp 是否具有全局标志 g。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str=<span class="string">"1 plus 2 equal 3"</span></span><br><span class="line">str.match(<span class="regexp">/\d+/g</span>)<span class="comment">//[1,2,3]</span></span><br></pre></td></tr></table></figure>
+</li>
 </ul>
 <h5 id="3-search"><a href="#3-search" class="headerlink" title="3. search"></a>3. search</h5><ul>
 <li>search() 方法用于检索字符串中指定的子字符串，或检索与正则表达式相匹配的子字符串。</li>
-<li><p>stringObject 中第一个与 regexp 相匹配的子串的起始位置。</p>
-<p>  var str=”Visit W3School!”<br>  str.search(/W3School/) //6</p>
+<li>stringObject 中第一个与 regexp 相匹配的子串的起始位置。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str=<span class="string">"Visit W3School!"</span></span><br><span class="line">str.search(<span class="regexp">/W3School/</span>) <span class="comment">//6</span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h5 id="4-replace"><a href="#4-replace" class="headerlink" title="4. replace"></a>4. replace</h5><ul>
-<li><p>replace() 方法用于在字符串中用一些字符替换另一些字符，或替换一个与正则表达式匹配的子串。</p>
-<pre><code>stringObject.replace(regexp/substr,replacement)
-</code></pre></li>
-<li><p>regexp/substr    必需。规定子字符串或要替换的模式的 RegExp 对象。</p>
+<li>replace() 方法用于在字符串中用一些字符替换另一些字符，或替换一个与正则表达式匹配的子串。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">        stringObject.replace(regexp/substr,replacement)</span><br><span class="line"> <span class="string">``</span><span class="string">`       </span></span><br><span class="line"><span class="string">- regexp/substr	必需。规定子字符串或要替换的模式的 RegExp 对象。</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">- 请注意，如果该值是一个字符串，则将它作为要检索的直接量文本模式，而不是首先被转换为 RegExp 对象。</span></span><br><span class="line"><span class="string">- replacement 必需。一个字符串值。规定了替换文本或生成替换文本的函数。</span></span><br><span class="line"><span class="string">- 一个新的字符串，是用 replacement 替换了 regexp 的第一次匹配或所有匹配之后得到的。</span></span><br><span class="line"><span class="string">- 字符串 stringObject 的 replace() 方法执行的是查找并替换的操作。它将在 stringObject 中查找与 regexp 相匹配的子字符串，然后用 replacement 来替换这些子串。如果 regexp 具有全局标志 g，那么 replace() 方法将替换所有匹配的子串。否则，它只替换第一个匹配子串。</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">- replacement 可以是字符串，也可以是函数。如果它是字符串，那么每个匹配都将由字符串替换。但是 replacement 中的 $ 字符具有特定的含义。</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">- $1、$2、...、$99	与 regexp 中的第 1 到第 99 个子表达式相匹配的文本。</span></span><br><span class="line"><span class="string">- $&amp;	与 regexp 相匹配的子串。</span></span><br><span class="line"><span class="string">- $`</span>	位于匹配子串左侧的文本。</span><br><span class="line">- $<span class="string">'	位于匹配子串右侧的文本。</span></span><br><span class="line"><span class="string">- $$	直接量符号。</span></span><br><span class="line"><span class="string">- ==第二个参数为函数时，每次匹配都会调用该函数，函数的返回值将作为替换文本执行匹配操作，同时函数可以接收于$为前缀的特殊字符组合，用来匹配文本的相关信息进行引用==</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">``` javascript</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        let s = "张三56分，李四74分，王五92分，赵六84分",</span></span><br><span class="line"><span class="string">    		a = s.match(/\d+/g),</span></span><br><span class="line"><span class="string">    		sum = 0;</span></span><br><span class="line"><span class="string">    		</span></span><br><span class="line"><span class="string">    	for(var i = 0; i&lt;a.length;i++)&#123;</span></span><br><span class="line"><span class="string">    		sum += parseFloat(a[i]);</span></span><br><span class="line"><span class="string">    	&#125;</span></span><br><span class="line"><span class="string">    	</span></span><br><span class="line"><span class="string">    	let avg = sum/a.length;</span></span><br><span class="line"><span class="string">    	</span></span><br><span class="line"><span class="string">    	function f(a,b,c)&#123;</span></span><br><span class="line"><span class="string">    		console.log('</span>a<span class="string">',a); //56分,74分,92分,84分//匹配内容</span></span><br><span class="line"><span class="string">    		console.log('</span>b<span class="string">',b); //56,74,92,84 //第一个子表达式匹配的文本</span></span><br><span class="line"><span class="string">    		console.log('</span>c<span class="string">',c); //2,8,14,20 //位置索引</span></span><br><span class="line"><span class="string">    		let n = parseFloat(arguments[1]);</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    		return n + '</span>分<span class="string">' + '</span>(<span class="string">' +  ((n &gt; avg) ? ('</span>超出平均分<span class="string">' + (n - avg)) : ('</span>低于平均分<span class="string">' + (avg-n))) +'</span>分)<span class="string">';</span></span><br><span class="line"><span class="string">    	&#125;</span></span><br><span class="line"><span class="string">    	let s2 = s.replace(/(\d+)分/g,f);</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    	console.log('</span>s2<span class="string">',s2); </span></span><br><span class="line"><span class="string">    	</span></span><br><span class="line"><span class="string">    	//s2 张三56分(低于平均分20.5分)，李四74分(低于平均分2.5分)，王五92分(超出平均分15.5分)，赵六84分(超出平均分7.5分)</span></span><br></pre></td></tr></table></figure>
 </li>
-<li><p>请注意，如果该值是一个字符串，则将它作为要检索的直接量文本模式，而不是首先被转换为 RegExp 对象。</p>
-</li>
-<li>replacement 必需。一个字符串值。规定了替换文本或生成替换文本的函数。</li>
-<li>一个新的字符串，是用 replacement 替换了 regexp 的第一次匹配或所有匹配之后得到的。</li>
-<li><p>字符串 stringObject 的 replace() 方法执行的是查找并替换的操作。它将在 stringObject 中查找与 regexp 相匹配的子字符串，然后用 replacement 来替换这些子串。如果 regexp 具有全局标志 g，那么 replace() 方法将替换所有匹配的子串。否则，它只替换第一个匹配子串。</p>
-</li>
-<li><p>replacement 可以是字符串，也可以是函数。如果它是字符串，那么每个匹配都将由字符串替换。但是 replacement 中的 $ 字符具有特定的含义。</p>
-</li>
-<li><p>$1、$2、…、$99    与 regexp 中的第 1 到第 99 个子表达式相匹配的文本。</p>
-</li>
-<li>$&amp;    与 regexp 相匹配的子串。</li>
-<li>$`    位于匹配子串左侧的文本。</li>
-<li>$’    位于匹配子串右侧的文本。</li>
-<li>$$    直接量符号。</li>
-<li>==第二个参数为函数时，每次匹配都会调用该函数，函数的返回值将作为替换文本执行匹配操作，同时函数可以接收于$为前缀的特殊字符组合，用来匹配文本的相关信息进行引用==</li>
 </ul>
-<pre><code>let s = &quot;张三56分，李四74分，王五92分，赵六84分&quot;,
-    a = s.match(/\d+/g),
-    sum = 0;
-
-for(var i = 0; i&lt;a.length;i++){
-    sum += parseFloat(a[i]);
-}
-
-let avg = sum/a.length;
-
-function f(a,b,c){
-    console.log(&apos;a&apos;,a); //56分,74分,92分,84分//匹配内容
-    console.log(&apos;b&apos;,b); //56,74,92,84 //第一个子表达式匹配的文本
-    console.log(&apos;c&apos;,c); //2,8,14,20 //位置索引
-    let n = parseFloat(arguments[1]);
-
-    return n + &apos;分&apos; + &apos;(&apos; +  ((n &gt; avg) ? (&apos;超出平均分&apos; + (n - avg)) : (&apos;低于平均分&apos; + (avg-n))) +&apos;分)&apos;;
-}
-let s2 = s.replace(/(\d+)分/g,f);
-
-console.log(&apos;s2&apos;,s2); 
-
-//s2 张三56分(低于平均分20.5分)，李四74分(低于平均分2.5分)，王五92分(超出平均分15.5分)，赵六84分(超出平均分7.5分)
-</code></pre><h5 id="5-exec"><a href="#5-exec" class="headerlink" title="5. exec"></a>5. exec</h5><ul>
+<h5 id="5-exec"><a href="#5-exec" class="headerlink" title="5. exec"></a>5. exec</h5><ul>
 <li>返回一个数组，其中存放匹配的结果。如果未找到匹配，则返回值为 null。</li>
 <li><p>exec() 方法的功能非常强大，它是一个通用的方法，而且使用起来也比 test() 方法以及支持正则表达式的 String 对象的方法更为复杂。</p>
 </li>

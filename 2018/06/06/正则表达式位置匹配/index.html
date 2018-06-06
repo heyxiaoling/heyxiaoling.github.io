@@ -85,7 +85,7 @@
 <meta property="og:url" content="http://yoursite.com/2018/06/06/正则表达式位置匹配/index.html">
 <meta property="og:site_name" content="Hey">
 <meta property="og:description" content="位置匹配 在 ES5 中，共有 6 个锚：^、$、\b、\B、(?=p)、(?!p)把位置理解空字符，是对位置非常有效的理解方式。  ^ 和 $ ^（脱字符）匹配开头，在多行匹配中匹配行开头。 $（美元符号）匹配结尾，在多行匹配中匹配行结尾。比如我们把字符串的开头和结尾用 “#” 替换（位置可以替换成字符的！）： var result = &amp;quot;hello&amp;quot;.replace(/^|">
-<meta property="og:updated_time" content="2018-06-06T08:50:07.573Z">
+<meta property="og:updated_time" content="2018-06-06T08:51:42.112Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="正则表达式位置匹配">
 <meta name="twitter:description" content="位置匹配 在 ES5 中，共有 6 个锚：^、$、\b、\B、(?=p)、(?!p)把位置理解空字符，是对位置非常有效的理解方式。  ^ 和 $ ^（脱字符）匹配开头，在多行匹配中匹配行开头。 $（美元符号）匹配结尾，在多行匹配中匹配行结尾。比如我们把字符串的开头和结尾用 “#” 替换（位置可以替换成字符的！）： var result = &amp;quot;hello&amp;quot;.replace(/^|">
@@ -364,10 +364,8 @@ console.log(result);
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = <span class="string">"hello"</span>.replace(<span class="regexp">/(?=l)/g</span>, <span class="string">'#'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(result);</span><br><span class="line"><span class="comment">// =&gt; "he#l#lo"</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>(?!p) 就是 (?=p) 的反面意思，要求当前是一个位置，但不是 \b 前面的位置，其实 (?!\b) 说的就是 \B。</p>
-<pre><code>var result = &quot;hello&quot;.replace(/(?!l)/g, &apos;#&apos;);
-console.log(result);
-// =&gt; &quot;#h#ell#o#&quot; 
-</code></pre></li>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = <span class="string">"hello"</span>.replace(<span class="regexp">/(?!l)/g</span>, <span class="string">'#'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(result);</span><br><span class="line"><span class="comment">// =&gt; "#h#ell#o#"</span></span><br></pre></td></tr></table></figure>
+</li>
 </ul>
 <h4 id="lt-p-和-lt-p"><a href="#lt-p-和-lt-p" class="headerlink" title="(?&lt;=p) 和 (?&lt;!p)"></a>(?&lt;=p) 和 (?&lt;!p)</h4>
       
