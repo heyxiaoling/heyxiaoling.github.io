@@ -206,16 +206,6 @@
         </li>
       
         
-        <li class="menu-item menu-item-categories">
-          <a href="/categories/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            Categories
-          </a>
-        </li>
-      
-        
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
@@ -244,6 +234,664 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/06/正则表达式常用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hey">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ocx1796s4.bkt.clouddn.com/cat01.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hey">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/06/正则表达式常用/" itemprop="url">正则表达式常用</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-06T16:42:32+08:00">
+                2018-06-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/正则表达式/" itemprop="url" rel="index">
+                    <span itemprop="name">正则表达式</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h6 id=""><a href="#" class="headerlink" title="\"></a>\</h6><ul>
+<li>转义元字符<h6 id="点"><a href="#点" class="headerlink" title=".点"></a>.点</h6></li>
+<li>匹配除“\n”和”\r”之外的任何单个字符。要匹配包括“\n”和”\r”在内的任何字符，请使用像“[\s\S]”的模式。<h6 id="-1"><a href="#-1" class="headerlink" title="^"></a>^</h6></li>
+<li>匹配输入字行首<h6 id="-2"><a href="#-2" class="headerlink" title="$"></a>$</h6></li>
+<li>匹配输入行尾，$ 的意思是从右边，也就是末尾开始匹配<h6 id="-3"><a href="#-3" class="headerlink" title="*"></a>*</h6></li>
+<li>匹配前面表达式0次或者多次，贪婪匹配，尽可能多的匹配，等价于{0,}<h6 id="-4"><a href="#-4" class="headerlink" title="+"></a>+</h6></li>
+<li>匹配一次或者多次，贪婪匹配，等价于{1,}<h6 id="-5"><a href="#-5" class="headerlink" title="?"></a>?</h6></li>
+<li>匹配前面的表达式0次或者1一次，等价于{0,1}<h6 id="n"><a href="#n" class="headerlink" title="{n}"></a>{n}</h6></li>
+<li>匹配前面的表达式n次<h6 id="n-1"><a href="#n-1" class="headerlink" title="{n,}"></a>{n,}</h6></li>
+<li>匹配前面的表达式最少n次<h6 id="，-，-，-n-，-n-，-n-m"><a href="#，-，-，-n-，-n-，-n-m" class="headerlink" title="+? ，*?， ??， {n}?， {n,}?， {n,m}?"></a>+? ，*?， ??， {n}?， {n,}?， {n,m}?</h6></li>
+<li><p>非贪婪匹配，尽可能少的皮配</p>
+<pre><code>var str = &apos;goooogle‘;
+var reg1 = /o+/;   //&quot;goooo&quot;
+var reg2 = /o+?/;  //&quot;go&quot;
+
+var str = &apos;goooogle‘;
+var reg1 = /o+gle/;  //&quot;oooogle&quot;
+var reg2 = /o+?gle/;  //&quot;oooogle&quot;
+</code></pre></li>
+</ul>
+<ul>
+<li>改过后的例子结果变为相同了，为什么 /o+?gle/ </li>
+<li>没有匹配到“ogle”呢？原来正则表达式中总是从左往右进行匹配的，不会从右边获取子串进行匹配。</li>
+</ul>
+<h6 id="-6"><a href="#-6" class="headerlink" title="."></a>.</h6><ul>
+<li>匹配除\r \n之外的任何单个字符</li>
+</ul>
+<h6 id="s-S"><a href="#s-S" class="headerlink" title="[\s\S]"></a>[\s\S]</h6><ul>
+<li>匹配任意字符</li>
+</ul>
+<h6 id="pattern"><a href="#pattern" class="headerlink" title="(?:pattern)"></a>(?:pattern)</h6><ul>
+<li>非获取匹配，匹配pattern但不获取匹配结果，不进行存储供以后使用。这在使用或字符“(|)”来组合一个模式的各个部分时很有用。例如“industr(?:y|ies)”就是一个比“industry|industries”更简略的表达式。</li>
+</ul>
+<h6 id="exp-，-exp"><a href="#exp-，-exp" class="headerlink" title="(?=exp) ，(?!exp)"></a>(?=exp) ，(?!exp)</h6><ul>
+<li><p>JS里只支持零宽先行断言。即零宽正预测先行断言”(?=exp)”和零宽负预测先行断言“(?!exp)”。所谓“零宽”，就是它并不在匹配的结果字符中占据空间。例如“\w”，”\s”就会占据一个或几个空间，依匹配的字符长度决定。而像”^”，”$”这种对应的首末位置，不占据空间，零宽就是属于这一类。</p>
+<pre><code>var str = &apos;java coffeescript&apos;;
+var reg1 = /\b\w+(?=script\b)/; //coffee 
+var reg2 = /\b\w+(?!script\b)/; //java
+</code></pre></li>
+<li><p>reg1为零宽正预测先行断言，”(?=script\b)”表示某单词需以“script”结尾，它代表着一种条件，不占有任何空间大小。</p>
+</li>
+<li>同样，reg2为零宽负预测先行断言，”(?!script\b)”表示不以“script”结尾的单词。</li>
+<li>另外，因为没有零宽后顾断言，不能判断某字符串的前面部分满足什么条件。但在JS中可以用多次正则表达式来实现：先匹配到要找的串，然后截取开头到index的字符子串，再匹配子串末尾是否符合需要的断言条件。具体用法可另外尝试一下<h6 id="x-y"><a href="#x-y" class="headerlink" title="x|y"></a>x|y</h6></li>
+<li>匹配x或者y<h6 id="xyz"><a href="#xyz" class="headerlink" title="[xyz]"></a>[xyz]</h6></li>
+<li>匹配xyz中的任意一个<h6 id="xyz-1"><a href="#xyz-1" class="headerlink" title="[^xyz]"></a>[^xyz]</h6></li>
+<li>匹配未包含的任意字符<h6 id="a-z"><a href="#a-z" class="headerlink" title="[a-z]"></a>[a-z]</h6></li>
+<li>匹配a到z字符<h6 id="a-z-1"><a href="#a-z-1" class="headerlink" title="[^a-z]"></a>[^a-z]</h6></li>
+<li>匹配不是a到z的字符<h6 id="b"><a href="#b" class="headerlink" title="\b"></a>\b</h6></li>
+<li>匹配单词边界<h6 id="B"><a href="#B" class="headerlink" title="\B"></a>\B</h6></li>
+<li>非单词匹配边界<h6 id="cx"><a href="#cx" class="headerlink" title="\cx"></a>\cx</h6></li>
+<li>匹配一个x指定的控制符，例如，\cM匹配一个Control-M或回车符。x的值必须为A-Z或a-z之一。否则，将c视为一个原义的“c”字符。<h6 id="d"><a href="#d" class="headerlink" title="\d"></a>\d</h6></li>
+<li>匹配一个数字[0-9]<h6 id="D"><a href="#D" class="headerlink" title="\D"></a>\D</h6></li>
+<li>匹配一个非数字[^0-9]<h6 id="f"><a href="#f" class="headerlink" title="\f"></a>\f</h6></li>
+<li>匹配换页符 匹配一个换页符。等价于\x0c和\cL。<h6 id="n-2"><a href="#n-2" class="headerlink" title="\n"></a>\n</h6></li>
+<li>匹配一个换行符。等价于\x0a和\cJ。<h6 id="r"><a href="#r" class="headerlink" title="\r"></a>\r</h6></li>
+<li>匹配一个回车符。等价于\x0d和\cM。<h6 id="s"><a href="#s" class="headerlink" title="\s"></a>\s</h6></li>
+<li>匹配任何不可见字符，包括空格、制表符、换页符等等。等价于[ \f\n\r\t\v]。<h6 id="S"><a href="#S" class="headerlink" title="\S"></a>\S</h6></li>
+<li>匹配任何可见字符，等价[^\f\n\r\t\v]<h6 id="t"><a href="#t" class="headerlink" title="\t"></a>\t</h6></li>
+<li>匹配一个制表符匹配一个制表符。等价于\x09和\cI。<h6 id="v"><a href="#v" class="headerlink" title="\v"></a>\v</h6></li>
+<li>匹配一个垂直制表符匹配一个垂直制表符。等价于\x0b和\cK。<h6 id="w"><a href="#w" class="headerlink" title="\w"></a>\w</h6></li>
+<li>匹配一个包含下划线的单词字符，类似但不等价于“[A-Za-z0-9_]”<h6 id="W"><a href="#W" class="headerlink" title="\W"></a>\W</h6></li>
+<li>匹配任何非单词字符，等价于[^a-zA-z0-9]<h6 id="xn"><a href="#xn" class="headerlink" title="\xn"></a>\xn</h6></li>
+<li>匹配n，其中n为十六进制转义值。十六进制转义值必须为确定的两个数字长。例如，“\x41”匹配“A”。“\x041”则等价于“\x04&amp;1”。正则表达式中可以使用ASCII编码。<h6 id="num"><a href="#num" class="headerlink" title="\num"></a>\num</h6></li>
+<li>匹配num，其中num是一个正整数。对所获取的匹配的引用。例如，“(.)\1”匹配两个连续的相同字符。</li>
+</ul>
+<h6 id="X"><a href="#X" class="headerlink" title="(?=X )"></a>(?=X )</h6><ul>
+<li><p>零宽度正先行断言。仅当子表达式 X 在 此位置的右侧匹配时才继续匹配。例如，/w+(?=\d)/ 与后跟数字的单词匹配，而不与该数字匹配。此构造不会回溯。</p>
+<pre><code>var str = &apos;java coffeescript&apos;;
+var reg1 = /\b\w+(?=script\b)/; //coffee 
+var reg2 = /\b\w+(?!script\b)/; //java
+</code></pre></li>
+</ul>
+<h6 id="X-1"><a href="#X-1" class="headerlink" title="(?!X)"></a>(?!X)</h6><ul>
+<li><p>零宽度负先行断言。仅当子表达式 X 不在 此位置的右侧匹配时才继续匹配。例如，例如，/w+(?!\d)/ 与后不跟数字的单词匹配，而不与该数字匹配 。</p>
+<pre><code>&apos;123asdf,12344&apos;.match(/\d{3}(?!\d)/);
+//[&quot;123&quot;, index: 0, input: &quot;123asdf,12344&quot;, groups: undefined]
+&apos;123asdf,12344&apos;.match(/\d{3}(?!\d)/g);
+//[&quot;123&quot;, &quot;344&quot;]
+</code></pre></li>
+</ul>
+<h6 id="lt-X"><a href="#lt-X" class="headerlink" title="(?&lt;=X)"></a>(?&lt;=X)</h6><ul>
+<li><p>零宽度正后发断言。仅当子表达式 X 在 此位置的左侧匹配时才继续匹配。例如，(?&lt;=19)99 与跟在 19 后面的 99 的实例匹配。此构造不会回溯。</p>
+<pre><code> var str = &apos;java coffeescriptadv&apos;;
+str.match(/(?&lt;=script)\w+/); //coffee
+</code></pre><p>   // [“adv”, index: 17, input: “java coffeescriptadv”, groups: undefined]</p>
+</li>
+</ul>
+<h6 id="lt-X-1"><a href="#lt-X-1" class="headerlink" title="(?&lt;!X)"></a>(?&lt;!X)</h6><ul>
+<li><p>零宽度负后发断言。仅当子表达式 X 不在此位置的左侧匹配时才继续匹配。例如，(?&lt;!19)99 与不跟在 19 后面的 99 的实例匹配</p>
+<pre><code>var str = &apos;java coffeescriptadv&apos;;
+str.match(/(?&lt;!script)\w+/); //coffee
+//[&quot;java&quot;, index: 0, input: &quot;java coffeescriptadv&quot;, groups: undefined] 
+</code></pre></li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/06/正则表达式位置匹配/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hey">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ocx1796s4.bkt.clouddn.com/cat01.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hey">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/06/正则表达式位置匹配/" itemprop="url">正则表达式位置匹配</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-06T16:42:16+08:00">
+                2018-06-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/正则表达式/" itemprop="url" rel="index">
+                    <span itemprop="name">正则表达式</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="位置匹配"><a href="#位置匹配" class="headerlink" title="位置匹配"></a>位置匹配</h1><blockquote>
+<p>在 ES5 中，共有 6 个锚：<br>^、$、\b、\B、(?=p)、(?!p)<br>把位置理解空字符，是对位置非常有效的理解方式。</p>
+</blockquote>
+<h4 id="和"><a href="#和" class="headerlink" title="^ 和 $"></a>^ 和 $</h4><ul>
+<li>^（脱字符）匹配开头，在多行匹配中匹配行开头。</li>
+<li><p>$（美元符号）匹配结尾，在多行匹配中匹配行结尾。<br>比如我们把字符串的开头和结尾用 “#” 替换（位置可以替换成字符的！）：</p>
+<pre><code>var result = &quot;hello&quot;.replace(/^|$/g, &apos;#&apos;);
+console.log(result);
+// =&gt; &quot;#hello#&quot;
+</code></pre></li>
+<li><p>多行匹配模式（即有修饰符 m）时，二者是行的概念，这一点需要我们注意：</p>
+<pre><code>var result = &quot;I\nlove\njavascript&quot;.replace(/^|$/gm, &apos;#&apos;);
+console.log(result);
+/*
+#I#
+#love#
+#javascript#
+*/
+</code></pre></li>
+</ul>
+<h4 id="b-和-B"><a href="#b-和-B" class="headerlink" title="\b 和 \B"></a>\b 和 \B</h4><ul>
+<li>\b 是单词边界，具体就是 \w 与 \W 之间的位置，也包括 \w 与 ^ 之间的位置，和 \w 与 $ 之间的位置。</li>
+<li>\B非单词边界。 \w 与 \w、 \W 与 \W、^ 与 \W，\W 与 $ 之间的位置。</li>
+</ul>
+<pre><code>var result = &quot;[JS] Lesson_01.mp4&quot;.replace(/\b/g, &apos;#&apos;);
+console.log(result);
+// =&gt; &quot;[#JS#] #Lesson_01#.#mp4#&quot;
+</code></pre><ul>
+<li><p>\w =&gt; [a-z0-9A-Z_] \W =&gt; [^0-9a-zA-Z_]</p>
+<pre><code>var result = &quot;[JS] Lesson_01.mp4&quot;.replace(/\B/g, &apos;#&apos;);
+console.log(result);
+// =&gt; &quot;#[J#S]# L#e#s#s#o#n#_#0#1.m#p#4&quot;
+</code></pre></li>
+</ul>
+<h4 id="p-和-p-是正向先行断言和负向先行断言"><a href="#p-和-p-是正向先行断言和负向先行断言" class="headerlink" title="(?=p) 和 (?!p) 是正向先行断言和负向先行断言"></a>(?=p) 和 (?!p) 是正向先行断言和负向先行断言</h4><ul>
+<li><p>(?=p)，其中 p 是一个子模式，即 p 前面的位置，或者说，该位置后面的字符要匹配 p。</p>
+<pre><code>var result = &quot;hello&quot;.replace(/(?=l)/g, &apos;#&apos;);
+console.log(result);
+// =&gt; &quot;he#l#lo&quot;
+</code></pre></li>
+<li><p>(?!p) 就是 (?=p) 的反面意思，要求当前是一个位置，但不是 \b 前面的位置，其实 (?!\b) 说的就是 \B。</p>
+<pre><code>var result = &quot;hello&quot;.replace(/(?!l)/g, &apos;#&apos;);
+console.log(result);
+// =&gt; &quot;#h#ell#o#&quot; 
+</code></pre></li>
+</ul>
+<h4 id="lt-p-和-lt-p"><a href="#lt-p-和-lt-p" class="headerlink" title="(?&lt;=p) 和 (?&lt;!p)"></a>(?&lt;=p) 和 (?&lt;!p)</h4>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/06/正则表达式学习总结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hey">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ocx1796s4.bkt.clouddn.com/cat01.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hey">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/06/正则表达式学习总结/" itemprop="url">正则表达式学习总结</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-06T16:41:08+08:00">
+                2018-06-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/正则表达式/" itemprop="url" rel="index">
+                    <span itemprop="name">正则表达式</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="学习总结"><a href="#学习总结" class="headerlink" title="学习总结"></a>学习总结</h1><blockquote>
+<p>正则表达式是匹配模式，要么匹配字符，要么匹配位置。</p>
+</blockquote>
+<h3 id="工作机制，基本步骤"><a href="#工作机制，基本步骤" class="headerlink" title="工作机制，基本步骤"></a>工作机制，基本步骤</h3><ol>
+<li>编译。检查模板有没有错误，然后执行</li>
+<li>设置起始位置</li>
+<li>匹配每个正则表达式的字元。当匹配特定字元失败时，正则表达式将试图回溯到扫描之前的位置，然后进入正则表达式其他可能的路径,默认是贪婪匹配,优先级来说，从左往右的次序匹配 &gt; 贪婪 / 懒惰匹配。</li>
+<li>匹配成功或者失败。失败后正则表达式引擎回到第二部</li>
+</ol>
+<h3 id="回溯"><a href="#回溯" class="headerlink" title="回溯"></a>回溯</h3><ul>
+<li>简单总结就是，正因为有多种可能，所以要一个一个试。直到，要么到某一步时，整体匹配成功了；要么最<br>后都试完后，发现整体匹配不成功。</li>
+<li>分支结构，可能前面的子模式会形成了局部匹配，如果接下来表达式整体不匹配时，仍会继续尝试剩下的分<br>支。这种尝试也可以看成一种回溯。</li>
+<li>贪婪量词“试”的策略是：买衣服砍价。价钱太高了，便宜点，不行，再便宜点。</li>
+<li>惰性量词“试”的策略是：卖东西加价。给少了，再多给点行不，还有点少啊，再给点。</li>
+<li>分支结构“试”的策略是：货比三家。这家不行，换一家吧，还不行，再换。</li>
+</ul>
+<h3 id="方法总结"><a href="#方法总结" class="headerlink" title="方法总结"></a>方法总结</h3><h5 id="1-test"><a href="#1-test" class="headerlink" title="1. test"></a>1. test</h5><ul>
+<li>如果字符串 string 中含有与 RegExpObject 匹配的文本，则返回 true，否则返回 false。</li>
+</ul>
+<pre><code>RegExpObject.test(string)
+
+var str = &quot;Visit W3School&quot;;
+var patt1 = new RegExp(&quot;W3School&quot;);
+
+var result = patt1.test(str);
+
+document.write(&quot;Result: &quot; + result);
+//匹配ip
+/((25[0-5])|(2[0-4]\d)|(1\d{2})|([1-9]?\d)\.){3}(25[0-5])|(2[0-4]\d)|(1\d{2})|([1-9]?\d)/.test(&quot;10.243.19.86&quot;); //true
+</code></pre><h5 id="2-match"><a href="#2-match" class="headerlink" title="2. match"></a>2. match</h5><ul>
+<li><p>存放匹配结果的数组。该数组的内容依赖于 regexp 是否具有全局标志 g。</p>
+<pre><code>var str=&quot;1 plus 2 equal 3&quot;
+str.match(/\d+/g)//[1,2,3]
+</code></pre></li>
+</ul>
+<h5 id="3-search"><a href="#3-search" class="headerlink" title="3. search"></a>3. search</h5><ul>
+<li>search() 方法用于检索字符串中指定的子字符串，或检索与正则表达式相匹配的子字符串。</li>
+<li><p>stringObject 中第一个与 regexp 相匹配的子串的起始位置。</p>
+<p>  var str=”Visit W3School!”<br>  str.search(/W3School/) //6</p>
+</li>
+</ul>
+<h5 id="4-replace"><a href="#4-replace" class="headerlink" title="4. replace"></a>4. replace</h5><ul>
+<li><p>replace() 方法用于在字符串中用一些字符替换另一些字符，或替换一个与正则表达式匹配的子串。</p>
+<pre><code>stringObject.replace(regexp/substr,replacement)
+</code></pre></li>
+<li><p>regexp/substr    必需。规定子字符串或要替换的模式的 RegExp 对象。</p>
+</li>
+<li><p>请注意，如果该值是一个字符串，则将它作为要检索的直接量文本模式，而不是首先被转换为 RegExp 对象。</p>
+</li>
+<li>replacement 必需。一个字符串值。规定了替换文本或生成替换文本的函数。</li>
+<li>一个新的字符串，是用 replacement 替换了 regexp 的第一次匹配或所有匹配之后得到的。</li>
+<li><p>字符串 stringObject 的 replace() 方法执行的是查找并替换的操作。它将在 stringObject 中查找与 regexp 相匹配的子字符串，然后用 replacement 来替换这些子串。如果 regexp 具有全局标志 g，那么 replace() 方法将替换所有匹配的子串。否则，它只替换第一个匹配子串。</p>
+</li>
+<li><p>replacement 可以是字符串，也可以是函数。如果它是字符串，那么每个匹配都将由字符串替换。但是 replacement 中的 $ 字符具有特定的含义。</p>
+</li>
+<li><p>$1、$2、…、$99    与 regexp 中的第 1 到第 99 个子表达式相匹配的文本。</p>
+</li>
+<li>$&amp;    与 regexp 相匹配的子串。</li>
+<li>$`    位于匹配子串左侧的文本。</li>
+<li>$’    位于匹配子串右侧的文本。</li>
+<li>$$    直接量符号。</li>
+<li>==第二个参数为函数时，每次匹配都会调用该函数，函数的返回值将作为替换文本执行匹配操作，同时函数可以接收于$为前缀的特殊字符组合，用来匹配文本的相关信息进行引用==</li>
+</ul>
+<pre><code>let s = &quot;张三56分，李四74分，王五92分，赵六84分&quot;,
+    a = s.match(/\d+/g),
+    sum = 0;
+
+for(var i = 0; i&lt;a.length;i++){
+    sum += parseFloat(a[i]);
+}
+
+let avg = sum/a.length;
+
+function f(a,b,c){
+    console.log(&apos;a&apos;,a); //56分,74分,92分,84分//匹配内容
+    console.log(&apos;b&apos;,b); //56,74,92,84 //第一个子表达式匹配的文本
+    console.log(&apos;c&apos;,c); //2,8,14,20 //位置索引
+    let n = parseFloat(arguments[1]);
+
+    return n + &apos;分&apos; + &apos;(&apos; +  ((n &gt; avg) ? (&apos;超出平均分&apos; + (n - avg)) : (&apos;低于平均分&apos; + (avg-n))) +&apos;分)&apos;;
+}
+let s2 = s.replace(/(\d+)分/g,f);
+
+console.log(&apos;s2&apos;,s2); 
+
+//s2 张三56分(低于平均分20.5分)，李四74分(低于平均分2.5分)，王五92分(超出平均分15.5分)，赵六84分(超出平均分7.5分)
+</code></pre><h5 id="5-exec"><a href="#5-exec" class="headerlink" title="5. exec"></a>5. exec</h5><ul>
+<li>返回一个数组，其中存放匹配的结果。如果未找到匹配，则返回值为 null。</li>
+<li><p>exec() 方法的功能非常强大，它是一个通用的方法，而且使用起来也比 test() 方法以及支持正则表达式的 String 对象的方法更为复杂。</p>
+</li>
+<li><p>如果 exec() 找到了匹配的文本，则返回一个结果数组。否则，返回 null。此数组的第 0 个元素是与正则表达式相匹配的文本，第 1 个元素是与 RegExpObject 的第 1 个子表达式相匹配的文本（如果有的话），第 2 个元素是与 RegExpObject 的第 2 个子表达式相匹配的文本（如果有的话），以此类推。除了数组元素和 length 属性之外，exec() 方法还返回两个属性。index 属性声明的是匹配文本的第一个字符的位置。input 属性则存放的是被检索的字符串 string。我们可以看得出，在调用非全局的 RegExp 对象的 exec() 方法时，返回的数组与调用方法 String.match() 返回的数组是相同的。</p>
+</li>
+<li><p>但是，当 RegExpObject 是一个全局正则表达式时，exec() 的行为就稍微复杂一些。它会在 RegExpObject 的 lastIndex 属性指定的字符处开始检索字符串 string。当 exec() 找到了与表达式相匹配的文本时，在匹配后，它将把 RegExpObject 的 lastIndex 属性设置为匹配文本的最后一个字符的下一个位置。这就是说，您可以通过反复调用 exec() 方法来遍历字符串中的所有匹配文本。当 exec() 再也找不到匹配的文本时，它将返回 null，并把 lastIndex 属性重置为 0。</p>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -1401,573 +2049,6 @@ componentDidUpdate :function(nextProp,nextState){
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/26/像素/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="hey">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ocx1796s4.bkt.clouddn.com/cat01.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hey">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/04/26/像素/" itemprop="url">像素</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-26T11:12:44+08:00">
-                2017-04-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Basic/" itemprop="url" rel="index">
-                    <span itemprop="name">Basic</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="设备像素"><a href="#设备像素" class="headerlink" title="设备像素"></a>设备像素</h4><ul>
-<li>（又叫物理像素）(大小是固定的，是不可变的)</li>
-</ul>
-<h4 id="设备独立像素"><a href="#设备独立像素" class="headerlink" title="设备独立像素"></a>设备独立像素</h4><ul>
-<li>（也叫密度无关像素，一般来讲是css里面的像素，在android机中CSS 像素就不叫”CSS 像素”了而是叫”设备独立像素”）(大小可变的)</li>
-</ul>
-<p>在PC端可以通过 screen.width/height属性来获取设备独立像素值，在PC端这个值把它当 成我们常说的屏幕分辨率（实际上它不是，但是由于在PC端设备像素和设备独立像素数值 相等，才有这么一个不准确的说法）。</p>
-<p>但你把浏览器切换到设备模式时，也就是在移动端   环境下通过上面的<br>screen.width/height获取的不是移动设备的分辨率，而是移动设备的屏宽/高（这里只是猜测），如：Iphone 5s下screen.width =320、screen.height =568。<br>本以为是浏览器里的设备环境没有完全模拟真实的移动设备环境，可是用真机测试时，还是出现同样的结果screen.width =320、screen.height=568。<br>值得注意的是：不管你手机是否切换到横屏，这两个值还是一样的。</p>
-<p>所以不管是移动端还是PC端通过screen.width/height获取的这个值是设备独立像素（CSS像素），而不是设备的屏幕分辨率，因为设备的屏幕分辨率对于WEB开发者来说是无法通过代码来获得的，是完全透明的。<br>#</p>
-<h5 id="设备像素和设备独立像素的关系"><a href="#设备像素和设备独立像素的关系" class="headerlink" title="设备像素和设备独立像素的关系"></a>设备像素和设备独立像素的关系</h5><ul>
-<li>pc:一个物理像素 = 一个设备独立像素</li>
-<li>ipone: 不确定</li>
-</ul>
-<h5 id="DPI与PPI（像素密度（pixeldensity）"><a href="#DPI与PPI（像素密度（pixeldensity）" class="headerlink" title="DPI与PPI（像素密度（pixeldensity）"></a>DPI与PPI（像素密度（pixeldensity）</h5><ul>
-<li>DPI（Dots Per Inch）是印刷行业中用来度量空间点密度用的，这个值是打印机每英寸可以喷的墨汁点数。计算机显示设备从打印机中借鉴了DPI的概念，由于计算机显示设备中的原子单位不是墨汁点而是像素，所以就创造了PPI（Pixels Per Inch），这个值是屏幕每英寸的像素数量，即像素密度（Screen density）。</li>
-<li>由于各种原因，目前PPI(主要是iOS)和DPI(比如在Android中)都会用在计算机显示设备的参数描述中，不过二者的意思是一样的，都是代表像素密度。</li>
-<li>PPI 全称是（pixel perinch）翻译下就是每英寸内有多少个像素点，这个像素点指的是设备像素点（物理像素），说得接地气点PPI就是像素密度（pixeldensity）。PPI的值越高，画质越好，也就是越细腻，看起来更有逼格。我来看看它的公式。</li>
-</ul>
-<p><img src="http://yunkus.com/wp-content/uploads/2016/07/physical-pixel-device-independent-pixels-1.jpg" alt=""></p>
-<p><img src="http://yunkus.com/wp-content/uploads/2016/07/physical-pixel-device-independent-pixels-2-1.png" alt=""></p>
-<blockquote>
-<p>以ipone6  Math.sqrt(Math.pow(1334,2) + Math.pow(750,2)) / 4.7 ~= 325.6122832234167 </p>
-</blockquote>
-<h5 id="HD与4K"><a href="#HD与4K" class="headerlink" title="HD与4K"></a>HD与4K</h5><ul>
-<li><p>现在移动设备、智能电视宣传最多的两个关键词估计就是HD、4K，这二者都是用来描述显示设备分辨率的标准，到底二者之间有什么区别？</p>
-</li>
-<li><p>HD(High-Definition)的分辨率要高于1280x720px或者720p。</p>
-</li>
-<li><p>Full HD的分辨率要高于1920x1080px，目前是主流电视以及高端手机（比如Galaxy SIV, HTC one, Sony Xperia Z, Nexus5等）采用的是这个分辨率。</p>
-</li>
-<li><p>4K（也叫做Quad HD或者Ultra HD）的分辨率从3840x2160起步，主要是现在高端电视的分辨率；其还有一个更高的4096x2160的标准，主要用于电影放映机或者专业相机。</p>
-</li>
-</ul>
-<h4 id="Retina"><a href="#Retina" class="headerlink" title="Retina"></a>Retina</h4><ul>
-<li>所谓“Retina”是一种显示技术，可以把更多的像素点压缩至一块屏幕里，从而达到更高的分辨率并提高屏幕显示的细腻程度。由摩托罗拉公司研发。最初该技术是用于Moto Aura上。这种分辨率在正常观看距离下足以使人肉眼无法分辨其中的单独像素。也被称为视网膜显示屏。</li>
-<li><p>一般来说，手机屏幕PPI达到300就可以叫做retina屏幕，视线距离在35CM左右，电脑屏幕PPI在220以上就可以称为retina屏幕，视线距离在60CM左右。macbook pro retina PPI为220，iPhone PPI为326，都被苹果命名retina屏幕。</p>
-</li>
-<li><p>Retina指的是像素视角的一个界限,即一个像素在视野里占有的角度,小于某个角度即为Retina.Retina宣传时通常使用像素密度来描述,即单位面积像素个数,常用单位是ppi.(已经假定了人眼离屏幕的距离)Retina不是分辨率指标.所以你无法比较二者的分辨率</p>
-</li>
-</ul>
-<h4 id="DP-PT-SP"><a href="#DP-PT-SP" class="headerlink" title="DP/PT/SP"></a>DP/PT/SP</h4><ul>
-<li><p>随着移动设备屏幕PPI的不断提高，对于开发者来说以前用物理像素(Physical Pixel)来度量显示元素的方法已经不奏效了。为了解决这个问题，两大平台都提出了抽象像素的概念：iOS叫做PT（Point，显示点），Android中叫做DP/DiP（Device independent Pixel，设备无关像素），如果没有特殊说明，以下统一用DP来进行描述。</p>
-</li>
-<li><p>举个例子，44x44dp的元素在非Retina屏幕中等于44x44px，在Retina屏幕中等于88x88px（变为4倍）。</p>
-</li>
-<li>SP（Scale-independent pixel）是缩放无关的像素，与DP和PT一样都是抽象像素，只不过用于描述字体的大小。</li>
-</ul>
-<h4 id="iOS中处理PPI"><a href="#iOS中处理PPI" class="headerlink" title="iOS中处理PPI"></a>iOS中处理PPI</h4><ul>
-<li><p>iOS中处理不同PPI显示的方法很简单：首先规定在多高的PPI下1DP等于1px，并以这个PPI作为基准（1x multiplier），如果显示设备的PPI是基准PPI的2倍，那么1DP等于2px（2x multiplier），其实就是简单的小学乘法。</p>
-</li>
-<li><p>在iPhone系列中，3G/S为1x multiplier，其他为2x multiplier：</p>
-</li>
-<li>在iOS中，同一个应用在非Retina屏幕和Retina屏幕显示的资源是不同的，其规则是： name.png为非Retina资源，<a href="mailto:name@2x.png" target="_blank" rel="noopener">name@2x.png</a>为Retina资源，所以对于设计人员来说，在你设计的时候需要考虑到Retina屏幕和非Retina屏幕</li>
-</ul>
-<h4 id="Android中处理PPI"><a href="#Android中处理PPI" class="headerlink" title="Android中处理PPI"></a>Android中处理PPI</h4><ul>
-<li>由于Android系统是开放的系统，要适配的PPI非常多，所以它对PPI划分的非常细：<ul>
-<li>ldpi (low) ~120dpi</li>
-<li>mdpi (medium) ~160dpi</li>
-<li>hdpi (high) ~240dpi</li>
-<li>xhdpi (extra-high) ~320dpi</li>
-<li>xxhdpi (extra-extra-high) ~480dpi</li>
-<li>xxxhdpi (extra-extra-extra-high) ~640dpi</li>
-</ul>
-</li>
-</ul>
-<h4 id="设备像素比"><a href="#设备像素比" class="headerlink" title="设备像素比"></a>设备像素比</h4><blockquote>
-<p>设备像素比 = 设备像素/设备独立像素 // 在某一方向上，x方向或者y方向</p>
-</blockquote>
-<blockquote>
-<p>你可以通过JavaScript 中的window.devicePixelRatio来获取设备中的像素比值。在css中，可以通过-webkit-device-pixel-ratio，-webkit-min-device-pixel-ratio和 -webkit-max-device-pixel-ratio进行媒体查询，对不同dpr的设备，做一些样式适配(这里只针对webkit内核的浏览器和webview)。</p>
-</blockquote>
-<blockquote>
-<p>在我自己电脑上测试 chrome 为2 ，360兼容模式undefined,极速模式为1</p>
-</blockquote>
-<p>#</p>
-<p>以iphone6为例：</p>
-<p>设备宽高为375×667，可以理解为设备独立像素(或css像素)。<br>dpr为2，根据上面的计算公式，其物理像素就应该×2，为750×1334。<br>用一张图来表现，就是这样(原谅我的盗图)：<br><img src="http://divio.qiniudn.com/FpXnQbkqJ8sqP82mmrIjYBxfliQL" alt=""></p>
-<p>上图中可以看出，对于这样的css样式：</p>
-<p><code>width: 2px;
-height: 2px;</code></p>
-<p>在不同的屏幕上(普通屏幕 vs retina屏幕)，css像素所呈现的大小(物理尺寸)是一致的，不同的是1个css像素所对应的物理像素个数是不一致的。</p>
-<p>在普通屏幕下，1个css像素 对应 1个物理像素(1:1)。<br>在retina 屏幕下，1个css像素对应 4个物理像素(1:4)。</p>
-<p>#</p>
-<h4 id="位图像素"><a href="#位图像素" class="headerlink" title="位图像素"></a>位图像素</h4><p>一个位图像素是栅格图像(如：png, jpg, gif等)最小的数据单元。每一个位图像素都包含着一些自身的显示信息(如：显示位置，颜色值，透明度等)。</p>
-<p>谈到这里，就得说一下，retina下图片的展示情况？</p>
-<p>理论上，1个位图像素对应于1个物理像素，图片才能得到完美清晰的展示。</p>
-<p>在普通屏幕下是没有问题的，但是在retina屏幕下就会出现位图像素点不够，从而导致图片模糊的情况。</p>
-<p>用一张图来表示：<br><img src="http://divio.qiniudn.com/Fuex59zSiV9pbaJG-s9wg_UpCERP" alt=""></p>
-<p>如上图：对于dpr=2的retina屏幕而言，1个位图像素对应于4个物理像素，由于单个位图像素不可以再进一步分割，所以只能就近取色，从而导致图片模糊(注意上述的几个颜色值)。</p>
-<p>所以，对于图片高清问题，比较好的方案就是两倍图片(@2x)。</p>
-<p>如：200×300(css pixel)img标签，就需要提供400×600的图片。</p>
-<p>如此一来，位图像素点个数就是原来的4倍，在retina屏幕下，位图像素点个数就可以跟物理像素点个数形成 1 : 1的比例，图片自然就清晰了(这也解释了之前留下的一个问题，为啥视觉稿的画布大小要×2？)。</p>
-<p>#</p>
-<p>这里就还有另一个问题，如果普通屏幕下，也用了两倍图片，会怎样呢？</p>
-<p>很明显，在普通屏幕下，200×300(css pixel)img标签，所对应的物理像素个数就是200×300个，而两倍图片的位图像素个数则是200×300*4，所以就出现一个物理像素点对应4个位图像素点，所以它的取色也只能通过一定的算法(显示结果就是一张只有原图像素总数四分之一，我们称这个过程叫做downsampling)，肉眼看上去虽然图片不会模糊，但是会觉得图片缺少一些锐利度，或者是有点色差(但还是可以接受的)。</p>
-<p>用一张图片来表示：</p>
-<p><img src="http://divio.qiniudn.com/FsYhT3m0Zq3ce-HLBOOlQfY9W2DD" alt=""></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/07/从浏览器输入url到显示/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="hey">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ocx1796s4.bkt.clouddn.com/cat01.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hey">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/03/07/从浏览器输入url到显示/" itemprop="url">从浏览器输入url到显示</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-07T13:19:37+08:00">
-                2017-03-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Basic/" itemprop="url" rel="index">
-                    <span itemprop="name">Basic</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="流程图"><a href="#流程图" class="headerlink" title="流程图"></a>流程图</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">graph TD</span><br><span class="line">A((URL)) --&gt; B[查看浏览器缓存]</span><br><span class="line">B --&gt; C&#123;有缓存&#125;</span><br><span class="line">B --&gt; D&#123;无缓存&#125;</span><br><span class="line">C --&gt; E[缓存未过期]</span><br><span class="line">C --&gt; F[缓存过期]</span><br><span class="line">F --&gt; H[请求资源,进入解析步骤]</span><br><span class="line">E --&gt; G[转码,渲染]</span><br><span class="line">D --&gt; I[解析url,获得协议,主机,端口,ip]</span><br><span class="line">I --&gt; J[组装成一个http请求]</span><br><span class="line">J --&gt; K[与服务器建立TCP连接]</span><br><span class="line">K --&gt; M[发送http请求]</span><br><span class="line">M --&gt; N[服务器接受请求,解析]</span><br><span class="line">N --&gt; |服务器检查请求头,验证缓存新鲜|O[服务器根据请求响应]</span><br><span class="line">O --&gt; P[通过TCP把响应报文发回浏览器]</span><br><span class="line">P --&gt; Q[浏览器接收http响应]</span><br><span class="line">P --&gt; 1[浏览器根据情况选择关闭TCP或者保持]</span><br><span class="line">Q --&gt; R[浏览器根据状态码做出处理]</span><br><span class="line">R --&gt; 2[资源可以缓存,进行缓存]</span><br><span class="line">R --&gt; S[对资源进行解码,如gzip解码]</span><br><span class="line">S --&gt; |解析html文档,构建DOM树,CSS树,执行脚本|3[渲染]</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">graph TD</span><br><span class="line">A((浏览器解析ip)) --&gt; B&#123;浏览器缓存&#125;</span><br><span class="line">B --&gt; C[本机缓存]</span><br><span class="line">C --&gt; D[hosts文件]</span><br><span class="line">D --&gt; E[路由器缓存]</span><br><span class="line">E --&gt; F[DNS缓存]</span><br><span class="line">F --&gt; G[isp网络供应商缓存]</span><br><span class="line">G --&gt; I[DNS递归查询]</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/03/理解CSRF/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="hey">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ocx1796s4.bkt.clouddn.com/cat01.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hey">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/03/03/理解CSRF/" itemprop="url">理解CSRF</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-03T10:31:01+08:00">
-                2017-03-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Basic/" itemprop="url" rel="index">
-                    <span itemprop="name">Basic</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="csrf-cross-site-reques-forgery跨站请求伪造"><a href="#csrf-cross-site-reques-forgery跨站请求伪造" class="headerlink" title="csrf(cross site reques forgery跨站请求伪造)"></a>csrf(cross site reques forgery跨站请求伪造)</h2><h3 id="csrf漏洞挖掘"><a href="#csrf漏洞挖掘" class="headerlink" title="csrf漏洞挖掘"></a>csrf漏洞挖掘</h3><ul>
-<li>目标表单是否有有效的token随机串</li>
-<li>目标表单是否有验证码</li>
-<li>目标是否判断了Referer来源</li>
-<li>网站根目录下的crossdomain.xml的“allow-access-from domain”是否是通配符</li>
-<li>目标json数据是否可以自定义callback函数</li>
-</ul>
-<h3 id="csrf实例"><a href="#csrf实例" class="headerlink" title="csrf实例"></a>csrf实例</h3><ul>
-<li>CSRF 攻击可以在受害者毫不知情的情况下以受害者名义伪造请求发送给受攻击站点，从而在并未授权的情况下执行在权限保护之下的操作。比如说，受害者 Bob 在银行有一笔存款，通过对银行的网站发送请求 <a href="http://bank.example/withdraw?account=bob&amp;amount=1000000&amp;for=bob2" target="_blank" rel="noopener">http://bank.example/withdraw?account=bob&amp;amount=1000000&amp;for=bob2</a> 可以使 Bob 把 1000000 的存款转到 bob2 的账号下。通常情况下，该请求发送到网站后，服务器会先验证该请求是否来自一个合法的 session，并且该 session 的用户 Bob 已经成功登陆。黑客 Mallory 自己在该银行也有账户，他知道上文中的 URL 可以把钱进行转帐操作。Mallory 可以自己发送一个请求给银行：<a href="http://bank.example/withdraw?account=bob&amp;amount=1000000&amp;for=Mallory。但是这个请求来自" target="_blank" rel="noopener">http://bank.example/withdraw?account=bob&amp;amount=1000000&amp;for=Mallory。但是这个请求来自</a> Mallory 而非 Bob，他不能通过安全认证，因此该请求不会起作用。这时，Mallory 想到使用 CSRF 的攻击方式，他先自己做一个网站，在网站中放入如下代码： src=”<a href="http://bank.example/withdraw?account=bob&amp;amount=1000000&amp;for=Mallory" target="_blank" rel="noopener">http://bank.example/withdraw?account=bob&amp;amount=1000000&amp;for=Mallory</a> ”，并且通过广告等诱使 Bob 来访问他的网站。当 Bob 访问该网站时，上述 url 就会从 Bob 的浏览器发向银行，而这个请求会附带 Bob 浏览器中的 cookie 一起发向银行服务器。大多数情况下，该请求会失败，因为他要求 Bob 的认证信息。但是，如果 Bob 当时恰巧刚访问他的银行后不久，他的浏览器与银行网站之间的 session 尚未过期，浏览器的 cookie 之中含有 Bob 的认证信息。这时，悲剧发生了，这个 url 请求就会得到响应，钱将从 Bob 的账号转移到 Mallory 的账号，而 Bob 当时毫不知情。等以后 Bob 发现账户钱少了，即使他去银行查询日志，他也只能发现确实有一个来自于他本人的合法请求转移了资金，没有任何被攻击的痕迹。而 Mallory 则可以拿到钱后逍遥法外。</li>
-</ul>
-<h3 id="理解csrf"><a href="#理解csrf" class="headerlink" title="理解csrf"></a>理解csrf</h3><ul>
-<li>在讨论如何抵御 CSRF 之前，先要明确 CSRF 攻击的对象，也就是要保护的对象。从以上的例子可知，CSRF<br>攻击是黑客借助受害者的 cookie 骗取服务器的信任，但是黑客并不能拿到 cookie，也看不到 cookie<br>的内容。另外，对于服务器返回的结果，由于浏览器同源策略的限制，黑客也无法进行解析。因此，黑客无法从返回的结果中得到任何东西，他所能做的就是给服务器发送请求，以执行请求中所描述的命令，在服务器端直接改变数据的值，而非窃取服务器中的数据。<br>所以，我们要保护的对象是那些可以直接产生数据改变的服务，而对于读取数据的服务，则不需要进行 CSRF 的保护。比如银行系统中转账的请求会直接改变账户的金额，会遭到 CSRF 攻击，需要保护。而查询余额是对金额的读取操作，不会改变数据，CSRF 攻击无法解析服务器返回的结果，无需保护。</li>
-</ul>
-<h3 id="防御csrf"><a href="#防御csrf" class="headerlink" title="防御csrf"></a>防御csrf</h3><ul>
-<li><p>判断Referer</p>
-<ul>
-<li>Referer 的值是由浏览器提供的，虽然 HTTP 协议上有明确的要求，但是每个浏览器对于 Referer 的具体实现可能有差别，并不能保证浏览器自身没有安全漏洞。使用验证 Referer 值的方法，就是把安全性都依赖于第三方（即浏览器）来保障，从理论上来讲，这样并不安全。事实上，对于某些浏览器，比如 IE6 或 FF2，目前已经有一些方法可以篡改 Referer 值。</li>
-<li>如果 bank.example 网站支持 IE6 浏览器，黑客完全可以把用户浏览器的 Referer 值设为以 bank.example 域名开头的地址，这样就可以通过验证，从而进行 CSRF 攻击。</li>
-<li>即便是使用最新的浏览器，黑客无法篡改 Referer 值，这种方法仍然有问题。因为 Referer 值会记录下用户的访问来源，有些用户认为这样会侵犯到他们自己的隐私权，特别是有些组织担心 Referer 值会把组织内网中的某些信息泄露到外网中。因此，用户自己可以设置浏览器使其在发送请求时不再提供 Referer。当他们正常访问银行网站时，网站会因为请求没有 Referer 值而认为是 CSRF 攻击，拒绝合法用户的访问。</li>
-</ul>
-</li>
-<li><p>token</p>
-<ul>
-<li>CSRF 主流防御方式是在后端生成表单的时候生成一串随机 token ，内置到表单里成为一个字段，同时，将此串 token 置入 session 中。每次表单提交到后端时都会检查这两个值是否一致，以此来判断此次表单提交是否是可信的。提交过一次之后，如果这个页面没有生成 CSRF token ，那么 token 将会被清空，如果有新的需求，那么 token 会被更新。</li>
-<li>CSRF 攻击之所以能够成功，是因为黑客可以完全伪造用户的请求，该请求中所有的用户验证信息都是存在于 cookie 中，因此黑客可以在不知道这些验证信息的情况下直接利用用户自己的 cookie 来通过安全验证。要抵御 CSRF，关键在于在请求中放入黑客所不能伪造的信息，并且该信息不存在于 cookie 之中。可以在 HTTP 请求中以参数的形式加入一个随机产生的 token，并在服务器端建立一个拦截器来验证这个 token，如果请求中没有 token 或者 token 内容不正确，则认为可能是 CSRF 攻击而拒绝该请求。</li>
-<li><font color="#f00">这种方法要比检查 Referer 要安全一些，token 可以在用户登陆后产生并放于 session 之中，然后在每次请求时把 token 从 session 中拿出，与请求中的 token 进行比对。</font></li>
-<li><p>但这种方法的难点在于如何把 token 以参数的形式加入请求。对于 GET 请求，token 将附在请求地址之后，这样 URL 就变成 <a href="http://url?csrftoken=tokenvalue。" target="_blank" rel="noopener">http://url?csrftoken=tokenvalue。</a> 而对于 POST 请求来说，要在 form 的最后加上</p>
-<pre><code>&lt;input type=”hidden” name=”csrftoken” value=”tokenvalue”/&gt;
-</code></pre></li>
-<li><p>这样就把 token 以参数的形式加入请求了。<br>但是，在一个网站中，可以接受请求的地方非常多，要对于每一个请求都加上 token 是很麻烦的，并且很容易漏掉，通常使用的方法就是在每次页面加载时，使用 javascript 遍历整个 dom 树，对于 dom 中所有的 a 和 form 标签后加入 token。这样可以解决大部分的请求，但是对于在页面加载之后动态生成的 html 代码，这种方法就没有作用，还需要程序员在编码时手动添加 token。</p>
-</li>
-<li>该方法还有一个缺点是难以保证 token 本身的安全。特别是在一些论坛之类支持用户自己发表内容的网站，黑客可以在上面发布自己个人网站的地址。由于系统也会在这个地址后面加上 token，黑客可以在自己的网站上得到这个 token，并马上就可以发动 CSRF 攻击。为了避免这一点，系统可以在添加 token 的时候增加一个判断，如果这个链接是链到自己本站的，就在后面添加 token，如果是通向外网则不加。不过，即使这个 csrftoken 不以参数的形式附加在请求之中，黑客的网站也同样可以通过 Referer 来得到这个 token 值以发动 CSRF 攻击。这也是一些用户喜欢手动关闭浏览器 Referer 功能的原因。</li>
-</ul>
-</li>
-<li><p>在 HTTP 头中自定义属性并验证</p>
-<ul>
-<li>这种方法也是使用 token 并进行验证，和上一种方法不同的是，这里并不是把 token 以参数的形式置于 HTTP 请求之中，而是把它放到 HTTP 头中自定义的属性里。通过 XMLHttpRequest 这个类，可以一次性给所有该类请求加上 csrftoken 这个 HTTP 头属性，并把 token 值放入其中。这样解决了上种方法在请求中加入 token 的不便，同时，通过 XMLHttpRequest 请求的地址不会被记录到浏览器的地址栏，也不用担心 token 会透过 Referer 泄露到其他网站中去。</li>
-<li><p>然而这种方法的局限性非常大。XMLHttpRequest 请求通常用于 Ajax 方法中对于页面局部的异步刷新，并非所有的请求都适合用这个类来发起，而且通过该类请求得到的页面不能被浏览器所记录下，从而进行前进，后退，刷新，收藏等操作，给用户带来不便。另外，对于没有进行 CSRF 防护的遗留系统来说，要采用这种方法来进行防护，要把所有请求都改为 XMLHttpRequest 请求，这样几乎是要重写整个网站，这代价无疑是不能接受的。</p>
-<pre><code>//HTTP 头中自定义属性
-//服务器端模拟http请求，XMLHttpRequest
-</code></pre></li>
-</ul>
-</li>
-</ul>
-<p>参考文章：<a href="http://www.ibm.com/developerworks/cn/web/1102_niugang_csrf/" target="_blank" rel="noopener">CSRF的攻击应对之道</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2022,7 +2103,7 @@ height: 2px;</code></p>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -2033,7 +2114,7 @@ height: 2px;</code></p>
               
               <div class="site-state-item site-state-categories">
                 
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">categories</span>
                 
               </div>

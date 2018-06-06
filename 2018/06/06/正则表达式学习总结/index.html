@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="前端知识，随想" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="学习总结 正则表达式是匹配模式，要么匹配字符，要么匹配位置。  工作机制，基本步骤 编译。检查模板有没有错误，然后执行 设置起始位置 匹配每个正则表达式的字元。当匹配特定字元失败时，正则表达式将试图回溯到扫描之前的位置，然后进入正则表达式其他可能的路径,默认是贪婪匹配,优先级来说，从左往右的次序匹配 &amp;gt; 贪婪 / 懒惰匹配。 匹配成功或者失败。失败后正则表达式引擎回到第二部  回溯 简单总结">
+<meta property="og:type" content="article">
+<meta property="og:title" content="正则表达式学习总结">
+<meta property="og:url" content="http://yoursite.com/2018/06/06/正则表达式学习总结/index.html">
+<meta property="og:site_name" content="Hey">
+<meta property="og:description" content="学习总结 正则表达式是匹配模式，要么匹配字符，要么匹配位置。  工作机制，基本步骤 编译。检查模板有没有错误，然后执行 设置起始位置 匹配每个正则表达式的字元。当匹配特定字元失败时，正则表达式将试图回溯到扫描之前的位置，然后进入正则表达式其他可能的路径,默认是贪婪匹配,优先级来说，从左往右的次序匹配 &amp;gt; 贪婪 / 懒惰匹配。 匹配成功或者失败。失败后正则表达式引擎回到第二部  回溯 简单总结">
+<meta property="og:updated_time" content="2018-06-06T08:43:09.021Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="正则表达式学习总结">
+<meta name="twitter:description" content="学习总结 正则表达式是匹配模式，要么匹配字符，要么匹配位置。  工作机制，基本步骤 编译。检查模板有没有错误，然后执行 设置起始位置 匹配每个正则表达式的字元。当匹配特定字元失败时，正则表达式将试图回溯到扫描之前的位置，然后进入正则表达式其他可能的路径,默认是贪婪匹配,优先级来说，从左往右的次序匹配 &amp;gt; 贪婪 / 懒惰匹配。 匹配成功或者失败。失败后正则表达式引擎回到第二部  回溯 简单总结">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/06/06/正则表达式学习总结/"/>
+
+
+
+
+
+  <title>正则表达式学习总结 | Hey</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hey</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-fe">
+          <a href="/fe/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-arrows-alt"></i> <br />
+            
+            fe
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/06/正则表达式学习总结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hey">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ocx1796s4.bkt.clouddn.com/cat01.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hey">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">正则表达式学习总结</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-06T16:41:08+08:00">
+                2018-06-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/正则表达式/" itemprop="url" rel="index">
+                    <span itemprop="name">正则表达式</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="学习总结"><a href="#学习总结" class="headerlink" title="学习总结"></a>学习总结</h1><blockquote>
+<p>正则表达式是匹配模式，要么匹配字符，要么匹配位置。</p>
+</blockquote>
+<h3 id="工作机制，基本步骤"><a href="#工作机制，基本步骤" class="headerlink" title="工作机制，基本步骤"></a>工作机制，基本步骤</h3><ol>
+<li>编译。检查模板有没有错误，然后执行</li>
+<li>设置起始位置</li>
+<li>匹配每个正则表达式的字元。当匹配特定字元失败时，正则表达式将试图回溯到扫描之前的位置，然后进入正则表达式其他可能的路径,默认是贪婪匹配,优先级来说，从左往右的次序匹配 &gt; 贪婪 / 懒惰匹配。</li>
+<li>匹配成功或者失败。失败后正则表达式引擎回到第二部</li>
+</ol>
+<h3 id="回溯"><a href="#回溯" class="headerlink" title="回溯"></a>回溯</h3><ul>
+<li>简单总结就是，正因为有多种可能，所以要一个一个试。直到，要么到某一步时，整体匹配成功了；要么最<br>后都试完后，发现整体匹配不成功。</li>
+<li>分支结构，可能前面的子模式会形成了局部匹配，如果接下来表达式整体不匹配时，仍会继续尝试剩下的分<br>支。这种尝试也可以看成一种回溯。</li>
+<li>贪婪量词“试”的策略是：买衣服砍价。价钱太高了，便宜点，不行，再便宜点。</li>
+<li>惰性量词“试”的策略是：卖东西加价。给少了，再多给点行不，还有点少啊，再给点。</li>
+<li>分支结构“试”的策略是：货比三家。这家不行，换一家吧，还不行，再换。</li>
+</ul>
+<h3 id="方法总结"><a href="#方法总结" class="headerlink" title="方法总结"></a>方法总结</h3><h5 id="1-test"><a href="#1-test" class="headerlink" title="1. test"></a>1. test</h5><ul>
+<li>如果字符串 string 中含有与 RegExpObject 匹配的文本，则返回 true，否则返回 false。</li>
+</ul>
+<pre><code>RegExpObject.test(string)
+
+var str = &quot;Visit W3School&quot;;
+var patt1 = new RegExp(&quot;W3School&quot;);
+
+var result = patt1.test(str);
+
+document.write(&quot;Result: &quot; + result);
+//匹配ip
+/((25[0-5])|(2[0-4]\d)|(1\d{2})|([1-9]?\d)\.){3}(25[0-5])|(2[0-4]\d)|(1\d{2})|([1-9]?\d)/.test(&quot;10.243.19.86&quot;); //true
+</code></pre><h5 id="2-match"><a href="#2-match" class="headerlink" title="2. match"></a>2. match</h5><ul>
+<li><p>存放匹配结果的数组。该数组的内容依赖于 regexp 是否具有全局标志 g。</p>
+<pre><code>var str=&quot;1 plus 2 equal 3&quot;
+str.match(/\d+/g)//[1,2,3]
+</code></pre></li>
+</ul>
+<h5 id="3-search"><a href="#3-search" class="headerlink" title="3. search"></a>3. search</h5><ul>
+<li>search() 方法用于检索字符串中指定的子字符串，或检索与正则表达式相匹配的子字符串。</li>
+<li><p>stringObject 中第一个与 regexp 相匹配的子串的起始位置。</p>
+<p>  var str=”Visit W3School!”<br>  str.search(/W3School/) //6</p>
+</li>
+</ul>
+<h5 id="4-replace"><a href="#4-replace" class="headerlink" title="4. replace"></a>4. replace</h5><ul>
+<li><p>replace() 方法用于在字符串中用一些字符替换另一些字符，或替换一个与正则表达式匹配的子串。</p>
+<pre><code>stringObject.replace(regexp/substr,replacement)
+</code></pre></li>
+<li><p>regexp/substr    必需。规定子字符串或要替换的模式的 RegExp 对象。</p>
+</li>
+<li><p>请注意，如果该值是一个字符串，则将它作为要检索的直接量文本模式，而不是首先被转换为 RegExp 对象。</p>
+</li>
+<li>replacement 必需。一个字符串值。规定了替换文本或生成替换文本的函数。</li>
+<li>一个新的字符串，是用 replacement 替换了 regexp 的第一次匹配或所有匹配之后得到的。</li>
+<li><p>字符串 stringObject 的 replace() 方法执行的是查找并替换的操作。它将在 stringObject 中查找与 regexp 相匹配的子字符串，然后用 replacement 来替换这些子串。如果 regexp 具有全局标志 g，那么 replace() 方法将替换所有匹配的子串。否则，它只替换第一个匹配子串。</p>
+</li>
+<li><p>replacement 可以是字符串，也可以是函数。如果它是字符串，那么每个匹配都将由字符串替换。但是 replacement 中的 $ 字符具有特定的含义。</p>
+</li>
+<li><p>$1、$2、…、$99    与 regexp 中的第 1 到第 99 个子表达式相匹配的文本。</p>
+</li>
+<li>$&amp;    与 regexp 相匹配的子串。</li>
+<li>$`    位于匹配子串左侧的文本。</li>
+<li>$’    位于匹配子串右侧的文本。</li>
+<li>$$    直接量符号。</li>
+<li>==第二个参数为函数时，每次匹配都会调用该函数，函数的返回值将作为替换文本执行匹配操作，同时函数可以接收于$为前缀的特殊字符组合，用来匹配文本的相关信息进行引用==</li>
+</ul>
+<pre><code>let s = &quot;张三56分，李四74分，王五92分，赵六84分&quot;,
+    a = s.match(/\d+/g),
+    sum = 0;
+
+for(var i = 0; i&lt;a.length;i++){
+    sum += parseFloat(a[i]);
+}
+
+let avg = sum/a.length;
+
+function f(a,b,c){
+    console.log(&apos;a&apos;,a); //56分,74分,92分,84分//匹配内容
+    console.log(&apos;b&apos;,b); //56,74,92,84 //第一个子表达式匹配的文本
+    console.log(&apos;c&apos;,c); //2,8,14,20 //位置索引
+    let n = parseFloat(arguments[1]);
+
+    return n + &apos;分&apos; + &apos;(&apos; +  ((n &gt; avg) ? (&apos;超出平均分&apos; + (n - avg)) : (&apos;低于平均分&apos; + (avg-n))) +&apos;分)&apos;;
+}
+let s2 = s.replace(/(\d+)分/g,f);
+
+console.log(&apos;s2&apos;,s2); 
+
+//s2 张三56分(低于平均分20.5分)，李四74分(低于平均分2.5分)，王五92分(超出平均分15.5分)，赵六84分(超出平均分7.5分)
+</code></pre><h5 id="5-exec"><a href="#5-exec" class="headerlink" title="5. exec"></a>5. exec</h5><ul>
+<li>返回一个数组，其中存放匹配的结果。如果未找到匹配，则返回值为 null。</li>
+<li><p>exec() 方法的功能非常强大，它是一个通用的方法，而且使用起来也比 test() 方法以及支持正则表达式的 String 对象的方法更为复杂。</p>
+</li>
+<li><p>如果 exec() 找到了匹配的文本，则返回一个结果数组。否则，返回 null。此数组的第 0 个元素是与正则表达式相匹配的文本，第 1 个元素是与 RegExpObject 的第 1 个子表达式相匹配的文本（如果有的话），第 2 个元素是与 RegExpObject 的第 2 个子表达式相匹配的文本（如果有的话），以此类推。除了数组元素和 length 属性之外，exec() 方法还返回两个属性。index 属性声明的是匹配文本的第一个字符的位置。input 属性则存放的是被检索的字符串 string。我们可以看得出，在调用非全局的 RegExp 对象的 exec() 方法时，返回的数组与调用方法 String.match() 返回的数组是相同的。</p>
+</li>
+<li><p>但是，当 RegExpObject 是一个全局正则表达式时，exec() 的行为就稍微复杂一些。它会在 RegExpObject 的 lastIndex 属性指定的字符处开始检索字符串 string。当 exec() 找到了与表达式相匹配的文本时，在匹配后，它将把 RegExpObject 的 lastIndex 属性设置为匹配文本的最后一个字符的下一个位置。这就是说，您可以通过反复调用 exec() 方法来遍历字符串中的所有匹配文本。当 exec() 再也找不到匹配的文本时，它将返回 null，并把 lastIndex 属性重置为 0。</p>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/28/安静的鱼/" rel="next" title="安静的鱼">
+                <i class="fa fa-chevron-left"></i> 安静的鱼
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/06/正则表达式位置匹配/" rel="prev" title="正则表达式位置匹配">
+                正则表达式位置匹配 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="http://ocx1796s4.bkt.clouddn.com/cat01.jpg"
+                alt="hey" />
+            
+              <p class="site-author-name" itemprop="name">hey</p>
+              <p class="site-description motion-element" itemprop="description">生死由命，富贵在天</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">categories</span>
+                
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#学习总结"><span class="nav-number">1.</span> <span class="nav-text">学习总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#工作机制，基本步骤"><span class="nav-number">1.0.1.</span> <span class="nav-text">工作机制，基本步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#回溯"><span class="nav-number">1.0.2.</span> <span class="nav-text">回溯</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法总结"><span class="nav-number">1.0.3.</span> <span class="nav-text">方法总结</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-test"><span class="nav-number">1.0.3.0.1.</span> <span class="nav-text">1. test</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-match"><span class="nav-number">1.0.3.0.2.</span> <span class="nav-text">2. match</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-search"><span class="nav-number">1.0.3.0.3.</span> <span class="nav-text">3. search</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-replace"><span class="nav-number">1.0.3.0.4.</span> <span class="nav-text">4. replace</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-exec"><span class="nav-number">1.0.3.0.5.</span> <span class="nav-text">5. exec</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hey</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

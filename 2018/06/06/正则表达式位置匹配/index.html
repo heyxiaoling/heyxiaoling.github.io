@@ -79,16 +79,16 @@
 
 
 
-<meta name="description" content="配置webpack切换到webpack2后配置方法换了好多，又重新弄了一遍 //安装 npm install webpack -g npm install webpack --save-dev 配置转换cssless//安装 npm install less  --save-dev; npm install less-loader css-loader style-loader --save-de">
+<meta name="description" content="位置匹配 在 ES5 中，共有 6 个锚：^、$、\b、\B、(?=p)、(?!p)把位置理解空字符，是对位置非常有效的理解方式。  ^ 和 $ ^（脱字符）匹配开头，在多行匹配中匹配行开头。 $（美元符号）匹配结尾，在多行匹配中匹配行结尾。比如我们把字符串的开头和结尾用 “#” 替换（位置可以替换成字符的！）： var result = &amp;quot;hello&amp;quot;.replace(/^|">
 <meta property="og:type" content="article">
-<meta property="og:title" content="webpack2配置">
-<meta property="og:url" content="http://yoursite.com/2017/02/27/webpack2配置/index.html">
+<meta property="og:title" content="正则表达式位置匹配">
+<meta property="og:url" content="http://yoursite.com/2018/06/06/正则表达式位置匹配/index.html">
 <meta property="og:site_name" content="Hey">
-<meta property="og:description" content="配置webpack切换到webpack2后配置方法换了好多，又重新弄了一遍 //安装 npm install webpack -g npm install webpack --save-dev 配置转换cssless//安装 npm install less  --save-dev; npm install less-loader css-loader style-loader --save-de">
-<meta property="og:updated_time" content="2018-06-06T08:04:04.219Z">
+<meta property="og:description" content="位置匹配 在 ES5 中，共有 6 个锚：^、$、\b、\B、(?=p)、(?!p)把位置理解空字符，是对位置非常有效的理解方式。  ^ 和 $ ^（脱字符）匹配开头，在多行匹配中匹配行开头。 $（美元符号）匹配结尾，在多行匹配中匹配行结尾。比如我们把字符串的开头和结尾用 “#” 替换（位置可以替换成字符的！）： var result = &amp;quot;hello&amp;quot;.replace(/^|">
+<meta property="og:updated_time" content="2018-06-06T08:43:40.728Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="webpack2配置">
-<meta name="twitter:description" content="配置webpack切换到webpack2后配置方法换了好多，又重新弄了一遍 //安装 npm install webpack -g npm install webpack --save-dev 配置转换cssless//安装 npm install less  --save-dev; npm install less-loader css-loader style-loader --save-de">
+<meta name="twitter:title" content="正则表达式位置匹配">
+<meta name="twitter:description" content="位置匹配 在 ES5 中，共有 6 个锚：^、$、\b、\B、(?=p)、(?!p)把位置理解空字符，是对位置非常有效的理解方式。  ^ 和 $ ^（脱字符）匹配开头，在多行匹配中匹配行开头。 $（美元符号）匹配结尾，在多行匹配中匹配行结尾。比如我们把字符串的开头和结尾用 “#” 替换（位置可以替换成字符的！）： var result = &amp;quot;hello&amp;quot;.replace(/^|">
 
 
 
@@ -118,13 +118,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/02/27/webpack2配置/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/06/06/正则表达式位置匹配/"/>
 
 
 
 
 
-  <title>webpack2配置 | Hey</title>
+  <title>正则表达式位置匹配 | Hey</title>
   
 
 
@@ -251,7 +251,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/02/27/webpack2配置/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/06/正则表达式位置匹配/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="hey">
@@ -268,7 +268,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">webpack2配置</h1>
+          <h1 class="post-title" itemprop="name headline">正则表达式位置匹配</h1>
         
 
         <div class="post-meta">
@@ -280,8 +280,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-27T17:00:07+08:00">
-                2017-02-27
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-06T16:42:16+08:00">
+                2018-06-06
               </time>
             
 
@@ -303,8 +303,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Basic/" itemprop="url" rel="index">
-                    <span itemprop="name">Basic</span>
+                  <a href="/categories/正则表达式/" itemprop="url" rel="index">
+                    <span itemprop="name">正则表达式</span>
                   </a>
                 </span>
 
@@ -340,224 +340,53 @@
       
 
       
-        <h3 id="配置webpack"><a href="#配置webpack" class="headerlink" title="配置webpack"></a>配置webpack</h3><p>切换到webpack2后配置方法换了好多，又重新弄了一遍</p>
-<pre><code>//安装
-npm install webpack -g
-npm install webpack --save-dev
-</code></pre><h3 id="配置转换css"><a href="#配置转换css" class="headerlink" title="配置转换css"></a>配置转换css</h3><h3 id="less"><a href="#less" class="headerlink" title="less"></a>less</h3><pre><code>//安装
-npm install less  --save-dev;
-npm install less-loader css-loader style-loader --save-dev;
-
-//webpack配置
-
-module: {
-    rules: [
-        {
-            test: /\.less$/,
-            use: [
-              &apos;style-loader&apos;,
-              { loader: &apos;css-loader&apos;, options: { importLoaders: 1 } },
-              &apos;less-loader&apos;
-            ]
-        }
-    ]
-}
-
-//记得在js里面引入：
-
-require(./xx/x.less);
-</code></pre><h3 id="sass"><a href="#sass" class="headerlink" title="sass"></a>sass</h3><pre><code>//安装：
-
-npm install node-sass --save-dev
-npm install sass-loader css-loader style-loader --save-dev
-
-//node-sass： 安装不上先安装 cnpm
-
-npm install -g cnpm --registry=https://registry.npm.taobao.org  
-npm install node-sass --save-dev
-
-
-//webpack配置：
-
-rules: [
-    {
-        test: /\.scss$/,
-        use: [{
-            loader: &quot;style-loader&quot; // creates style nodes from JS strings
-        }, {
-            loader: &quot;css-loader&quot; // translates CSS into CommonJS
-        }, {
-            loader: &quot;sass-loader&quot; // compiles Sass to CSS
-        }]
-    }
-]
-
-//记得在js里面引入(注意后缀)：
-
-require(./xx/x.scss);
-</code></pre><p>例子：<a href="https://github.com/heyxiaoling/webpack-study/tree/master/transformationcss" target="_blank" rel="noopener">css</a> </p>
-<h4 id="生成样式文件"><a href="#生成样式文件" class="headerlink" title="生成样式文件"></a>生成样式文件</h4><p>注意：这样配置会在页面head里面生成一个style，样式都写在里面，如果你想把样式固定在一个文件，这样达到利用浏览器缓存的目的</p>
-<pre><code>//安装
-npm install extract-text-webpack-plugin --save-dev
-//webpack配置
-rules: [
-    {
-        test: /\.less$/i,
-        use: ExtractLESS.extract([ &apos;css-loader&apos;, &apos;less-loader&apos; ])
-    },
-    {
-        test: /\.scss$/i,
-        use: ExtractLESS.extract([ &apos;css-loader&apos;, &apos;sass-loader&apos; ])
-    }
-]
-plugins: [
-    new ExtractTextPlugin(&apos;common.css&apos;)
-]
-//这样会生成一个common.css文件
-</code></pre><h3 id="图片等文件处理"><a href="#图片等文件处理" class="headerlink" title="图片等文件处理"></a>图片等文件处理</h3><pre><code>//安装
-npm install file-loader url-loader --save-dev
-
-//webpack
-
-{
-    test: /\.(png|jpg|jpeg|gif|eot|ttf|woff|woff2|svg|svgz)(\?.+)?$/,
-    use: [
-      {
-        loader: &apos;url-loader&apos;,
-        options: {
-          limit: 100000
-        }
-      }
-    ]
-}
-</code></pre><h3 id="配置babel"><a href="#配置babel" class="headerlink" title="配置babel"></a>配置babel</h3><pre><code>//安装
-npm install babel-core babel-loader --save-dev; //babel-core现版本为babel本身
-npm install babel-preset-es2015 --save-dev //这个看你需求
-npm install babel-preset-react babel-preset-stage-2 --save-dev
-//因为用到react，如果不用可以不配置
-//我用到react版本是15,所以配置了babel-preset-stage-2，这个视你的react具体情况而定
-
-//安装
-npm install babel-polyfill --save //兼容某些低版本浏览器对es5的不支持
-
-
-//增加.babelrc文件
-
-//在里面写上
-
-{
-    &quot;presets&quot;: [
-        [&quot;es2015&quot;, {&quot;modules&quot;: false}],
-        &quot;stage-2&quot;,
-        &quot;react&quot;,
-    ],
-    &quot;plugins&quot;: [
-        &quot;react-hot-loader/babel&quot;
-        //react-hot
-    ]
-}
-
-
-//webpack配置
-{
-    test: /\.(js|es6|jsx)$/, //注意你文件的后缀
-    use: [
-      &apos;babel-loader&apos;,
-    ],
-    exclude: /node_modules/
-},
-
-//注意当你没有配置.babelrc文件时：
-
-{
-    test: /\.(js|es6|jsx)$/, //注意你文件的后缀
-    use: [
-      &apos;babel-loader&apos;,
-      options: { 
-        &quot;presets&quot;: [
-            [&quot;es2015&quot;, {&quot;modules&quot;: false}],
-            &quot;stage-2&quot;,
-            &quot;react&quot;,
-        ],
-        &quot;plugins&quot;: [
-            &quot;react-hot-loader/babel&quot;
-            //react-hot
-        ]
-      }
-    ],
-    exclude: /node_modules/
-},
-</code></pre><h3 id="配置webpack-dev-server"><a href="#配置webpack-dev-server" class="headerlink" title="配置webpack-dev-server"></a>配置webpack-dev-server</h3><pre><code>//安装
-npm install webpack-dev-server --save-dev
-//react热加载,看情况配置
-npm install react-hot-loader --save-dev
-//配置webpack
-//入口
-entry: {
-    app: [
-        &quot;webpack-dev-server/client?http://0.0.0.0:8888/&quot;,
-        &apos;webpack/hot/only-dev-server&apos;,
-        path.resolve(__dirname, &apos;./src/app/index.es6&apos;)
-    ],
-},
-output: {
-    path: path.resolve(__dirname, &apos;./assets&apos;),
-    filename: &apos;[name].[hash].js&apos;
-},
-
-plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    // 开启全局的模块热替换(HMR)
-
-    new webpack.NamedModulesPlugin(),
-    // 当模块热替换(HMR)时在浏览器控制台输出对用户更友好的模块名字信息
-]
-
-//在package.json配置启动
-&quot;scripts&quot;: {
-    &quot;dev&quot;: &quot;webpack-dev-server --colors --profile --env.dev&quot;
-},
-
-
-
-//如果使用react热加载,请在入口文件添加，（这段代码情况而定）
-
-// 模块热替换的 API
-if (module.hot) {
-  module.hot.accept();
-}
-
-//启动 
-
-npm run dev
-</code></pre><h3 id="webpack-dev-middleware"><a href="#webpack-dev-middleware" class="headerlink" title="webpack-dev-middleware"></a>webpack-dev-middleware</h3><pre><code>npm install express webpack-dev-middleware --save-dev
-
-var express = require(&quot;express&quot;);
-var webpackDevMiddleware = require(&quot;webpack-dev-middleware&quot;);
-var webpack = require(&quot;webpack&quot;);
-var webpackConfig = require(&quot;./webpack.config&quot;);
-
-var app = express();
-var compiler = webpack(webpackConfig);
-
-app.use(webpackDevMiddleware(compiler, {
-  publicPath: &quot;/&quot; // 大部分情况下和 `output.publicPath`相同
-}));
-
-app.listen(3000, function () {
-  console.log(&quot;Listening on port 3000!&quot;);
-});
-
-//默认情况下会使用watch mode。也可以使用 lazy mode，这使得 webpack 只在对入口点进行请求时再进行重新编译。
-
-//设置仅在对入口 bundle.js 请求时进行编译：
-
-app.use(webpackDevMiddleware(compiler, {
-  lazy: true,
-  filename: &quot;bundle.js&quot; // Same as `output.filename` in most cases.
-}));
-</code></pre><p>例子：<a href="https://github.com/heyxiaoling/webpack-study/tree/master/react-dev" target="_blank" rel="noopener">react-dev</a> </p>
-
+        <h1 id="位置匹配"><a href="#位置匹配" class="headerlink" title="位置匹配"></a>位置匹配</h1><blockquote>
+<p>在 ES5 中，共有 6 个锚：<br>^、$、\b、\B、(?=p)、(?!p)<br>把位置理解空字符，是对位置非常有效的理解方式。</p>
+</blockquote>
+<h4 id="和"><a href="#和" class="headerlink" title="^ 和 $"></a>^ 和 $</h4><ul>
+<li>^（脱字符）匹配开头，在多行匹配中匹配行开头。</li>
+<li><p>$（美元符号）匹配结尾，在多行匹配中匹配行结尾。<br>比如我们把字符串的开头和结尾用 “#” 替换（位置可以替换成字符的！）：</p>
+<pre><code>var result = &quot;hello&quot;.replace(/^|$/g, &apos;#&apos;);
+console.log(result);
+// =&gt; &quot;#hello#&quot;
+</code></pre></li>
+<li><p>多行匹配模式（即有修饰符 m）时，二者是行的概念，这一点需要我们注意：</p>
+<pre><code>var result = &quot;I\nlove\njavascript&quot;.replace(/^|$/gm, &apos;#&apos;);
+console.log(result);
+/*
+#I#
+#love#
+#javascript#
+*/
+</code></pre></li>
+</ul>
+<h4 id="b-和-B"><a href="#b-和-B" class="headerlink" title="\b 和 \B"></a>\b 和 \B</h4><ul>
+<li>\b 是单词边界，具体就是 \w 与 \W 之间的位置，也包括 \w 与 ^ 之间的位置，和 \w 与 $ 之间的位置。</li>
+<li>\B非单词边界。 \w 与 \w、 \W 与 \W、^ 与 \W，\W 与 $ 之间的位置。</li>
+</ul>
+<pre><code>var result = &quot;[JS] Lesson_01.mp4&quot;.replace(/\b/g, &apos;#&apos;);
+console.log(result);
+// =&gt; &quot;[#JS#] #Lesson_01#.#mp4#&quot;
+</code></pre><ul>
+<li><p>\w =&gt; [a-z0-9A-Z_] \W =&gt; [^0-9a-zA-Z_]</p>
+<pre><code>var result = &quot;[JS] Lesson_01.mp4&quot;.replace(/\B/g, &apos;#&apos;);
+console.log(result);
+// =&gt; &quot;#[J#S]# L#e#s#s#o#n#_#0#1.m#p#4&quot;
+</code></pre></li>
+</ul>
+<h4 id="p-和-p-是正向先行断言和负向先行断言"><a href="#p-和-p-是正向先行断言和负向先行断言" class="headerlink" title="(?=p) 和 (?!p) 是正向先行断言和负向先行断言"></a>(?=p) 和 (?!p) 是正向先行断言和负向先行断言</h4><ul>
+<li><p>(?=p)，其中 p 是一个子模式，即 p 前面的位置，或者说，该位置后面的字符要匹配 p。</p>
+<pre><code>var result = &quot;hello&quot;.replace(/(?=l)/g, &apos;#&apos;);
+console.log(result);
+// =&gt; &quot;he#l#lo&quot;
+</code></pre></li>
+<li><p>(?!p) 就是 (?=p) 的反面意思，要求当前是一个位置，但不是 \b 前面的位置，其实 (?!\b) 说的就是 \B。</p>
+<pre><code>var result = &quot;hello&quot;.replace(/(?!l)/g, &apos;#&apos;);
+console.log(result);
+// =&gt; &quot;#h#ell#o#&quot; 
+</code></pre></li>
+</ul>
+<h4 id="lt-p-和-lt-p"><a href="#lt-p-和-lt-p" class="headerlink" title="(?&lt;=p) 和 (?&lt;!p)"></a>(?&lt;=p) 和 (?&lt;!p)</h4>
       
     </div>
     
@@ -581,8 +410,8 @@ app.use(webpackDevMiddleware(compiler, {
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/02/21/Hey/" rel="next" title="Hey">
-                <i class="fa fa-chevron-left"></i> Hey
+              <a href="/2018/06/06/正则表达式学习总结/" rel="next" title="正则表达式学习总结">
+                <i class="fa fa-chevron-left"></i> 正则表达式学习总结
               </a>
             
           </div>
@@ -591,8 +420,8 @@ app.use(webpackDevMiddleware(compiler, {
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/03/02/移动端常用布局方法/" rel="prev" title="移动端常用布局方法">
-                移动端常用布局方法 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/06/06/正则表达式常用/" rel="prev" title="正则表达式常用">
+                正则表达式常用 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -720,7 +549,7 @@ app.use(webpackDevMiddleware(compiler, {
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置webpack"><span class="nav-number">1.</span> <span class="nav-text">配置webpack</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置转换css"><span class="nav-number">2.</span> <span class="nav-text">配置转换css</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#less"><span class="nav-number">3.</span> <span class="nav-text">less</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sass"><span class="nav-number">4.</span> <span class="nav-text">sass</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#生成样式文件"><span class="nav-number">4.1.</span> <span class="nav-text">生成样式文件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#图片等文件处理"><span class="nav-number">5.</span> <span class="nav-text">图片等文件处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置babel"><span class="nav-number">6.</span> <span class="nav-text">配置babel</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置webpack-dev-server"><span class="nav-number">7.</span> <span class="nav-text">配置webpack-dev-server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#webpack-dev-middleware"><span class="nav-number">8.</span> <span class="nav-text">webpack-dev-middleware</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#位置匹配"><span class="nav-number">1.</span> <span class="nav-text">位置匹配</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#和"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">^ 和 $</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#b-和-B"><span class="nav-number">1.0.0.2.</span> <span class="nav-text">\b 和 \B</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#p-和-p-是正向先行断言和负向先行断言"><span class="nav-number">1.0.0.3.</span> <span class="nav-text">(?=p) 和 (?!p) 是正向先行断言和负向先行断言</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#lt-p-和-lt-p"><span class="nav-number">1.0.0.4.</span> <span class="nav-text">(?&lt;=p) 和 (?&lt;!p)</span></a></li></ol></li></ol></li></ol></li></ol></div>
             
 
           </div>
