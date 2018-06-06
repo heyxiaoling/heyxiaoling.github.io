@@ -233,6 +233,127 @@
   
   
 
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/06/从浏览器地址栏输入url到显示页面的步骤(以HTTP为例)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hey">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ocx1796s4.bkt.clouddn.com/cat01.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/06/从浏览器地址栏输入url到显示页面的步骤(以HTTP为例)/" itemprop="url">Unbenannt</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-06T16:04:36+08:00">
+                2018-06-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="流程图"><a href="#流程图" class="headerlink" title="流程图"></a>流程图</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">graph TD</span><br><span class="line">A((URL)) --&gt; B[查看浏览器缓存]</span><br><span class="line">B --&gt; C&#123;有缓存&#125;</span><br><span class="line">B --&gt; D&#123;无缓存&#125;</span><br><span class="line">C --&gt; E[缓存未过期]</span><br><span class="line">C --&gt; F[缓存过期]</span><br><span class="line">F --&gt; H[请求资源,进入解析步骤]</span><br><span class="line">E --&gt; G[转码,渲染]</span><br><span class="line">D --&gt; I[解析url,获得协议,主机,端口,ip]</span><br><span class="line">I --&gt; J[组装成一个http请求]</span><br><span class="line">J --&gt; K[与服务器建立TCP连接]</span><br><span class="line">K --&gt; M[发送http请求]</span><br><span class="line">M --&gt; N[服务器接受请求,解析]</span><br><span class="line">N --&gt; |服务器检查请求头,验证缓存新鲜|O[服务器根据请求响应]</span><br><span class="line">O --&gt; P[通过TCP把响应报文发回浏览器]</span><br><span class="line">P --&gt; Q[浏览器接收http响应]</span><br><span class="line">P --&gt; 1[浏览器根据情况选择关闭TCP或者保持]</span><br><span class="line">Q --&gt; R[浏览器根据状态码做出处理]</span><br><span class="line">R --&gt; 2[资源可以缓存,进行缓存]</span><br><span class="line">R --&gt; S[对资源进行解码,如gzip解码]</span><br><span class="line">S --&gt; |解析html文档,构建DOM树,CSS树,执行脚本|3[渲染]</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">graph TD</span><br><span class="line">A((浏览器解析ip)) --&gt; B&#123;浏览器缓存&#125;</span><br><span class="line">B --&gt; C[本机缓存]</span><br><span class="line">C --&gt; D[hosts文件]</span><br><span class="line">D --&gt; E[路由器缓存]</span><br><span class="line">E --&gt; F[DNS缓存]</span><br><span class="line">F --&gt; G[isp网络供应商缓存]</span><br><span class="line">G --&gt; I[DNS递归查询]</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
   <article class="post post-type-about" itemscope itemtype="http://schema.org/Article">
   
   
@@ -494,6 +615,296 @@
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/09/分类测试文章/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hey">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ocx1796s4.bkt.clouddn.com/cat01.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/09/分类测试文章/" itemprop="url">分类测试文章</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-09T10:40:04+08:00">
+                2017-08-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/About/" itemprop="url" rel="index">
+                    <span itemprop="name">About</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <div align="center"><br>测试文章<br></div>
+
+
+
+<div align="center"><br><img src="http://ocx1796s4.bkt.clouddn.com/wechat-qcode.jpg" alt="image"><br></div><br><div align="center"><br>欢迎您扫一扫上面的微信公众号，订阅我的博客！<br></div>
+
+<div align="center"><br><img src="http://ocx1796s4.bkt.clouddn.com/wechat-reward.png" alt="image"><br></div><br><div align="center"><br>—<br></div>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/07/从浏览器输入url到显示/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hey">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ocx1796s4.bkt.clouddn.com/cat01.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/03/07/从浏览器输入url到显示/" itemprop="url">从浏览器输入url到显示</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-07T13:19:37+08:00">
+                2017-03-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Basic/" itemprop="url" rel="index">
+                    <span itemprop="name">Basic</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="流程图"><a href="#流程图" class="headerlink" title="流程图"></a>流程图</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">graph TD</span><br><span class="line">A((URL)) --&gt; B[查看浏览器缓存]</span><br><span class="line">B --&gt; C&#123;有缓存&#125;</span><br><span class="line">B --&gt; D&#123;无缓存&#125;</span><br><span class="line">C --&gt; E[缓存未过期]</span><br><span class="line">C --&gt; F[缓存过期]</span><br><span class="line">F --&gt; H[请求资源,进入解析步骤]</span><br><span class="line">E --&gt; G[转码,渲染]</span><br><span class="line">D --&gt; I[解析url,获得协议,主机,端口,ip]</span><br><span class="line">I --&gt; J[组装成一个http请求]</span><br><span class="line">J --&gt; K[与服务器建立TCP连接]</span><br><span class="line">K --&gt; M[发送http请求]</span><br><span class="line">M --&gt; N[服务器接受请求,解析]</span><br><span class="line">N --&gt; |服务器检查请求头,验证缓存新鲜|O[服务器根据请求响应]</span><br><span class="line">O --&gt; P[通过TCP把响应报文发回浏览器]</span><br><span class="line">P --&gt; Q[浏览器接收http响应]</span><br><span class="line">P --&gt; 1[浏览器根据情况选择关闭TCP或者保持]</span><br><span class="line">Q --&gt; R[浏览器根据状态码做出处理]</span><br><span class="line">R --&gt; 2[资源可以缓存,进行缓存]</span><br><span class="line">R --&gt; S[对资源进行解码,如gzip解码]</span><br><span class="line">S --&gt; |解析html文档,构建DOM树,CSS树,执行脚本|3[渲染]</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">graph TD</span><br><span class="line">A((浏览器解析ip)) --&gt; B&#123;浏览器缓存&#125;</span><br><span class="line">B --&gt; C[本机缓存]</span><br><span class="line">C --&gt; D[hosts文件]</span><br><span class="line">D --&gt; E[路由器缓存]</span><br><span class="line">E --&gt; F[DNS缓存]</span><br><span class="line">F --&gt; G[isp网络供应商缓存]</span><br><span class="line">G --&gt; I[DNS递归查询]</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
@@ -544,7 +955,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">Artikel</span>
                 </a>
               </div>
@@ -555,21 +966,12 @@
               
               <div class="site-state-item site-state-categories">
                 
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">Kategorien</span>
                 
               </div>
             
 
-            
-              
-              
-              <div class="site-state-item site-state-tags">
-                
-                  <span class="site-state-item-count">1</span>
-                  <span class="site-state-item-name">Tags</span>
-                
-              </div>
             
 
           </nav>
