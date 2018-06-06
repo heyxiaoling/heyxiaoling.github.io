@@ -85,7 +85,7 @@
 <meta property="og:url" content="http://yoursite.com/2018/06/06/正则表达式常用/index.html">
 <meta property="og:site_name" content="Hey">
 <meta property="og:description" content="\ 转义元字符.点 匹配除“\n”和”\r”之外的任何单个字符。要匹配包括“\n”和”\r”在内的任何字符，请使用像“[\s\S]”的模式。^ 匹配输入字行首$ 匹配输入行尾，$ 的意思是从右边，也就是末尾开始匹配* 匹配前面表达式0次或者多次，贪婪匹配，尽可能多的匹配，等价于{0,}+ 匹配一次或者多次，贪婪匹配，等价于{1,}? 匹配前面的表达式0次或者1一次，等价于{0,1}{n} 匹配前面">
-<meta property="og:updated_time" content="2018-06-06T08:43:29.572Z">
+<meta property="og:updated_time" content="2018-06-06T08:51:16.348Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="正则表达式常用">
 <meta name="twitter:description" content="\ 转义元字符.点 匹配除“\n”和”\r”之外的任何单个字符。要匹配包括“\n”和”\r”在内的任何字符，请使用像“[\s\S]”的模式。^ 匹配输入字行首$ 匹配输入行尾，$ 的意思是从右边，也就是末尾开始匹配* 匹配前面表达式0次或者多次，贪婪匹配，尽可能多的匹配，等价于{0,}+ 匹配一次或者多次，贪婪匹配，等价于{1,}? 匹配前面的表达式0次或者1一次，等价于{0,1}{n} 匹配前面">
@@ -351,17 +351,10 @@
 <li>匹配前面的表达式n次<h6 id="n-1"><a href="#n-1" class="headerlink" title="{n,}"></a>{n,}</h6></li>
 <li>匹配前面的表达式最少n次<h6 id="，-，-，-n-，-n-，-n-m"><a href="#，-，-，-n-，-n-，-n-m" class="headerlink" title="+? ，*?， ??， {n}?， {n,}?， {n,m}?"></a>+? ，*?， ??， {n}?， {n,}?， {n,m}?</h6></li>
 <li><p>非贪婪匹配，尽可能少的皮配</p>
-<pre><code>var str = &apos;goooogle‘;
-var reg1 = /o+/;   //&quot;goooo&quot;
-var reg2 = /o+?/;  //&quot;go&quot;
-
-var str = &apos;goooogle‘;
-var reg1 = /o+gle/;  //&quot;oooogle&quot;
-var reg2 = /o+?gle/;  //&quot;oooogle&quot;
-</code></pre></li>
-</ul>
-<ul>
-<li>改过后的例子结果变为相同了，为什么 /o+?gle/ </li>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">'goooogle‘;</span></span><br><span class="line"><span class="string">var reg1 = /o+/;   //"goooo"</span></span><br><span class="line"><span class="string">var reg2 = /o+?/;  //"go"</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">var str = '</span>goooogle‘;</span><br><span class="line"><span class="keyword">var</span> reg1 = <span class="regexp">/o+gle/</span>;  <span class="comment">//"oooogle"</span></span><br><span class="line"><span class="keyword">var</span> reg2 = <span class="regexp">/o+?gle/</span>;  <span class="comment">//"oooogle"</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>改过后的例子结果变为相同了，为什么 /o+?gle/ </p>
+</li>
 <li>没有匹配到“ogle”呢？原来正则表达式中总是从左往右进行匹配的，不会从右边获取子串进行匹配。</li>
 </ul>
 <h6 id="-6"><a href="#-6" class="headerlink" title="."></a>.</h6><ul>
@@ -375,10 +368,8 @@ var reg2 = /o+?gle/;  //&quot;oooogle&quot;
 </ul>
 <h6 id="exp-，-exp"><a href="#exp-，-exp" class="headerlink" title="(?=exp) ，(?!exp)"></a>(?=exp) ，(?!exp)</h6><ul>
 <li><p>JS里只支持零宽先行断言。即零宽正预测先行断言”(?=exp)”和零宽负预测先行断言“(?!exp)”。所谓“零宽”，就是它并不在匹配的结果字符中占据空间。例如“\w”，”\s”就会占据一个或几个空间，依匹配的字符长度决定。而像”^”，”$”这种对应的首末位置，不占据空间，零宽就是属于这一类。</p>
-<pre><code>var str = &apos;java coffeescript&apos;;
-var reg1 = /\b\w+(?=script\b)/; //coffee 
-var reg2 = /\b\w+(?!script\b)/; //java
-</code></pre></li>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">'java coffeescript'</span>;</span><br><span class="line"><span class="keyword">var</span> reg1 = <span class="regexp">/\b\w+(?=script\b)/</span>; <span class="comment">//coffee </span></span><br><span class="line"><span class="keyword">var</span> reg2 = <span class="regexp">/\b\w+(?!script\b)/</span>; <span class="comment">//java</span></span><br></pre></td></tr></table></figure>
+</li>
 <li><p>reg1为零宽正预测先行断言，”(?=script\b)”表示某单词需以“script”结尾，它代表着一种条件，不占有任何空间大小。</p>
 </li>
 <li>同样，reg2为零宽负预测先行断言，”(?!script\b)”表示不以“script”结尾的单词。</li>
@@ -406,33 +397,19 @@ var reg2 = /\b\w+(?!script\b)/; //java
 <li>匹配num，其中num是一个正整数。对所获取的匹配的引用。例如，“(.)\1”匹配两个连续的相同字符。</li>
 </ul>
 <h6 id="X"><a href="#X" class="headerlink" title="(?=X )"></a>(?=X )</h6><ul>
-<li><p>零宽度正先行断言。仅当子表达式 X 在 此位置的右侧匹配时才继续匹配。例如，/w+(?=\d)/ 与后跟数字的单词匹配，而不与该数字匹配。此构造不会回溯。</p>
-<pre><code>var str = &apos;java coffeescript&apos;;
-var reg1 = /\b\w+(?=script\b)/; //coffee 
-var reg2 = /\b\w+(?!script\b)/; //java
-</code></pre></li>
+<li>零宽度正先行断言。仅当子表达式 X 在 此位置的右侧匹配时才继续匹配。例如，/w+(?=\d)/ 与后跟数字的单词匹配，而不与该数字匹配。此构造不会回溯。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">'java coffeescript'</span>;</span><br><span class="line"><span class="keyword">var</span> reg1 = <span class="regexp">/\b\w+(?=script\b)/</span>; <span class="comment">//coffee </span></span><br><span class="line"><span class="keyword">var</span> reg2 = <span class="regexp">/\b\w+(?!script\b)/</span>; <span class="comment">//java</span></span><br></pre></td></tr></table></figure>
+</li>
 </ul>
 <h6 id="X-1"><a href="#X-1" class="headerlink" title="(?!X)"></a>(?!X)</h6><ul>
-<li><p>零宽度负先行断言。仅当子表达式 X 不在 此位置的右侧匹配时才继续匹配。例如，例如，/w+(?!\d)/ 与后不跟数字的单词匹配，而不与该数字匹配 。</p>
-<pre><code>&apos;123asdf,12344&apos;.match(/\d{3}(?!\d)/);
-//[&quot;123&quot;, index: 0, input: &quot;123asdf,12344&quot;, groups: undefined]
-&apos;123asdf,12344&apos;.match(/\d{3}(?!\d)/g);
-//[&quot;123&quot;, &quot;344&quot;]
-</code></pre></li>
+<li>零宽度负先行断言。仅当子表达式 X 不在 此位置的右侧匹配时才继续匹配。例如，例如，/w+(?!\d)/ 与后不跟数字的单词匹配，而不与该数字匹配 。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'123asdf,12344'</span>.match(<span class="regexp">/\d&#123;3&#125;(?!\d)/</span>);</span><br><span class="line"><span class="comment">//["123", index: 0, input: "123asdf,12344", groups: undefined]</span></span><br><span class="line"><span class="string">'123asdf,12344'</span>.match(<span class="regexp">/\d&#123;3&#125;(?!\d)/g</span>);</span><br><span class="line"><span class="comment">//["123", "344"]</span></span><br></pre></td></tr></table></figure>
+</li>
 </ul>
 <h6 id="lt-X"><a href="#lt-X" class="headerlink" title="(?&lt;=X)"></a>(?&lt;=X)</h6><ul>
-<li><p>零宽度正后发断言。仅当子表达式 X 在 此位置的左侧匹配时才继续匹配。例如，(?&lt;=19)99 与跟在 19 后面的 99 的实例匹配。此构造不会回溯。</p>
-<pre><code> var str = &apos;java coffeescriptadv&apos;;
-str.match(/(?&lt;=script)\w+/); //coffee
-</code></pre><p>   // [“adv”, index: 17, input: “java coffeescriptadv”, groups: undefined]</p>
+<li>零宽度正后发断言。仅当子表达式 X 在 此位置的左侧匹配时才继续匹配。例如，(?&lt;=19)99 与跟在 19 后面的 99 的实例匹配。此构造不会回溯。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">   <span class="keyword">var</span> str = <span class="string">'java coffeescriptadv'</span>;</span><br><span class="line">  str.match(<span class="regexp">/(?&lt;=script)\w+/</span>); <span class="comment">//coffee</span></span><br><span class="line"><span class="comment">// ["adv", index: 17, input: "java coffeescriptadv", groups: undefined]</span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h6 id="lt-X-1"><a href="#lt-X-1" class="headerlink" title="(?&lt;!X)"></a>(?&lt;!X)</h6><ul>
-<li><p>零宽度负后发断言。仅当子表达式 X 不在此位置的左侧匹配时才继续匹配。例如，(?&lt;!19)99 与不跟在 19 后面的 99 的实例匹配</p>
-<pre><code>var str = &apos;java coffeescriptadv&apos;;
-str.match(/(?&lt;!script)\w+/); //coffee
-//[&quot;java&quot;, index: 0, input: &quot;java coffeescriptadv&quot;, groups: undefined] 
-</code></pre></li>
+<li>零宽度负后发断言。仅当子表达式 X 不在此位置的左侧匹配时才继续匹配。例如，(?&lt;!19)99 与不跟在 19 后面的 99 的实例匹配<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">'java coffeescriptadv'</span>;</span><br><span class="line">str.match(<span class="regexp">/(?&lt;!script)\w+/</span>); <span class="comment">//coffee</span></span><br><span class="line"><span class="comment">//["java", index: 0, input: "java coffeescriptadv", groups: undefined]</span></span><br></pre></td></tr></table></figure></li>
 </ul>
 
       
