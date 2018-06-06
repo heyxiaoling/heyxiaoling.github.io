@@ -79,16 +79,16 @@
 
 
 
-<meta name="description" content="流程图123456789101112131415161718192021graph TDA((URL)) --&amp;gt; B[查看浏览器缓存]B --&amp;gt; C&amp;#123;有缓存&amp;#125;B --&amp;gt; D&amp;#123;无缓存&amp;#125;C --&amp;gt; E[缓存未过期]C --&amp;gt; F[缓存过期]F --&amp;gt; H[请求资源,进入解析步骤]E --&amp;gt; G[转码,渲染]D --&amp;gt">
+<meta name="description" content="配置webpack切换到webpack2后配置方法换了好多，又重新弄了一遍 //安装 npm install webpack -g npm install webpack --save-dev 配置转换cssless//安装 npm install less  --save-dev; npm install less-loader css-loader style-loader --save-de">
 <meta property="og:type" content="article">
-<meta property="og:title" content="从浏览器输入url到显示">
-<meta property="og:url" content="http://yoursite.com/2017/03/07/从浏览器输入url到显示/index.html">
+<meta property="og:title" content="webpack2配置">
+<meta property="og:url" content="http://yoursite.com/2017/02/27/webpack2配置/index.html">
 <meta property="og:site_name" content="Hey">
-<meta property="og:description" content="流程图123456789101112131415161718192021graph TDA((URL)) --&amp;gt; B[查看浏览器缓存]B --&amp;gt; C&amp;#123;有缓存&amp;#125;B --&amp;gt; D&amp;#123;无缓存&amp;#125;C --&amp;gt; E[缓存未过期]C --&amp;gt; F[缓存过期]F --&amp;gt; H[请求资源,进入解析步骤]E --&amp;gt; G[转码,渲染]D --&amp;gt">
-<meta property="og:updated_time" content="2018-06-06T08:03:58.361Z">
+<meta property="og:description" content="配置webpack切换到webpack2后配置方法换了好多，又重新弄了一遍 //安装 npm install webpack -g npm install webpack --save-dev 配置转换cssless//安装 npm install less  --save-dev; npm install less-loader css-loader style-loader --save-de">
+<meta property="og:updated_time" content="2018-06-06T08:04:04.219Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="从浏览器输入url到显示">
-<meta name="twitter:description" content="流程图123456789101112131415161718192021graph TDA((URL)) --&amp;gt; B[查看浏览器缓存]B --&amp;gt; C&amp;#123;有缓存&amp;#125;B --&amp;gt; D&amp;#123;无缓存&amp;#125;C --&amp;gt; E[缓存未过期]C --&amp;gt; F[缓存过期]F --&amp;gt; H[请求资源,进入解析步骤]E --&amp;gt; G[转码,渲染]D --&amp;gt">
+<meta name="twitter:title" content="webpack2配置">
+<meta name="twitter:description" content="配置webpack切换到webpack2后配置方法换了好多，又重新弄了一遍 //安装 npm install webpack -g npm install webpack --save-dev 配置转换cssless//安装 npm install less  --save-dev; npm install less-loader css-loader style-loader --save-de">
 
 
 
@@ -118,13 +118,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/03/07/从浏览器输入url到显示/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/02/27/webpack2配置/"/>
 
 
 
 
 
-  <title>从浏览器输入url到显示 | Hey</title>
+  <title>webpack2配置 | Hey</title>
   
 
 
@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/07/从浏览器输入url到显示/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/02/27/webpack2配置/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="hey">
@@ -258,7 +258,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">从浏览器输入url到显示</h1>
+          <h1 class="post-title" itemprop="name headline">webpack2配置</h1>
         
 
         <div class="post-meta">
@@ -270,8 +270,8 @@
               
                 <span class="post-meta-item-text">Veröffentlicht am</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-07T13:19:37+08:00">
-                2017-03-07
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-27T17:00:07+08:00">
+                2017-02-27
               </time>
             
 
@@ -330,8 +330,223 @@
       
 
       
-        <h3 id="流程图"><a href="#流程图" class="headerlink" title="流程图"></a>流程图</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">graph TD</span><br><span class="line">A((URL)) --&gt; B[查看浏览器缓存]</span><br><span class="line">B --&gt; C&#123;有缓存&#125;</span><br><span class="line">B --&gt; D&#123;无缓存&#125;</span><br><span class="line">C --&gt; E[缓存未过期]</span><br><span class="line">C --&gt; F[缓存过期]</span><br><span class="line">F --&gt; H[请求资源,进入解析步骤]</span><br><span class="line">E --&gt; G[转码,渲染]</span><br><span class="line">D --&gt; I[解析url,获得协议,主机,端口,ip]</span><br><span class="line">I --&gt; J[组装成一个http请求]</span><br><span class="line">J --&gt; K[与服务器建立TCP连接]</span><br><span class="line">K --&gt; M[发送http请求]</span><br><span class="line">M --&gt; N[服务器接受请求,解析]</span><br><span class="line">N --&gt; |服务器检查请求头,验证缓存新鲜|O[服务器根据请求响应]</span><br><span class="line">O --&gt; P[通过TCP把响应报文发回浏览器]</span><br><span class="line">P --&gt; Q[浏览器接收http响应]</span><br><span class="line">P --&gt; 1[浏览器根据情况选择关闭TCP或者保持]</span><br><span class="line">Q --&gt; R[浏览器根据状态码做出处理]</span><br><span class="line">R --&gt; 2[资源可以缓存,进行缓存]</span><br><span class="line">R --&gt; S[对资源进行解码,如gzip解码]</span><br><span class="line">S --&gt; |解析html文档,构建DOM树,CSS树,执行脚本|3[渲染]</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">graph TD</span><br><span class="line">A((浏览器解析ip)) --&gt; B&#123;浏览器缓存&#125;</span><br><span class="line">B --&gt; C[本机缓存]</span><br><span class="line">C --&gt; D[hosts文件]</span><br><span class="line">D --&gt; E[路由器缓存]</span><br><span class="line">E --&gt; F[DNS缓存]</span><br><span class="line">F --&gt; G[isp网络供应商缓存]</span><br><span class="line">G --&gt; I[DNS递归查询]</span><br></pre></td></tr></table></figure>
+        <h3 id="配置webpack"><a href="#配置webpack" class="headerlink" title="配置webpack"></a>配置webpack</h3><p>切换到webpack2后配置方法换了好多，又重新弄了一遍</p>
+<pre><code>//安装
+npm install webpack -g
+npm install webpack --save-dev
+</code></pre><h3 id="配置转换css"><a href="#配置转换css" class="headerlink" title="配置转换css"></a>配置转换css</h3><h3 id="less"><a href="#less" class="headerlink" title="less"></a>less</h3><pre><code>//安装
+npm install less  --save-dev;
+npm install less-loader css-loader style-loader --save-dev;
+
+//webpack配置
+
+module: {
+    rules: [
+        {
+            test: /\.less$/,
+            use: [
+              &apos;style-loader&apos;,
+              { loader: &apos;css-loader&apos;, options: { importLoaders: 1 } },
+              &apos;less-loader&apos;
+            ]
+        }
+    ]
+}
+
+//记得在js里面引入：
+
+require(./xx/x.less);
+</code></pre><h3 id="sass"><a href="#sass" class="headerlink" title="sass"></a>sass</h3><pre><code>//安装：
+
+npm install node-sass --save-dev
+npm install sass-loader css-loader style-loader --save-dev
+
+//node-sass： 安装不上先安装 cnpm
+
+npm install -g cnpm --registry=https://registry.npm.taobao.org  
+npm install node-sass --save-dev
+
+
+//webpack配置：
+
+rules: [
+    {
+        test: /\.scss$/,
+        use: [{
+            loader: &quot;style-loader&quot; // creates style nodes from JS strings
+        }, {
+            loader: &quot;css-loader&quot; // translates CSS into CommonJS
+        }, {
+            loader: &quot;sass-loader&quot; // compiles Sass to CSS
+        }]
+    }
+]
+
+//记得在js里面引入(注意后缀)：
+
+require(./xx/x.scss);
+</code></pre><p>例子：<a href="https://github.com/heyxiaoling/webpack-study/tree/master/transformationcss" target="_blank" rel="noopener">css</a> </p>
+<h4 id="生成样式文件"><a href="#生成样式文件" class="headerlink" title="生成样式文件"></a>生成样式文件</h4><p>注意：这样配置会在页面head里面生成一个style，样式都写在里面，如果你想把样式固定在一个文件，这样达到利用浏览器缓存的目的</p>
+<pre><code>//安装
+npm install extract-text-webpack-plugin --save-dev
+//webpack配置
+rules: [
+    {
+        test: /\.less$/i,
+        use: ExtractLESS.extract([ &apos;css-loader&apos;, &apos;less-loader&apos; ])
+    },
+    {
+        test: /\.scss$/i,
+        use: ExtractLESS.extract([ &apos;css-loader&apos;, &apos;sass-loader&apos; ])
+    }
+]
+plugins: [
+    new ExtractTextPlugin(&apos;common.css&apos;)
+]
+//这样会生成一个common.css文件
+</code></pre><h3 id="图片等文件处理"><a href="#图片等文件处理" class="headerlink" title="图片等文件处理"></a>图片等文件处理</h3><pre><code>//安装
+npm install file-loader url-loader --save-dev
+
+//webpack
+
+{
+    test: /\.(png|jpg|jpeg|gif|eot|ttf|woff|woff2|svg|svgz)(\?.+)?$/,
+    use: [
+      {
+        loader: &apos;url-loader&apos;,
+        options: {
+          limit: 100000
+        }
+      }
+    ]
+}
+</code></pre><h3 id="配置babel"><a href="#配置babel" class="headerlink" title="配置babel"></a>配置babel</h3><pre><code>//安装
+npm install babel-core babel-loader --save-dev; //babel-core现版本为babel本身
+npm install babel-preset-es2015 --save-dev //这个看你需求
+npm install babel-preset-react babel-preset-stage-2 --save-dev
+//因为用到react，如果不用可以不配置
+//我用到react版本是15,所以配置了babel-preset-stage-2，这个视你的react具体情况而定
+
+//安装
+npm install babel-polyfill --save //兼容某些低版本浏览器对es5的不支持
+
+
+//增加.babelrc文件
+
+//在里面写上
+
+{
+    &quot;presets&quot;: [
+        [&quot;es2015&quot;, {&quot;modules&quot;: false}],
+        &quot;stage-2&quot;,
+        &quot;react&quot;,
+    ],
+    &quot;plugins&quot;: [
+        &quot;react-hot-loader/babel&quot;
+        //react-hot
+    ]
+}
+
+
+//webpack配置
+{
+    test: /\.(js|es6|jsx)$/, //注意你文件的后缀
+    use: [
+      &apos;babel-loader&apos;,
+    ],
+    exclude: /node_modules/
+},
+
+//注意当你没有配置.babelrc文件时：
+
+{
+    test: /\.(js|es6|jsx)$/, //注意你文件的后缀
+    use: [
+      &apos;babel-loader&apos;,
+      options: { 
+        &quot;presets&quot;: [
+            [&quot;es2015&quot;, {&quot;modules&quot;: false}],
+            &quot;stage-2&quot;,
+            &quot;react&quot;,
+        ],
+        &quot;plugins&quot;: [
+            &quot;react-hot-loader/babel&quot;
+            //react-hot
+        ]
+      }
+    ],
+    exclude: /node_modules/
+},
+</code></pre><h3 id="配置webpack-dev-server"><a href="#配置webpack-dev-server" class="headerlink" title="配置webpack-dev-server"></a>配置webpack-dev-server</h3><pre><code>//安装
+npm install webpack-dev-server --save-dev
+//react热加载,看情况配置
+npm install react-hot-loader --save-dev
+//配置webpack
+//入口
+entry: {
+    app: [
+        &quot;webpack-dev-server/client?http://0.0.0.0:8888/&quot;,
+        &apos;webpack/hot/only-dev-server&apos;,
+        path.resolve(__dirname, &apos;./src/app/index.es6&apos;)
+    ],
+},
+output: {
+    path: path.resolve(__dirname, &apos;./assets&apos;),
+    filename: &apos;[name].[hash].js&apos;
+},
+
+plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    // 开启全局的模块热替换(HMR)
+
+    new webpack.NamedModulesPlugin(),
+    // 当模块热替换(HMR)时在浏览器控制台输出对用户更友好的模块名字信息
+]
+
+//在package.json配置启动
+&quot;scripts&quot;: {
+    &quot;dev&quot;: &quot;webpack-dev-server --colors --profile --env.dev&quot;
+},
+
+
+
+//如果使用react热加载,请在入口文件添加，（这段代码情况而定）
+
+// 模块热替换的 API
+if (module.hot) {
+  module.hot.accept();
+}
+
+//启动 
+
+npm run dev
+</code></pre><h3 id="webpack-dev-middleware"><a href="#webpack-dev-middleware" class="headerlink" title="webpack-dev-middleware"></a>webpack-dev-middleware</h3><pre><code>npm install express webpack-dev-middleware --save-dev
+
+var express = require(&quot;express&quot;);
+var webpackDevMiddleware = require(&quot;webpack-dev-middleware&quot;);
+var webpack = require(&quot;webpack&quot;);
+var webpackConfig = require(&quot;./webpack.config&quot;);
+
+var app = express();
+var compiler = webpack(webpackConfig);
+
+app.use(webpackDevMiddleware(compiler, {
+  publicPath: &quot;/&quot; // 大部分情况下和 `output.publicPath`相同
+}));
+
+app.listen(3000, function () {
+  console.log(&quot;Listening on port 3000!&quot;);
+});
+
+//默认情况下会使用watch mode。也可以使用 lazy mode，这使得 webpack 只在对入口点进行请求时再进行重新编译。
+
+//设置仅在对入口 bundle.js 请求时进行编译：
+
+app.use(webpackDevMiddleware(compiler, {
+  lazy: true,
+  filename: &quot;bundle.js&quot; // Same as `output.filename` in most cases.
+}));
+</code></pre><p>例子：<a href="https://github.com/heyxiaoling/webpack-study/tree/master/react-dev" target="_blank" rel="noopener">react-dev</a> </p>
 
       
     </div>
@@ -356,8 +571,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/03/理解CSRF/" rel="next" title="理解CSRF">
-                <i class="fa fa-chevron-left"></i> 理解CSRF
+              <a href="/2017/02/21/Heyxiaoling/" rel="next" title="Heyxiaoling">
+                <i class="fa fa-chevron-left"></i> Heyxiaoling
               </a>
             
           </div>
@@ -366,8 +581,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/04/26/像素/" rel="prev" title="像素">
-                像素 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/03/02/移动端常用布局方法/" rel="prev" title="移动端常用布局方法">
+                移动端常用布局方法 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -495,7 +710,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#流程图"><span class="nav-number">1.</span> <span class="nav-text">流程图</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置webpack"><span class="nav-number">1.</span> <span class="nav-text">配置webpack</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置转换css"><span class="nav-number">2.</span> <span class="nav-text">配置转换css</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#less"><span class="nav-number">3.</span> <span class="nav-text">less</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sass"><span class="nav-number">4.</span> <span class="nav-text">sass</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#生成样式文件"><span class="nav-number">4.1.</span> <span class="nav-text">生成样式文件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#图片等文件处理"><span class="nav-number">5.</span> <span class="nav-text">图片等文件处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置babel"><span class="nav-number">6.</span> <span class="nav-text">配置babel</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置webpack-dev-server"><span class="nav-number">7.</span> <span class="nav-text">配置webpack-dev-server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#webpack-dev-middleware"><span class="nav-number">8.</span> <span class="nav-text">webpack-dev-middleware</span></a></li></ol></div>
             
 
           </div>

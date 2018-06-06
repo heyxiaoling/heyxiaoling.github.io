@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="前端知识，随想" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1，使用meta,固定width&amp;lt;meta name=&amp;quot;viewport&amp;quot; content=&amp;quot;width=320&amp;quot;&amp;gt; &amp;lt;meta name=&amp;quot;viewport&amp;quot; content=&amp;quot;width=640&amp;quot;&amp;gt; &amp;lt;meta name=&amp;quot;viewport&amp;quot; content=&amp;qu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="移动端常用布局方法">
+<meta property="og:url" content="http://yoursite.com/2017/03/02/移动端常用布局方法/index.html">
+<meta property="og:site_name" content="Hey">
+<meta property="og:description" content="1，使用meta,固定width&amp;lt;meta name=&amp;quot;viewport&amp;quot; content=&amp;quot;width=320&amp;quot;&amp;gt; &amp;lt;meta name=&amp;quot;viewport&amp;quot; content=&amp;quot;width=640&amp;quot;&amp;gt; &amp;lt;meta name=&amp;quot;viewport&amp;quot; content=&amp;qu">
+<meta property="og:updated_time" content="2018-06-06T08:03:00.711Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="移动端常用布局方法">
+<meta name="twitter:description" content="1，使用meta,固定width&amp;lt;meta name=&amp;quot;viewport&amp;quot; content=&amp;quot;width=320&amp;quot;&amp;gt; &amp;lt;meta name=&amp;quot;viewport&amp;quot; content=&amp;quot;width=640&amp;quot;&amp;gt; &amp;lt;meta name=&amp;quot;viewport&amp;quot; content=&amp;qu">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/03/02/移动端常用布局方法/"/>
+
+
+
+
+
+  <title>移动端常用布局方法 | Hey</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hey</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-fe">
+          <a href="/fe/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-arrows-alt"></i> <br />
+            
+            fe
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            Über
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/02/移动端常用布局方法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hey">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ocx1796s4.bkt.clouddn.com/cat01.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hey">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">移动端常用布局方法</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-02T17:34:39+08:00">
+                2017-03-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Basic/" itemprop="url" rel="index">
+                    <span itemprop="name">Basic</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="1，使用meta-固定width"><a href="#1，使用meta-固定width" class="headerlink" title="1，使用meta,固定width"></a>1，使用meta,固定width</h3><pre><code>&lt;meta name=&quot;viewport&quot; content=&quot;width=320&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=640&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=640, user-scalable=no, target-densitydpi=device-dpi&quot;&gt;
+</code></pre><ul>
+<li>固定宽度，viewport 缩放<br>视觉稿、页面宽度、viewport width 使用统一宽度，利用浏览器自身缩放完成适配。页面样式（包括图像元素）完全按照视觉稿的尺寸，使用定值单位 （px、em）即可完成。</li>
+<li>如<a href="http://m.lizhi.fm/" target="_blank" rel="noopener">荔枝FM</a></li>
+<li><p>是这样的，WebKit内核默认按照160的DPI来排版。假如设备真实DPI是480，宽度是1080，在WebKit会按160DPI，360宽度来排版。排版结束后在放大到1080宽。<br>所以当取window.innerwidth之类的值的时候，取的是WebKit实际排版宽度360，而不是1080.target-densitydpi=device-dpi可以强制内核以480DPI排版，使画面更精细，window.innerwidth也将为屏幕宽度1080.但WebKit从去年开始取消了对target-densitydpi的支持。</p>
+<h4 id="优点："><a href="#优点：" class="headerlink" title="优点："></a>优点：</h4><ul>
+<li>开发简单    缩放交给浏览器，完全按视觉稿切图。</li>
+<li>还原精准    绝对等比例缩放，可以精准还原视觉稿（不考虑清晰度的情况下）。</li>
+<li>测试方便    在PC端即可完成大部分测试，手机端只需酌情调整一些细节（比如图标、字体混合排列时，因为字体不同造成的对齐问题）。<h4 id="不足："><a href="#不足：" class="headerlink" title="不足："></a>不足：</h4></li>
+<li>像素丢失     对于一些分辨率较低的手机，可能设备像素还未达到指定的 viewport 宽度，此时屏幕的渲染可能就不准确了。比较常见的是边框“消失”了，不过随着手机硬件的更新，这个问题会越来越少的。</li>
+<li>缩放失效     某些安卓机不能正常的根据 meta 标签中 width 的值来缩放 viewport，需要配合initial-scale 。（缩放失效问题可以通过 js 动态设定 initial-scale。）</li>
+<li>文本折行    存在于缩放失效的机型中，某些手机为了便于文本的阅读，在文本到达 viewport 边缘（非元素容器的边缘）时即进行折行，而当 viewport 宽度被修正后，浏览器并没有正确的重绘，所以就发现文本没有占满整行。一些常用的段落性文本标签会存在该问题。</li>
+</ul>
+</li>
+</ul>
+<h3 id="2，使用meta-弹性布局"><a href="#2，使用meta-弹性布局" class="headerlink" title="2，使用meta,弹性布局"></a>2，使用meta,弹性布局</h3><pre><code>&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no&quot;&gt;
+//文字流式，控件弹性，图片等比缩放
+//使用vm, vh，%
+</code></pre><h3 id="3，设置一系列分辨率"><a href="#3，设置一系列分辨率" class="headerlink" title="3，设置一系列分辨率"></a>3，设置一系列分辨率</h3><pre><code>/*公共media query查询 1rem初始设置为12px
+dpr为2时对应750的效果图 dpr为3时对应1080的效果图
+查询区间间隔暂时设置为30px 对应3倍图时 1rem大小变化1px
+对于dpr为2的有额外百分之4.2增大的兼容*/
+html{font-size:12px}
+@media screen and (max-width: 320px) {
+    html,body{font-size:62.5%}
+}
+@media screen and (min-width: 321px) and (max-width:350px) {
+    @media screen and (-webkit-min-device-pixel-ratio: 2){
+        html,body{font-size:71.62%}
+    }
+    @media screen and (-webkit-min-device-pixel-ratio: 3){
+        html,body{font-size:68.75%}
+    }
+}
+@media screen and (min-width: 351px) and (max-width:380px) {
+        html,body{font-size:75%}
+}
+@media screen and (min-width: 381px) and (max-width:410px) {
+    @media screen and (-webkit-min-device-pixel-ratio: 2){
+        html,body{font-size:84.64%}
+    }
+    @media screen and (-webkit-min-device-pixel-ratio: 3){
+        html,body{font-size:81.25%}
+    }
+}
+@media screen and (min-width: 411px) and (max-width:440px) {
+    @media screen and (-webkit-min-device-pixel-ratio: 2){
+        html,body{font-size:91.15%}
+    }
+    @media screen and (-webkit-min-device-pixel-ratio: 3){
+        html,body{font-size:87.5%}
+    }
+}
+@media screen and (min-width: 441px) and (max-width:470px) {
+    @media screen and (-webkit-min-device-pixel-ratio: 2){
+        html,body{font-size:97.66%}
+    }
+    @media screen and (-webkit-min-device-pixel-ratio: 3){
+        html,body{font-size:93.75%}
+    }
+}
+@media screen and (min-width: 471px) and (max-width:500px) {
+    @media screen and (-webkit-min-device-pixel-ratio: 2){
+        html,body{font-size:104.17%}
+    }
+    @media screen and (-webkit-min-device-pixel-ratio: 3){
+        html,body{font-size:100%}
+    }
+}
+@media screen and (min-width: 501px) and (max-width:539px) {
+    @media screen and (-webkit-min-device-pixel-ratio: 2){
+        html,body{font-size:110.68%}
+    }
+    @media screen and (-webkit-min-device-pixel-ratio: 3){
+        html,body{font-size:106.25%}
+    }
+}
+@media screen and (min-width: 540px) {
+    html,body{font-size: 150%}
+}
+</code></pre><h3 id="4，使用rem作为单位"><a href="#4，使用rem作为单位" class="headerlink" title="4，使用rem作为单位"></a>4，使用rem作为单位</h3><pre><code>/*
+// 例如: .px2rem(height, 80);
+.px2rem(@name, @px){
+    @{name}: @px / 640 * 1rem;
+}
+
+所以，对于宽高640×300px的div，我们用less就这样写：
+
+.px2rem(width, 640);
+.px2rem(height, 300);
+
+*/
+
+(function(d,psdW){
+    var dele = d.documentElement;
+    var w = dele.clientWidth; //window.screen.width
+    //psd宽度,以设计稿为准,这里假设设计稿为640
+    var psdW = psdW;
+    //换算比列,这里写上100,标示1rem=100px; 
+    //当宽度为400时，为4rem;
+    var  n = 100;
+
+    //设备宽度除以设计稿宽度，分割设计稿为n份
+    //超出某个宽度后处理
+    if( w &gt; psdW) w = psdW;
+
+    dele.style.fontSize = w / psdW * n + &apos;px&apos;;
+
+})(document,640)
+</code></pre><h3 id="5，devicePixelRatio控制meta缩放，并使用rem单位"><a href="#5，devicePixelRatio控制meta缩放，并使用rem单位" class="headerlink" title="5，devicePixelRatio控制meta缩放，并使用rem单位"></a>5，devicePixelRatio控制meta缩放，并使用rem单位</h3><pre><code>var dpr, rem, scale;
+var docEl = document.documentElement;
+var fontEl = document.createElement(&apos;style&apos;);
+var metaEl = document.querySelector(&apos;meta[name=&quot;viewport&quot;]&apos;);
+
+dpr = window.devicePixelRatio || 1;
+rem = window.screen.width * dpr / 10;
+scale = 1 / dpr;
+
+
+// 设置viewport，进行缩放，达到高清效果
+metaEl.setAttribute(&apos;content&apos;, &apos;width=&apos; + dpr * docEl.clientWidth + &apos;,initial-scale=&apos; + scale + &apos;,maximum-scale=&apos; + scale + &apos;, minimum-scale=&apos; + scale + &apos;,user-scalable=no&apos;);
+
+// 设置data-dpr属性，留作的css hack之用
+docEl.setAttribute(&apos;data-dpr&apos;, dpr);
+
+// 动态写入样式
+docEl.firstElementChild.appendChild(fontEl);
+fontEl.innerHTML = &apos;html{font-size:&apos; + rem + &apos;px!important;}&apos;;
+
+// 给js调用的，某一dpr下rem和px之间的转换函数
+window.rem2px = function(v) {
+v = parseFloat(v);
+return v * rem;
+};
+window.px2rem = function(v) {
+    v = parseFloat(v);
+    return v / rem;
+};
+
+window.dpr = dpr;
+window.rem = rem;
+
+假设设计稿750×1334
+如果有一个区块，在psd文件中量出：宽高750×300px的div，那么如何转换成rem单位呢？
+
+公式如下：
+
+rem = px / 基准值;
+对于一个iphone6的视觉稿，它的基准值就是75(之前有提到);
+
+//less写一个mixin，像这样：
+
+// 例如: .px2rem(height, 80);
+.px2rem(@name, @px){
+    @{name}: @px / 75 * 1rem;
+}
+
+//所以，对于宽高750×300px的div，我们用less就这样写：
+
+.px2rem(width, 750);
+.px2rem(height, 300);
+//转换成html，就是这样：
+
+width: 10rem; // -&gt; 750px
+height: 4rem; // -&gt; 300px
+
+//最后因为dpr为2，页面scale了0.5，所以在手机屏幕上显示的真实宽高应该是375×150px，就刚刚好。
+
+倘若页面并没有scale 0.5，我们的代码就得这样：
+
+.px2rem(width, 375);
+.px2rem(height, 150);
+
+
+
+//设计要求：任何手机屏幕上字体大小都要统一 
+//否则可以用rem标示字体
+
+font-size: 16px;
+[data-dpr=&quot;2&quot;] input {
+  font-size: 32px;
+}
+
+.px2px(@name, @px){
+    @{name}: round(@px / 2) * 1px;
+    [data-dpr=&quot;2&quot;] &amp; {
+        @{name}: @px * 1px;
+    }
+    // for mx3
+    [data-dpr=&quot;2.5&quot;] &amp; {
+        @{name}: round(@px * 2.5 / 2) * 1px;
+    }
+    // for 小米note
+    [data-dpr=&quot;2.75&quot;] &amp; {
+        @{name}: round(@px * 2.75 / 2) * 1px;
+    }
+    [data-dpr=&quot;3&quot;] &amp; {
+        @{name}: round(@px / 2 * 3) * 1px
+    }
+    // for 三星note4
+    [data-dpr=&quot;4&quot;] &amp; {
+        @{name}: @px * 2px;
+    }
+}
+[]() http://div.io/topic/1092
+</code></pre><h4 id="优点：-1"><a href="#优点：-1" class="headerlink" title="优点："></a>优点：</h4><ul>
+<li>清晰度高，能达到物理像素的清晰度。</li>
+<li>能解决 DPR 引起的“1像素”问题。</li>
+<li>向后兼容较好，即便屏幕宽度增加、PPI 增加该方案依旧适用。</li>
+</ul>
+<h4 id="缺点："><a href="#缺点：" class="headerlink" title="缺点："></a>缺点：</h4><ul>
+<li>适配 js 需尽可能早进入，减少（避免）viewport 变化引起的重绘。</li>
+<li>某些Android机会丢掉 rem 小数部分。</li>
+<li>需要预编译库进行单位转换。</li>
+</ul>
+<h3 id="5-使用阿里flexible"><a href="#5-使用阿里flexible" class="headerlink" title="5,使用阿里flexible"></a>5,使用阿里flexible</h3><pre><code>https://github.com/amfe/article/issues/17
+使用flexible
+http://www.cnblogs.com/lyzg/p/5058356.html
+优点：
+对任意的设计搞都可以很好适配
+</code></pre><h3 id="6-使用hotcss"><a href="#6-使用hotcss" class="headerlink" title="6,使用hotcss"></a>6,使用hotcss</h3><p><a href=""></a><a href="http://imochen.github.io/hotcss/" target="_blank" rel="noopener">http://imochen.github.io/hotcss/</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/02/27/webpack2配置/" rel="next" title="webpack2配置">
+                <i class="fa fa-chevron-left"></i> webpack2配置
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/03/理解CSRF/" rel="prev" title="理解CSRF">
+                理解CSRF <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="http://ocx1796s4.bkt.clouddn.com/cat01.jpg"
+                alt="hey" />
+            
+              <p class="site-author-name" itemprop="name">hey</p>
+              <p class="site-description motion-element" itemprop="description">生死由命，富贵在天</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">Artikel</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">Kategorien</span>
+                
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1，使用meta-固定width"><span class="nav-number">1.</span> <span class="nav-text">1，使用meta,固定width</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#优点："><span class="nav-number">1.1.</span> <span class="nav-text">优点：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#不足："><span class="nav-number">1.2.</span> <span class="nav-text">不足：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2，使用meta-弹性布局"><span class="nav-number">2.</span> <span class="nav-text">2，使用meta,弹性布局</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3，设置一系列分辨率"><span class="nav-number">3.</span> <span class="nav-text">3，设置一系列分辨率</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4，使用rem作为单位"><span class="nav-number">4.</span> <span class="nav-text">4，使用rem作为单位</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5，devicePixelRatio控制meta缩放，并使用rem单位"><span class="nav-number">5.</span> <span class="nav-text">5，devicePixelRatio控制meta缩放，并使用rem单位</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#优点：-1"><span class="nav-number">5.1.</span> <span class="nav-text">优点：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#缺点："><span class="nav-number">5.2.</span> <span class="nav-text">缺点：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-使用阿里flexible"><span class="nav-number">6.</span> <span class="nav-text">5,使用阿里flexible</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-使用hotcss"><span class="nav-number">7.</span> <span class="nav-text">6,使用hotcss</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hey</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

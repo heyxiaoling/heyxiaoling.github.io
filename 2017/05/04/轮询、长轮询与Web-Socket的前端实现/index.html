@@ -79,16 +79,16 @@
 
 
 
-<meta name="description" content="流程图123456789101112131415161718192021graph TDA((URL)) --&amp;gt; B[查看浏览器缓存]B --&amp;gt; C&amp;#123;有缓存&amp;#125;B --&amp;gt; D&amp;#123;无缓存&amp;#125;C --&amp;gt; E[缓存未过期]C --&amp;gt; F[缓存过期]F --&amp;gt; H[请求资源,进入解析步骤]E --&amp;gt; G[转码,渲染]D --&amp;gt">
+<meta name="description" content="Web Socket 应用场景:实现即时通讯:如股票交易行情分析、聊天室、在线游戏等，替代轮询和长轮询轮询 轮询是在特定的的时间间隔（如每1秒），由浏览器对服务器发出HTTP request，然后由服务器返回最新的数据给客户端的浏览器。这种传统的HTTP request 的模式带来很明显的缺点 – 浏览器需要不断的向服务器发出请求，然而HTTP request 的header是非常长的，里面包含的">
 <meta property="og:type" content="article">
-<meta property="og:title" content="从浏览器输入url到显示">
-<meta property="og:url" content="http://yoursite.com/2017/03/07/从浏览器输入url到显示/index.html">
+<meta property="og:title" content="轮询、长轮询与Web Socket的前端实现">
+<meta property="og:url" content="http://yoursite.com/2017/05/04/轮询、长轮询与Web-Socket的前端实现/index.html">
 <meta property="og:site_name" content="Hey">
-<meta property="og:description" content="流程图123456789101112131415161718192021graph TDA((URL)) --&amp;gt; B[查看浏览器缓存]B --&amp;gt; C&amp;#123;有缓存&amp;#125;B --&amp;gt; D&amp;#123;无缓存&amp;#125;C --&amp;gt; E[缓存未过期]C --&amp;gt; F[缓存过期]F --&amp;gt; H[请求资源,进入解析步骤]E --&amp;gt; G[转码,渲染]D --&amp;gt">
-<meta property="og:updated_time" content="2018-06-06T08:03:58.361Z">
+<meta property="og:description" content="Web Socket 应用场景:实现即时通讯:如股票交易行情分析、聊天室、在线游戏等，替代轮询和长轮询轮询 轮询是在特定的的时间间隔（如每1秒），由浏览器对服务器发出HTTP request，然后由服务器返回最新的数据给客户端的浏览器。这种传统的HTTP request 的模式带来很明显的缺点 – 浏览器需要不断的向服务器发出请求，然而HTTP request 的header是非常长的，里面包含的">
+<meta property="og:updated_time" content="2018-06-06T08:03:33.932Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="从浏览器输入url到显示">
-<meta name="twitter:description" content="流程图123456789101112131415161718192021graph TDA((URL)) --&amp;gt; B[查看浏览器缓存]B --&amp;gt; C&amp;#123;有缓存&amp;#125;B --&amp;gt; D&amp;#123;无缓存&amp;#125;C --&amp;gt; E[缓存未过期]C --&amp;gt; F[缓存过期]F --&amp;gt; H[请求资源,进入解析步骤]E --&amp;gt; G[转码,渲染]D --&amp;gt">
+<meta name="twitter:title" content="轮询、长轮询与Web Socket的前端实现">
+<meta name="twitter:description" content="Web Socket 应用场景:实现即时通讯:如股票交易行情分析、聊天室、在线游戏等，替代轮询和长轮询轮询 轮询是在特定的的时间间隔（如每1秒），由浏览器对服务器发出HTTP request，然后由服务器返回最新的数据给客户端的浏览器。这种传统的HTTP request 的模式带来很明显的缺点 – 浏览器需要不断的向服务器发出请求，然而HTTP request 的header是非常长的，里面包含的">
 
 
 
@@ -118,13 +118,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/03/07/从浏览器输入url到显示/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/05/04/轮询、长轮询与Web-Socket的前端实现/"/>
 
 
 
 
 
-  <title>从浏览器输入url到显示 | Hey</title>
+  <title>轮询、长轮询与Web Socket的前端实现 | Hey</title>
   
 
 
@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/07/从浏览器输入url到显示/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/04/轮询、长轮询与Web-Socket的前端实现/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="hey">
@@ -258,7 +258,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">从浏览器输入url到显示</h1>
+          <h1 class="post-title" itemprop="name headline">轮询、长轮询与Web Socket的前端实现</h1>
         
 
         <div class="post-meta">
@@ -270,8 +270,8 @@
               
                 <span class="post-meta-item-text">Veröffentlicht am</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-07T13:19:37+08:00">
-                2017-03-07
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-04T16:25:43+08:00">
+                2017-05-04
               </time>
             
 
@@ -330,8 +330,20 @@
       
 
       
-        <h3 id="流程图"><a href="#流程图" class="headerlink" title="流程图"></a>流程图</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">graph TD</span><br><span class="line">A((URL)) --&gt; B[查看浏览器缓存]</span><br><span class="line">B --&gt; C&#123;有缓存&#125;</span><br><span class="line">B --&gt; D&#123;无缓存&#125;</span><br><span class="line">C --&gt; E[缓存未过期]</span><br><span class="line">C --&gt; F[缓存过期]</span><br><span class="line">F --&gt; H[请求资源,进入解析步骤]</span><br><span class="line">E --&gt; G[转码,渲染]</span><br><span class="line">D --&gt; I[解析url,获得协议,主机,端口,ip]</span><br><span class="line">I --&gt; J[组装成一个http请求]</span><br><span class="line">J --&gt; K[与服务器建立TCP连接]</span><br><span class="line">K --&gt; M[发送http请求]</span><br><span class="line">M --&gt; N[服务器接受请求,解析]</span><br><span class="line">N --&gt; |服务器检查请求头,验证缓存新鲜|O[服务器根据请求响应]</span><br><span class="line">O --&gt; P[通过TCP把响应报文发回浏览器]</span><br><span class="line">P --&gt; Q[浏览器接收http响应]</span><br><span class="line">P --&gt; 1[浏览器根据情况选择关闭TCP或者保持]</span><br><span class="line">Q --&gt; R[浏览器根据状态码做出处理]</span><br><span class="line">R --&gt; 2[资源可以缓存,进行缓存]</span><br><span class="line">R --&gt; S[对资源进行解码,如gzip解码]</span><br><span class="line">S --&gt; |解析html文档,构建DOM树,CSS树,执行脚本|3[渲染]</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">graph TD</span><br><span class="line">A((浏览器解析ip)) --&gt; B&#123;浏览器缓存&#125;</span><br><span class="line">B --&gt; C[本机缓存]</span><br><span class="line">C --&gt; D[hosts文件]</span><br><span class="line">D --&gt; E[路由器缓存]</span><br><span class="line">E --&gt; F[DNS缓存]</span><br><span class="line">F --&gt; G[isp网络供应商缓存]</span><br><span class="line">G --&gt; I[DNS递归查询]</span><br></pre></td></tr></table></figure>
+        <h4 id="Web-Socket"><a href="#Web-Socket" class="headerlink" title="Web Socket"></a>Web Socket</h4><ul>
+<li>应用场景:实现即时通讯:如股票交易行情分析、聊天室、在线游戏等，替代轮询和长轮询<h4 id="轮询"><a href="#轮询" class="headerlink" title="轮询"></a>轮询</h4></li>
+<li><p>轮询是在特定的的时间间隔（如每1秒），由浏览器对服务器发出HTTP request，然后由服务器返回最新的数据给客户端的浏览器。这种传统的HTTP request 的模式带来很明显的缺点 – 浏览器需要不断的向服务器发出请求，然而HTTP request 的header是非常长的，里面包含的有用数据可能只是一个很小的值，这样会占用很多的带宽。</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var xhr = new XMLHttpRequest();</span><br><span class="line">setInterval(function()&#123;</span><br><span class="line">    xhr.open(&apos;GET&apos;,&apos;/user&apos;);</span><br><span class="line">    xhr.onreadystatechange = function()&#123;</span><br><span class="line"></span><br><span class="line">    &#125;;</span><br><span class="line">    xhr.send();</span><br><span class="line">&#125;,1000)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="长轮询"><a href="#长轮询" class="headerlink" title="长轮询:"></a>长轮询:</h4><ul>
+<li>ajax实现:在发送ajax后,服务器端会阻塞请求直到有数据传递或超时才返回。 客户端JavaScript响应处理函数会在处理完服务器返回的信息后，再次发出请求，重新建立连接。  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function ajax()&#123;</span><br><span class="line">    var xhr = new XMLHttpRequest();</span><br><span class="line">    xhr.open(&apos;GET&apos;,&apos;/user&apos;);</span><br><span class="line">    xhr.onreadystatechange = function()&#123;</span><br><span class="line">          ajax();</span><br><span class="line">    &#125;;</span><br><span class="line">    xhr.send();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="Web-Socket-1"><a href="#Web-Socket-1" class="headerlink" title="Web Socket:"></a>Web Socket:</h4><ul>
+<li><p>轮询与长轮询都是基于HTTP的，两者本身存在着缺陷:轮询需要更快的处理速度；长轮询则更要求处理并发的能力;两者都是“被动型服务器”的体现:服务器不会主动推送信息，而是在客户端发送ajax请求后进行返回的响应。而理想的模型是”在服务器端数据有了变化后，可以主动推送给客户端”,这种”主动型”服务器是解决这类问题的很好的方案。Web Sockets就是这样的方案。</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">//需要先npm install ws</span><br><span class="line"></span><br><span class="line">//服务器端</span><br><span class="line">var Server = require(&apos;ws&apos;).Server;</span><br><span class="line">var wss = new Server(&#123;</span><br><span class="line">    port:2000</span><br><span class="line">&#125;);</span><br><span class="line">wss.on(&apos;connection&apos;,function(ws)&#123;</span><br><span class="line">    ws.on(&apos;message&apos;,function(data)&#123;</span><br><span class="line">        ws.send(&apos;你好,客户端,我是服务器!&apos;);</span><br><span class="line">        console.log(data);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">//node客户端</span><br><span class="line"></span><br><span class="line">var WebSocket = require(&apos;ws&apos;);</span><br><span class="line">var socket = new WebSocket(&apos;ws://localhost:2000/&apos;);</span><br><span class="line">socket.on(&apos;open&apos;,function()&#123;</span><br><span class="line">    socket.send(&apos;你好，服务器,我是客户端&apos;);</span><br><span class="line">&#125;);</span><br><span class="line">socket.on(&apos;message&apos;,function(event)&#123;</span><br><span class="line">    console.log(event);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">//html客户端(注:浏览器客户端与node客户端只需要一种)</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var socket = new WebSocket(&apos;ws://localhost:2000/&apos;);</span><br><span class="line">    socket.onopen = function()&#123;</span><br><span class="line"></span><br><span class="line">    &#125;;</span><br><span class="line">    socket.onmessage = function(event)&#123;</span><br><span class="line">        console.log(event.data)</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
 
       
     </div>
@@ -356,8 +368,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/03/理解CSRF/" rel="next" title="理解CSRF">
-                <i class="fa fa-chevron-left"></i> 理解CSRF
+              <a href="/2017/05/03/es6和react/" rel="next" title="es6和react">
+                <i class="fa fa-chevron-left"></i> es6和react
               </a>
             
           </div>
@@ -366,8 +378,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/04/26/像素/" rel="prev" title="像素">
-                像素 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/05/05/居中问题/" rel="prev" title="居中问题">
+                居中问题 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -495,7 +507,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#流程图"><span class="nav-number">1.</span> <span class="nav-text">流程图</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Web-Socket"><span class="nav-number">1.</span> <span class="nav-text">Web Socket</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#轮询"><span class="nav-number">2.</span> <span class="nav-text">轮询</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#长轮询"><span class="nav-number">3.</span> <span class="nav-text">长轮询:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Web-Socket-1"><span class="nav-number">4.</span> <span class="nav-text">Web Socket:</span></a></li></ol></div>
             
 
           </div>
