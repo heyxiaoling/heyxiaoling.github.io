@@ -248,6 +248,556 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/08/nuxt.js初探/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hey">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ocx1796s4.bkt.clouddn.com/cat01.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hey">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/08/nuxt.js初探/" itemprop="url">从浏览器输入url到显示</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-08T13:19:39+08:00">
+                2018-08-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Basic/" itemprop="url" rel="index">
+                    <span itemprop="name">Basic</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="nuxt-js初探"><a href="#nuxt-js初探" class="headerlink" title="nuxt.js初探"></a>nuxt.js初探</h2><blockquote>
+<p>主要讲遇到的坑</p>
+</blockquote>
+<h3 id="修改ip端口"><a href="#修改ip端口" class="headerlink" title="修改ip端口"></a>修改ip端口</h3><p>在package.json添加修改</p>
+<pre><code>&quot;config&quot;: {
+    &quot;nuxt&quot;: {
+      &quot;host&quot;: &quot;10.243.19.86&quot;,
+      &quot;port&quot;: &quot;8888&quot;
+    }
+}
+</code></pre><h3 id="引入静态js"><a href="#引入静态js" class="headerlink" title="引入静态js"></a>引入静态js</h3><p>请把文件放在static目录下，页面目录pages&gt;user&gt;index.vue</p>
+<pre><code>//md5.js放在static/js/md5.js
+
+//pages
+head: {
+    script: [
+        { src: &apos;../js/md5.js&apos;}
+    ]
+}
+</code></pre><h3 id="引入ivew"><a href="#引入ivew" class="headerlink" title="引入ivew"></a>引入ivew</h3><p>注意ssr需要设置为true，如果为false会出现报错警告</p>
+<pre><code>css: [
+    { src: &apos;iview/dist/styles/iview.css&apos;}
+],
+plugins: [
+    { src: &apos;~plugins/iview.js&apos;, ssr: true }
+]
+</code></pre><h3 id="引入公共js"><a href="#引入公共js" class="headerlink" title="引入公共js"></a>引入公共js</h3><pre><code>//plugins/common.js
+import Vue from &apos;vue&apos;;
+import axios from &apos;axios&apos;;
+import iView from &apos;iview&apos;;
+import {BASEPATH} from &apos;@/config/config&apos;;
+import http from &apos;./http&apos;;
+
+export const Common = {};
+
+
+Common.install = function (Vue, options) {
+    Vue.prototype.http = http;
+}
+
+Vue.use(Common);
+
+//http.js
+
+import axios from &apos;axios&apos;;
+import iView from &apos;iview&apos;;
+import {BASEPATH} from &apos;@/config/config&apos;;
+
+const instance = axios.create({
+    baseURL: BASEPATH,
+    timeout: 30000
+});
+
+export default (option)=&gt;{
+    return new Promise((resolve, reject) =&gt; {
+        option.withCredentials = true;
+        iView.LoadingBar.start();
+        instance(option).then((res)=&gt;{
+            iView.LoadingBar.finish();
+            if(res.status !== 200) {
+                alert(&apos;error&apos;,&apos;提示&apos;,res.data.desc);
+                reject(res);
+            }else{ 
+                resolve(res);
+            }
+        }).catch((err)=&gt;{
+            iView.LoadingBar.error();
+            console.log(err);
+        })
+    })
+
+}
+
+//nuxt.config.js
+
+plugins: [
+    //{ src: &apos;~plugins/iview.js&apos;, ssr: true },
+    { src: &apos;~plugins/common.js&apos;}
+],
+</code></pre><h3 id="使用less"><a href="#使用less" class="headerlink" title="使用less"></a>使用less</h3><p>需要安装less,less-loader</p>
+<pre><code>build: {
+    /*
+    ** Run ESLint on save
+    */
+    extend (config, { isDev, isClient }) {
+        if (isDev &amp;&amp; isClient) {
+            config.module.rules.push({
+                enforce: &apos;pre&apos;,
+                test: /\.(js|vue)$/,
+                loader: &apos;eslint-loader&apos;,
+                exclude: /(node_modules)/
+            });
+
+
+        }
+
+        const vueLoader = config.module.rules.find((rule) =&gt; rule.loader === &apos;vue-loader&apos;);
+        vueLoader.options.loaders.less = &apos;vue-style-loader!css-loader!less-loader&apos;;
+    }
+},
+</code></pre><h3 id="路由签权"><a href="#路由签权" class="headerlink" title="路由签权"></a>路由签权</h3><p>使用exprss-session,body-parse插件,注意服务器路由跟前端路由路径不要相同，或者会覆盖前端的路由,我这里在页面首页使用中间件middleware,在store，actions里使用nuxtServerInit方法，注意这个方法只能在store的最外层</p>
+<pre><code>//nuxt.config.js
+const bodyParser = require(&apos;body-parser&apos;);
+const session = require(&apos;express-session&apos;);
+serverMiddleware: [
+    // body-parser middleware
+    bodyParser.json(),
+    // session middleware
+    session({
+        secret: &apos;super-secret-key&apos;,
+        resave: false,
+        saveUninitialized: false,
+        cookie: { maxAge: 60000 }
+    }),
+    // Api middleware
+    // We add /api/login &amp; /api/logout routes
+    &apos;~/api&apos;
+]
+
+//api&gt;index.js
+
+const express = require(&apos;express&apos;)
+
+// Create express router
+const router = express.Router()
+
+// Transform req &amp; res to have the same API as express
+// So we can use res.status() &amp; res.json()
+var app = express()
+router.use((req, res, next) =&gt; {
+    Object.setPrototypeOf(req, app.request)
+    Object.setPrototypeOf(res, app.response)
+    req.res = res
+    res.req = req
+    next()
+})
+
+// Add POST - /api/login
+router.post(&apos;/login&apos;, (req, res) =&gt; {
+    if (req.body.username === &apos;demo&apos; &amp;&amp; req.body.password === &apos;demo&apos;) {
+        req.session.authUser = { username: &apos;demo&apos; }
+        return res.json({ username: &apos;demo&apos; })
+    }
+    res.status(401).json({ message: &apos;Bad credentials&apos; })
+})
+
+// Add POST - /api/logout
+router.post(&apos;/logout&apos;, (req, res) =&gt; {
+    delete req.session.authUser
+    res.json({ ok: true })
+})
+
+// Export the server middleware
+module.exports = {
+    path: &apos;/api&apos;,
+    handler: router
+}
+
+//首页做路由签权 page&gt;index.vue
+
+export default{
+
+    middleware: &apos;auth&apos;,
+}
+
+//middleware&gt;auth.js
+
+export default function ({store, error, route, req, res, redirect}) {
+    let redirectURL = &apos;/users/login&apos;;
+    if (!store.state.login.authUser) {
+        redirect(redirectURL)
+    }
+})
+
+//store&gt;actions
+
+
+export default {
+    nuxtServerInit({ commit }, { req }) {
+        if (req.session &amp;&amp; req.session.authUser) {
+            commit(&apos;SET_USER&apos;, req.session.authUser)
+        }
+    },
+    async login({ commit }, { username, password }) {
+        try {
+            const { data } = await axios.post(&apos;/api/login&apos;, { username, password })
+            commit(&apos;SET_USER&apos;, data)
+        } catch (error) {
+            if (error.response &amp;&amp; error.response.status === 401) {
+                throw new Error(&apos;Bad credentials&apos;)
+            }
+            throw error
+        }
+    },
+
+    async logout({ commit }) {
+        await axios.post(&apos;/api/logout&apos;)
+        commit(&apos;SET_USER&apos;, null)
+    }
+};
+</code></pre><blockquote>
+<p>有遇到坑在补充</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/07/linxu下mongodb安装/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hey">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ocx1796s4.bkt.clouddn.com/cat01.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hey">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/07/linxu下mongodb安装/" itemprop="url">从浏览器输入url到显示</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-07T13:19:37+08:00">
+                2018-07-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Basic/" itemprop="url" rel="index">
+                    <span itemprop="name">Basic</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="mongodb安装"><a href="#mongodb安装" class="headerlink" title="mongodb安装"></a>mongodb安装</h3><h4 id="yum命令"><a href="#yum命令" class="headerlink" title="yum命令"></a>yum命令</h4><p>yum命令是在Fedora和RedHat以及SUSE中基于rpm的软件包管理器，它可以使系统管理人员交互和自动化地更细与管理RPM软件包，能够从指定的服务器自动下载RPM包并且安装，可以自动处理依赖性关系，并且一次安装所有依赖的软体包，无须繁琐地一次次下载、安装。<br>yum提供了查找、安装、删除某一个、一组甚至全部软件包的命令，而且命令简洁而又好记。</p>
+<h4 id="pwd命令"><a href="#pwd命令" class="headerlink" title="pwd命令"></a>pwd命令</h4><p>pwd命令以绝对路径的方式显示用户当前工作目录。命令将当前目录的全路径名称（从根目录）写入标准输出。全部目录使用/分隔。第一个/表示根目录，最后一个目录是当前目录。执行pwd命令可立刻得知您目前所在的工作目录的绝对路径名称。</p>
+<h4 id="tar命令"><a href="#tar命令" class="headerlink" title="tar命令"></a>tar命令</h4><p>tar命令可以为linux的文件和目录创建档案。利用tar，可以为某一特定文件创建档案（备份文件），也可以在档案中改变文件，或者向档案中加入新的文件。tar最初被用来在磁带上创建档案，现在，用户可以在任何设备上创建档案。利用tar命令，可以把一大堆的文件和目录全部打包成一个文件，这对于备份文件或将几个文件组合成为一个文件以便于网络传输是非常有用的。<br>首先要弄清两个概念：打包和压缩。打包是指将一大堆文件或目录变成一个总的文件；压缩则是将一个大的文件通过一些压缩算法变成一个小文件。<br>为什么要区分这两个概念呢？这源于Linux中很多压缩程序只能针对一个文件进行压缩，这样当你想要压缩一大堆文件时，你得先将这一大堆文件先打成一个包（tar命令），然后再用压缩程序进行压缩（gzip bzip2命令）。</p>
+<h4 id="curl命令"><a href="#curl命令" class="headerlink" title="curl命令"></a>curl命令</h4><p>curl命令是一个利用URL规则在命令行下工作的文件传输工具。它支持文件的上传和下载，所以是综合传输工具，但按传统，习惯称curl为下载工具。作为一款强力工具，curl支持包括HTTP、HTTPS、ftp等众多协议，还支持POST、cookies、认证、从指定偏移处下载部分文件、用户代理字符串、限速、文件大小、进度条等特征。做网页处理流程和数据检索自动化，curl可以祝一臂之力。</p>
+<hr>
+<blockquote>
+<p>新手最好按推荐路径装</p>
+</blockquote>
+<p>下载完安装包，并解压 tgz（以下演示的是 64 位 Linux上的安装） 。</p>
+<pre><code>curl -O https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-3.0.6.tgz    # 下载
+tar -zxvf mongodb-linux-x86_64-3.0.6.tgz                                   # 解压
+
+mv  mongodb-linux-x86_64-3.0.6/ /usr/local/mongodb                         # 将解压包拷贝到指定目录
+</code></pre><p>MongoDB 的可执行文件位于 bin 目录下，所以可以将其添加到 PATH 路径中：</p>
+<pre><code>export PATH=&lt;mongodb-install-directory&gt;/bin:$PATH
+</code></pre><p><mongodb-install-directory> 为你 MongoDB 的安装路径。如本文的 /usr/local/mongodb 。</mongodb-install-directory></p>
+<p>让我们进入MongoDB安装路径下,在此目录下创建data目录，并且在data目录下创建db和logs目录；</p>
+<pre><code>cd /usr/local/mongodb;
+mkdir data &amp;&amp; cd data
+mkdir db
+touch logs
+</code></pre><p><img src="https://imgsa.baidu.com/exp/w=480/sign=27426c53bb4543a9f51bfbc42e168a7b/0bd162d9f2d3572c85842e7b8613632762d0c337.jpg" alt="image"></p>
+<p>在data目录下创建并且编辑，输入命令：vi mongdb.conf；</p>
+<p>输入一下内容：</p>
+<pre><code>#端口号
+
+port = 27017
+
+#数据目录
+
+dbpath = /usr/local/mongodb/data/db
+
+#日志所在目录
+
+logpath = /usr/local/mongodb/data/logs
+
+#日志输出方式
+
+logappend = true
+</code></pre><blockquote>
+<p>注意路径</p>
+</blockquote>
+<p>重新返回到mongodb目录下，输入命令：cd /usr/local/mongodb；</p>
+<p>让我们来启动服务吧；</p>
+<p>输入命令：</p>
+<pre><code>mongod -f /usr/local/mongodb/data/mongdb.conf
+</code></pre><blockquote>
+<p>启动前先设置路径,因为export是临时的，关闭xhell链接后失效</p>
+</blockquote>
+<pre><code>export PATH=/usr/local/mongodb/bin:$PATH;
+mongo
+</code></pre><p>永久设置（成功未知）：修改.bash_profile</p>
+<pre><code>cd ~;
+ls -a;
+vi .bash_profile;
+source .bash_profile
+//添加这个
+PATH=$PATH:$HOME/bin:/usr/local/mongodb/bin
+
+export PATH
+
+//启动
+mongod --dbpath /user/local/mongodb/data
+</code></pre><p>打开<a href="http://203.195.177.24:27017/查看" target="_blank" rel="noopener">http://203.195.177.24:27017/查看</a></p>
+<p>It looks like you are trying to access MongoDB over HTTP on the native driver port.</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/06/正则表达式常用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -806,6 +1356,349 @@ console.log(result);
   
   
 
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/16/node小爬虫/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hey">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ocx1796s4.bkt.clouddn.com/cat01.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hey">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/16/node小爬虫/" itemprop="url">从浏览器输入url到显示</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-16T13:19:37+08:00">
+                2018-05-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Basic/" itemprop="url" rel="index">
+                    <span itemprop="name">Basic</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="node小爬虫"><a href="#node小爬虫" class="headerlink" title="node小爬虫"></a>node小爬虫</h3><blockquote>
+<p>实现一个爬取小说网页并提取关键字</p>
+</blockquote>
+<p>小说示例网站：<a href="https://www.xs8.cn/" target="_blank" rel="noopener">https://www.xs8.cn/</a></p>
+<h4 id="开启服务"><a href="#开启服务" class="headerlink" title="开启服务"></a>开启服务</h4><p>使用http，https，或者可以使用express，我这里使用http</p>
+<pre><code>http.createServer((req,res)=&gt;{
+
+    res.end(&apos;ok&apos;);
+}).listen(8888);
+</code></pre><h3 id="发送请求"><a href="#发送请求" class="headerlink" title="发送请求"></a>发送请求</h3><p>请求网站为https，需要引入，这里使用http.request()(可以使用superagent)</p>
+<pre><code>const https = require(&apos;https&apos;);
+//url为需要请求的网站地址
+//superagent.get(&apos;https://cnodejs.org/&apos;)
+const req = https.request(_url, (res) =&gt; {
+    res.setEncoding(&apos;utf8&apos;);
+    let arr = [];
+    res.on(&apos;data&apos;, (chunk) =&gt; {
+        arr.push(chunk);
+    });
+    res.on(&apos;end&apos;, () =&gt; {
+        //下一步处理
+
+    });
+});
+</code></pre><h3 id="处理请求的html"><a href="#处理请求的html" class="headerlink" title="处理请求的html"></a>处理请求的html</h3><p>使用jsdom，也可以使用cheerio </p>
+<pre><code>const JSDOM = require(&apos;jsdom&apos;).JSDOM
+res.on(&apos;end&apos;, () =&gt; {
+    let DOM = new JSDOM(arr);
+    let document = DOM.window.document;
+    var myHtml = document.querySelector(&apos;.read-content&apos;).innerHTML.replace(/&lt;\/?p&gt;/g,&apos;&apos;);
+    //下一步操作
+
+});
+</code></pre><h3 id="提取需要的关键字"><a href="#提取需要的关键字" class="headerlink" title="提取需要的关键字"></a>提取需要的关键字</h3><p>使用Segment分词插件</p>
+<pre><code>const Segment = require(&apos;segment&apos;);
+
+let seg = new Segment();
+seg.useDefault();
+
+res.on(&apos;end&apos;, () =&gt; {
+    let DOM = new JSDOM(arr);
+    let document = DOM.window.document;
+    var myHtml = document.querySelector(&apos;.read-content&apos;).innerHTML.replace(/&lt;\/?p&gt;/g,&apos;&apos;);
+
+    var _arr = seg.doSegment(myHtml);
+    console.log(_arr);
+    response.end(JSON.stringify(_arr));
+
+});
+</code></pre><h3 id="页面请求，处理数据，使用echarts图表化"><a href="#页面请求，处理数据，使用echarts图表化" class="headerlink" title="页面请求，处理数据，使用echarts图表化"></a>页面请求，处理数据，使用echarts图表化</h3>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/08/搭建git服务器/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hey">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ocx1796s4.bkt.clouddn.com/cat01.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hey">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/08/搭建git服务器/" itemprop="url">从浏览器输入url到显示</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-08T13:19:37+08:00">
+                2018-05-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Basic/" itemprop="url" rel="index">
+                    <span itemprop="name">Basic</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="搭建git服务器"><a href="#搭建git服务器" class="headerlink" title="搭建git服务器"></a>搭建git服务器</h3><pre><code>//git密码：1357huang
+</code></pre><h4 id="服务器端-Git-打开-RSA-认证"><a href="#服务器端-Git-打开-RSA-认证" class="headerlink" title="服务器端 Git 打开 RSA 认证"></a>服务器端 Git 打开 RSA 认证</h4><p>进入 /etc/ssh 目录，编辑 sshd_config，打开以下三个配置的注释：</p>
+<pre><code>RSAAuthentication yes
+PubkeyAuthentication yes
+AuthorizedKeysFile .ssh/authorized_keys
+</code></pre><p>保存并重启 sshd 服务：</p>
+<pre><code>[root@localhost ssh]# /etc/rc.d/init.d/sshd restart
+</code></pre><blockquote>
+<p>如果你是用 git init –bare mygit.git 建立的仓库.<br>该仓库是没有工作目录的.但问题中你说找不到工作目录.说明远程服务可能是部署工作,需要包含工作目录.</p>
+</blockquote>
+<p><a href="https://segmentfault.com/q/1010000010633417?sort=created" target="_blank" rel="noopener">https://segmentfault.com/q/1010000010633417?sort=created</a></p>
+<p><a href="https://www.cnblogs.com/dee0912/p/5815267.html" target="_blank" rel="noopener">参照文章</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
   <article class="post post-type-about" itemscope itemtype="http://schema.org/Article">
   
   
@@ -1099,350 +1992,6 @@ console.log(result);
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/08/nuxt.js初探/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="hey">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ocx1796s4.bkt.clouddn.com/cat01.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hey">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/08/08/nuxt.js初探/" itemprop="url">从浏览器输入url到显示</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-08T13:19:39+08:00">
-                2017-08-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Basic/" itemprop="url" rel="index">
-                    <span itemprop="name">Basic</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="nuxt-js初探"><a href="#nuxt-js初探" class="headerlink" title="nuxt.js初探"></a>nuxt.js初探</h2><blockquote>
-<p>主要讲遇到的坑</p>
-</blockquote>
-<h3 id="修改ip端口"><a href="#修改ip端口" class="headerlink" title="修改ip端口"></a>修改ip端口</h3><p>在package.json添加修改</p>
-<pre><code>&quot;config&quot;: {
-    &quot;nuxt&quot;: {
-      &quot;host&quot;: &quot;10.243.19.86&quot;,
-      &quot;port&quot;: &quot;8888&quot;
-    }
-}
-</code></pre><h3 id="引入静态js"><a href="#引入静态js" class="headerlink" title="引入静态js"></a>引入静态js</h3><p>请把文件放在static目录下，页面目录pages&gt;user&gt;index.vue</p>
-<pre><code>//md5.js放在static/js/md5.js
-
-//pages
-head: {
-    script: [
-        { src: &apos;../js/md5.js&apos;}
-    ]
-}
-</code></pre><h3 id="引入ivew"><a href="#引入ivew" class="headerlink" title="引入ivew"></a>引入ivew</h3><p>注意ssr需要设置为true，如果为false会出现报错警告</p>
-<pre><code>css: [
-    { src: &apos;iview/dist/styles/iview.css&apos;}
-],
-plugins: [
-    { src: &apos;~plugins/iview.js&apos;, ssr: true }
-]
-</code></pre><h3 id="引入公共js"><a href="#引入公共js" class="headerlink" title="引入公共js"></a>引入公共js</h3><pre><code>//plugins/common.js
-import Vue from &apos;vue&apos;;
-import axios from &apos;axios&apos;;
-import iView from &apos;iview&apos;;
-import {BASEPATH} from &apos;@/config/config&apos;;
-import http from &apos;./http&apos;;
-
-export const Common = {};
-
-
-Common.install = function (Vue, options) {
-    Vue.prototype.http = http;
-}
-
-Vue.use(Common);
-
-//http.js
-
-import axios from &apos;axios&apos;;
-import iView from &apos;iview&apos;;
-import {BASEPATH} from &apos;@/config/config&apos;;
-
-const instance = axios.create({
-    baseURL: BASEPATH,
-    timeout: 30000
-});
-
-export default (option)=&gt;{
-    return new Promise((resolve, reject) =&gt; {
-        option.withCredentials = true;
-        iView.LoadingBar.start();
-        instance(option).then((res)=&gt;{
-            iView.LoadingBar.finish();
-            if(res.status !== 200) {
-                alert(&apos;error&apos;,&apos;提示&apos;,res.data.desc);
-                reject(res);
-            }else{ 
-                resolve(res);
-            }
-        }).catch((err)=&gt;{
-            iView.LoadingBar.error();
-            console.log(err);
-        })
-    })
-
-}
-
-//nuxt.config.js
-
-plugins: [
-    //{ src: &apos;~plugins/iview.js&apos;, ssr: true },
-    { src: &apos;~plugins/common.js&apos;}
-],
-</code></pre><h3 id="使用less"><a href="#使用less" class="headerlink" title="使用less"></a>使用less</h3><p>需要安装less,less-loader</p>
-<pre><code>build: {
-    /*
-    ** Run ESLint on save
-    */
-    extend (config, { isDev, isClient }) {
-        if (isDev &amp;&amp; isClient) {
-            config.module.rules.push({
-                enforce: &apos;pre&apos;,
-                test: /\.(js|vue)$/,
-                loader: &apos;eslint-loader&apos;,
-                exclude: /(node_modules)/
-            });
-
-
-        }
-
-        const vueLoader = config.module.rules.find((rule) =&gt; rule.loader === &apos;vue-loader&apos;);
-        vueLoader.options.loaders.less = &apos;vue-style-loader!css-loader!less-loader&apos;;
-    }
-},
-</code></pre><h3 id="路由签权"><a href="#路由签权" class="headerlink" title="路由签权"></a>路由签权</h3><p>使用exprss-session,body-parse插件,注意服务器路由跟前端路由路径不要相同，或者会覆盖前端的路由,我这里在页面首页使用中间件middleware,在store，actions里使用nuxtServerInit方法，注意这个方法只能在store的最外层</p>
-<pre><code>//nuxt.config.js
-const bodyParser = require(&apos;body-parser&apos;);
-const session = require(&apos;express-session&apos;);
-serverMiddleware: [
-    // body-parser middleware
-    bodyParser.json(),
-    // session middleware
-    session({
-        secret: &apos;super-secret-key&apos;,
-        resave: false,
-        saveUninitialized: false,
-        cookie: { maxAge: 60000 }
-    }),
-    // Api middleware
-    // We add /api/login &amp; /api/logout routes
-    &apos;~/api&apos;
-]
-
-//api&gt;index.js
-
-const express = require(&apos;express&apos;)
-
-// Create express router
-const router = express.Router()
-
-// Transform req &amp; res to have the same API as express
-// So we can use res.status() &amp; res.json()
-var app = express()
-router.use((req, res, next) =&gt; {
-    Object.setPrototypeOf(req, app.request)
-    Object.setPrototypeOf(res, app.response)
-    req.res = res
-    res.req = req
-    next()
-})
-
-// Add POST - /api/login
-router.post(&apos;/login&apos;, (req, res) =&gt; {
-    if (req.body.username === &apos;demo&apos; &amp;&amp; req.body.password === &apos;demo&apos;) {
-        req.session.authUser = { username: &apos;demo&apos; }
-        return res.json({ username: &apos;demo&apos; })
-    }
-    res.status(401).json({ message: &apos;Bad credentials&apos; })
-})
-
-// Add POST - /api/logout
-router.post(&apos;/logout&apos;, (req, res) =&gt; {
-    delete req.session.authUser
-    res.json({ ok: true })
-})
-
-// Export the server middleware
-module.exports = {
-    path: &apos;/api&apos;,
-    handler: router
-}
-
-//首页做路由签权 page&gt;index.vue
-
-export default{
-
-    middleware: &apos;auth&apos;,
-}
-
-//middleware&gt;auth.js
-
-export default function ({store, error, route, req, res, redirect}) {
-    let redirectURL = &apos;/users/login&apos;;
-    if (!store.state.login.authUser) {
-        redirect(redirectURL)
-    }
-})
-
-//store&gt;actions
-
-
-export default {
-    nuxtServerInit({ commit }, { req }) {
-        if (req.session &amp;&amp; req.session.authUser) {
-            commit(&apos;SET_USER&apos;, req.session.authUser)
-        }
-    },
-    async login({ commit }, { username, password }) {
-        try {
-            const { data } = await axios.post(&apos;/api/login&apos;, { username, password })
-            commit(&apos;SET_USER&apos;, data)
-        } catch (error) {
-            if (error.response &amp;&amp; error.response.status === 401) {
-                throw new Error(&apos;Bad credentials&apos;)
-            }
-            throw error
-        }
-    },
-
-    async logout({ commit }) {
-        await axios.post(&apos;/api/logout&apos;)
-        commit(&apos;SET_USER&apos;, null)
-    }
-};
-</code></pre><blockquote>
-<p>有遇到坑在补充</p>
-</blockquote>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/21/面向切面方法/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1537,555 +2086,6 @@ export default {
         
           
             <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  alert(<span class="number">2</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Function</span>.prototype.before = <span class="function"><span class="keyword">function</span>(<span class="params">fn</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> _this = <span class="keyword">this</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   <span class="keyword">if</span>(fn.apply(_this,<span class="built_in">arguments</span>) == <span class="literal">false</span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">return</span> _this.apply(_this,<span class="built_in">arguments</span>);</span><br><span class="line">  &#125;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Function</span>.prototype.after = <span class="function"><span class="keyword">function</span>(<span class="params">fn</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> _this = <span class="keyword">this</span>;</span><br><span class="line">  <span class="built_in">console</span>.log(_this);</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   <span class="keyword">var</span> result = _this.apply(_this,<span class="built_in">arguments</span>);<span class="comment">//执行了 before 的返回</span></span><br><span class="line">   <span class="keyword">if</span>(result == <span class="literal">false</span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">   &#125;</span><br><span class="line">   </span><br><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment">    *  也就是执行了fn.apply(_this,arguments);_this.apply(_this,arguments);</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   fn.apply(_this,<span class="built_in">arguments</span>);</span><br><span class="line">   <span class="keyword">return</span> result;</span><br><span class="line">  &#125;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">test.before(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  alert(<span class="number">1</span>);</span><br><span class="line">&#125;).after(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  alert(<span class="number">3</span>);</span><br><span class="line">&#125;)();</span><br><span class="line"></span><br><span class="line"><span class="comment">// test.after(function()&#123;</span></span><br><span class="line"><span class="comment">//   alert(3);</span></span><br><span class="line"><span class="comment">// &#125;).before(function()&#123;</span></span><br><span class="line"><span class="comment">//   alert(1);</span></span><br><span class="line"><span class="comment">// &#125;)();</span></span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/07/linxu下mongodb安装/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="hey">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ocx1796s4.bkt.clouddn.com/cat01.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hey">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/07/07/linxu下mongodb安装/" itemprop="url">从浏览器输入url到显示</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-07T13:19:37+08:00">
-                2017-07-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Basic/" itemprop="url" rel="index">
-                    <span itemprop="name">Basic</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="mongodb安装"><a href="#mongodb安装" class="headerlink" title="mongodb安装"></a>mongodb安装</h3><h4 id="yum命令"><a href="#yum命令" class="headerlink" title="yum命令"></a>yum命令</h4><p>yum命令是在Fedora和RedHat以及SUSE中基于rpm的软件包管理器，它可以使系统管理人员交互和自动化地更细与管理RPM软件包，能够从指定的服务器自动下载RPM包并且安装，可以自动处理依赖性关系，并且一次安装所有依赖的软体包，无须繁琐地一次次下载、安装。<br>yum提供了查找、安装、删除某一个、一组甚至全部软件包的命令，而且命令简洁而又好记。</p>
-<h4 id="pwd命令"><a href="#pwd命令" class="headerlink" title="pwd命令"></a>pwd命令</h4><p>pwd命令以绝对路径的方式显示用户当前工作目录。命令将当前目录的全路径名称（从根目录）写入标准输出。全部目录使用/分隔。第一个/表示根目录，最后一个目录是当前目录。执行pwd命令可立刻得知您目前所在的工作目录的绝对路径名称。</p>
-<h4 id="tar命令"><a href="#tar命令" class="headerlink" title="tar命令"></a>tar命令</h4><p>tar命令可以为linux的文件和目录创建档案。利用tar，可以为某一特定文件创建档案（备份文件），也可以在档案中改变文件，或者向档案中加入新的文件。tar最初被用来在磁带上创建档案，现在，用户可以在任何设备上创建档案。利用tar命令，可以把一大堆的文件和目录全部打包成一个文件，这对于备份文件或将几个文件组合成为一个文件以便于网络传输是非常有用的。<br>首先要弄清两个概念：打包和压缩。打包是指将一大堆文件或目录变成一个总的文件；压缩则是将一个大的文件通过一些压缩算法变成一个小文件。<br>为什么要区分这两个概念呢？这源于Linux中很多压缩程序只能针对一个文件进行压缩，这样当你想要压缩一大堆文件时，你得先将这一大堆文件先打成一个包（tar命令），然后再用压缩程序进行压缩（gzip bzip2命令）。</p>
-<h4 id="curl命令"><a href="#curl命令" class="headerlink" title="curl命令"></a>curl命令</h4><p>curl命令是一个利用URL规则在命令行下工作的文件传输工具。它支持文件的上传和下载，所以是综合传输工具，但按传统，习惯称curl为下载工具。作为一款强力工具，curl支持包括HTTP、HTTPS、ftp等众多协议，还支持POST、cookies、认证、从指定偏移处下载部分文件、用户代理字符串、限速、文件大小、进度条等特征。做网页处理流程和数据检索自动化，curl可以祝一臂之力。</p>
-<hr>
-<blockquote>
-<p>新手最好按推荐路径装</p>
-</blockquote>
-<p>下载完安装包，并解压 tgz（以下演示的是 64 位 Linux上的安装） 。</p>
-<pre><code>curl -O https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-3.0.6.tgz    # 下载
-tar -zxvf mongodb-linux-x86_64-3.0.6.tgz                                   # 解压
-
-mv  mongodb-linux-x86_64-3.0.6/ /usr/local/mongodb                         # 将解压包拷贝到指定目录
-</code></pre><p>MongoDB 的可执行文件位于 bin 目录下，所以可以将其添加到 PATH 路径中：</p>
-<pre><code>export PATH=&lt;mongodb-install-directory&gt;/bin:$PATH
-</code></pre><p><mongodb-install-directory> 为你 MongoDB 的安装路径。如本文的 /usr/local/mongodb 。</mongodb-install-directory></p>
-<p>让我们进入MongoDB安装路径下,在此目录下创建data目录，并且在data目录下创建db和logs目录；</p>
-<pre><code>cd /usr/local/mongodb;
-mkdir data &amp;&amp; cd data
-mkdir db
-touch logs
-</code></pre><p><img src="https://imgsa.baidu.com/exp/w=480/sign=27426c53bb4543a9f51bfbc42e168a7b/0bd162d9f2d3572c85842e7b8613632762d0c337.jpg" alt="image"></p>
-<p>在data目录下创建并且编辑，输入命令：vi mongdb.conf；</p>
-<p>输入一下内容：</p>
-<pre><code>#端口号
-
-port = 27017
-
-#数据目录
-
-dbpath = /usr/local/mongodb/data/db
-
-#日志所在目录
-
-logpath = /usr/local/mongodb/data/logs
-
-#日志输出方式
-
-logappend = true
-</code></pre><blockquote>
-<p>注意路径</p>
-</blockquote>
-<p>重新返回到mongodb目录下，输入命令：cd /usr/local/mongodb；</p>
-<p>让我们来启动服务吧；</p>
-<p>输入命令：</p>
-<pre><code>mongod -f /usr/local/mongodb/data/mongdb.conf
-</code></pre><blockquote>
-<p>启动前先设置路径,因为export是临时的，关闭xhell链接后失效</p>
-</blockquote>
-<pre><code>export PATH=/usr/local/mongodb/bin:$PATH;
-mongo
-</code></pre><p>永久设置（成功未知）：修改.bash_profile</p>
-<pre><code>cd ~;
-ls -a;
-vi .bash_profile;
-source .bash_profile
-//添加这个
-PATH=$PATH:$HOME/bin:/usr/local/mongodb/bin
-
-export PATH
-
-//启动
-mongod --dbpath /user/local/mongodb/data
-</code></pre><p>打开<a href="http://203.195.177.24:27017/查看" target="_blank" rel="noopener">http://203.195.177.24:27017/查看</a></p>
-<p>It looks like you are trying to access MongoDB over HTTP on the native driver port.</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/16/node小爬虫/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="hey">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ocx1796s4.bkt.clouddn.com/cat01.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hey">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/05/16/node小爬虫/" itemprop="url">从浏览器输入url到显示</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-16T13:19:37+08:00">
-                2017-05-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Basic/" itemprop="url" rel="index">
-                    <span itemprop="name">Basic</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="node小爬虫"><a href="#node小爬虫" class="headerlink" title="node小爬虫"></a>node小爬虫</h3><blockquote>
-<p>实现一个爬取小说网页并提取关键字</p>
-</blockquote>
-<p>小说示例网站：<a href="https://www.xs8.cn/" target="_blank" rel="noopener">https://www.xs8.cn/</a></p>
-<h4 id="开启服务"><a href="#开启服务" class="headerlink" title="开启服务"></a>开启服务</h4><p>使用http，https，或者可以使用express，我这里使用http</p>
-<pre><code>http.createServer((req,res)=&gt;{
-
-    res.end(&apos;ok&apos;);
-}).listen(8888);
-</code></pre><h3 id="发送请求"><a href="#发送请求" class="headerlink" title="发送请求"></a>发送请求</h3><p>请求网站为https，需要引入，这里使用http.request()(可以使用superagent)</p>
-<pre><code>const https = require(&apos;https&apos;);
-//url为需要请求的网站地址
-//superagent.get(&apos;https://cnodejs.org/&apos;)
-const req = https.request(_url, (res) =&gt; {
-    res.setEncoding(&apos;utf8&apos;);
-    let arr = [];
-    res.on(&apos;data&apos;, (chunk) =&gt; {
-        arr.push(chunk);
-    });
-    res.on(&apos;end&apos;, () =&gt; {
-        //下一步处理
-
-    });
-});
-</code></pre><h3 id="处理请求的html"><a href="#处理请求的html" class="headerlink" title="处理请求的html"></a>处理请求的html</h3><p>使用jsdom，也可以使用cheerio </p>
-<pre><code>const JSDOM = require(&apos;jsdom&apos;).JSDOM
-res.on(&apos;end&apos;, () =&gt; {
-    let DOM = new JSDOM(arr);
-    let document = DOM.window.document;
-    var myHtml = document.querySelector(&apos;.read-content&apos;).innerHTML.replace(/&lt;\/?p&gt;/g,&apos;&apos;);
-    //下一步操作
-
-});
-</code></pre><h3 id="提取需要的关键字"><a href="#提取需要的关键字" class="headerlink" title="提取需要的关键字"></a>提取需要的关键字</h3><p>使用Segment分词插件</p>
-<pre><code>const Segment = require(&apos;segment&apos;);
-
-let seg = new Segment();
-seg.useDefault();
-
-res.on(&apos;end&apos;, () =&gt; {
-    let DOM = new JSDOM(arr);
-    let document = DOM.window.document;
-    var myHtml = document.querySelector(&apos;.read-content&apos;).innerHTML.replace(/&lt;\/?p&gt;/g,&apos;&apos;);
-
-    var _arr = seg.doSegment(myHtml);
-    console.log(_arr);
-    response.end(JSON.stringify(_arr));
-
-});
-</code></pre><h3 id="页面请求，处理数据，使用echarts图表化"><a href="#页面请求，处理数据，使用echarts图表化" class="headerlink" title="页面请求，处理数据，使用echarts图表化"></a>页面请求，处理数据，使用echarts图表化</h3>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/08/搭建git服务器/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="hey">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ocx1796s4.bkt.clouddn.com/cat01.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hey">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/05/08/搭建git服务器/" itemprop="url">从浏览器输入url到显示</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-08T13:19:37+08:00">
-                2017-05-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Basic/" itemprop="url" rel="index">
-                    <span itemprop="name">Basic</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="搭建git服务器"><a href="#搭建git服务器" class="headerlink" title="搭建git服务器"></a>搭建git服务器</h3><pre><code>//git密码：1357huang
-</code></pre><h4 id="服务器端-Git-打开-RSA-认证"><a href="#服务器端-Git-打开-RSA-认证" class="headerlink" title="服务器端 Git 打开 RSA 认证"></a>服务器端 Git 打开 RSA 认证</h4><p>进入 /etc/ssh 目录，编辑 sshd_config，打开以下三个配置的注释：</p>
-<pre><code>RSAAuthentication yes
-PubkeyAuthentication yes
-AuthorizedKeysFile .ssh/authorized_keys
-</code></pre><p>保存并重启 sshd 服务：</p>
-<pre><code>[root@localhost ssh]# /etc/rc.d/init.d/sshd restart
-</code></pre><blockquote>
-<p>如果你是用 git init –bare mygit.git 建立的仓库.<br>该仓库是没有工作目录的.但问题中你说找不到工作目录.说明远程服务可能是部署工作,需要包含工作目录.</p>
-</blockquote>
-<p><a href="https://segmentfault.com/q/1010000010633417?sort=created" target="_blank" rel="noopener">https://segmentfault.com/q/1010000010633417?sort=created</a></p>
-<p><a href="https://www.cnblogs.com/dee0912/p/5815267.html" target="_blank" rel="noopener">参照文章</a></p>
 
           
         
