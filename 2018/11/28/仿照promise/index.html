@@ -1,0 +1,1200 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="随想" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="实现自己的promisePromise规范https://promisesaplus.com/ 中文版规范：http://www.ituring.com.cn/article/66566 使用资料：    http://es6.ruanyifeng.com/#docs/promise 源码：https://raw.githubusercontent.com/taylorhakes/promise-">
+<meta property="og:type" content="article">
+<meta property="og:title" content="实现自己的promise">
+<meta property="og:url" content="http://yoursite.com/2018/11/28/仿照promise/index.html">
+<meta property="og:site_name" content="Hey">
+<meta property="og:description" content="实现自己的promisePromise规范https://promisesaplus.com/ 中文版规范：http://www.ituring.com.cn/article/66566 使用资料：    http://es6.ruanyifeng.com/#docs/promise 源码：https://raw.githubusercontent.com/taylorhakes/promise-">
+<meta property="og:updated_time" content="2018-12-01T11:57:27.814Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="实现自己的promise">
+<meta name="twitter:description" content="实现自己的promisePromise规范https://promisesaplus.com/ 中文版规范：http://www.ituring.com.cn/article/66566 使用资料：    http://es6.ruanyifeng.com/#docs/promise 源码：https://raw.githubusercontent.com/taylorhakes/promise-">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/11/28/仿照promise/"/>
+
+
+
+
+
+  <title>实现自己的promise | Hey</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hey</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-fe">
+          <a href="/fe/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-arrows-alt"></i> <br />
+            
+            fe
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            Über
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/28/仿照promise/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hey">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ocx1796s4.bkt.clouddn.com/cat01.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hey">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">实现自己的promise</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-28T17:56:41+08:00">
+                2018-11-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Basic/" itemprop="url" rel="index">
+                    <span itemprop="name">Basic</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="实现自己的promise"><a href="#实现自己的promise" class="headerlink" title="实现自己的promise"></a>实现自己的promise</h3><p><strong>Promise规范</strong><br><a href="https://promisesaplus.com/" target="_blank" rel="noopener">https://promisesaplus.com/</a></p>
+<p><a href="http://www.ituring.com.cn/article/66566" target="_blank" rel="noopener">中文版规范：http://www.ituring.com.cn/article/66566</a></p>
+<p><a href="http://es6.ruanyifeng.com/#docs/promise" target="_blank" rel="noopener">使用资料：<br>    http://es6.ruanyifeng.com/#docs/promise</a></p>
+<p><a href="https://raw.githubusercontent.com/taylorhakes/promise-polyfill/master/dist/polyfill.js" target="_blank" rel="noopener">源码：https://raw.githubusercontent.com/taylorhakes/promise-polyfill/master/dist/polyfill.js</a></p>
+<p><a href="https://github.com/kriskowal/q/tree/master/design" target="_blank" rel="noopener">演化：https://github.com/kriskowal/q/tree/master/design</a></p>
+<p><strong>Promise特性</strong></p>
+<ul>
+<li><p>状态机</p>
+<ul>
+<li>pending:Pending  正在进行</li>
+<li>fulfilled:Fulfilled, 完成状态</li>
+<li>rejected: Rejected 失败状态</li>
+</ul>
+</li>
+<li><p>状态迁移</p>
+<ul>
+<li>执行成功状态函数，状态变为fulfilled</li>
+<li>执行失败状态函数，状态变为rejected</li>
+</ul>
+</li>
+<li><p>thenable</p>
+<ul>
+<li>拥有then方法的对象或者函数</li>
+</ul>
+</li>
+</ul>
+<p><strong>源码实现</strong></p>
+<ul>
+<li><p>实现resolve和reject函数执行</p>
+</li>
+<li><p>then函数收集成功状态和失败状态要执行的函数，放入队列中</p>
+</li>
+<li><p>执行队列的函数，要使用定时器模拟异步，不是同步</p>
+</li>
+<li><p>判断传入是否是thenable函数</p>
+</li>
+<li><p>then返回一个Promise对象，做链式调用</p>
+</li>
+</ul>
+<p><strong>1,基础实现</strong></p>
+<pre><code>let p = new MyPromise((resolve,reject)=&gt;{
+    setTimeout(()=&gt;{
+        resolve(&apos;success&apos;);
+        //reject(&apos;fail&apos;);
+    },3000)
+});
+
+;(function(){
+    const status = {
+        pending: &apos;Pending&apos;,
+        fulfilled: &apos;Fulfilled&apos;,
+        rejected: &apos;Rejected&apos;
+    }
+
+    class MyPromise{
+        constructor(func){
+            this.status = status.pending;
+            this._handler(func);
+        }
+
+        _handler(func){
+            func((value)=&gt;{
+                this._resolve(value);
+            },(error)=&gt;{
+                this._reject(error);
+            });
+        }
+
+        _resolve(value){
+            this.status = status.fulfilled;
+        }
+
+        _reject(error){
+            this.status = status.rejected;
+        }
+    }
+
+    window.MyPromise = MyPromise;
+})()
+</code></pre><p><strong>2多个resove,reject问题</strong></p>
+<pre><code>let p = new Promise((resolve,reject) =&gt; {
+    setTimeout(function (){
+        resolve(&apos;成功&apos;)    
+        resolve(&apos;成功&apos;)    
+        resolve(&apos;成功&apos;)    
+        resolve(&apos;成功&apos;)    
+    },3000)
+});
+
+
+//让 _resolve只执行一次 
+
+_handler(func){
+    let done = false;
+    func((value)=&gt;{
+        if(done) return false;
+        done = true;
+        this._resolve(value);
+    },(error)=&gt;{
+
+        this._reject(error);
+    });
+}
+</code></pre><p><strong>3调用多个then方法</strong></p>
+<pre><code>//实现是一个promise对象调用多次then方法
+let p = new MyPromise((resolve,reject)=&gt;{
+    setTimeout(()=&gt;{
+        resolve(&apos;success&apos;);
+        //reject(&apos;fail&apos;);
+    },3000)
+});
+
+p.then(function (data){
+    console.log(&apos;sucess ,then执行&apos;,data)
+},function (){
+    console.log(&apos;失败then执行&apos;)    
+});
+
+p.then(function (data){
+    console.log(&apos;ucess ,then执行2&apos;,data)
+},function (){
+    console.log(&apos;失败then执行2&apos;)    
+});
+
+
+//使用数组存储后，状态改变时触发
+;(function(){
+    const status = {
+        pending: &apos;Pending&apos;,
+        fulfilled: &apos;Fulfilled&apos;,
+        rejected: &apos;Rejected&apos;
+    }
+
+    class MyPromise{
+        constructor(func){
+            this.status = status.pending;
+            this._value = null;  // 记录resolve函数传入的参数
+            this._error = null;  // 记录reject函数传入的参数
+
+            // 收集成功状态要执行的函数
+            this.resolvedArr = [];
+            // 收集失败状态要执行的函数
+            this.rejectedArr = [];
+            this._handler(func);
+        }
+
+        _handler(func){
+            let done = false;
+            func((value)=&gt;{
+                if(done) return false;
+                done = true;
+                this._resolve(value);
+            },(error)=&gt;{
+                if(done) return false;
+                done = true;
+                this._reject(error);
+            });
+        }
+
+        _resolve(value){
+            this.status = status.fulfilled;
+            this._value = value;
+            this.resolvedArr.forEach(i=&gt;i(this._value));
+        }
+
+        _reject(error){
+            this.status = status.rejected;
+            this._error = error;
+            this.rejectedArr.forEach(i=&gt;i(this._error))
+        }
+
+        then(resolvedFunc,rejectFunc){
+            this._done(resolvedFunc,rejectFunc);
+        }
+
+        _done(resolvedFunc,rejectFunc){
+            resolvedFunc = typeof resolvedFunc === &apos;function&apos;? resolvedFunc : null;
+            rejectFunc = typeof rejectFunc === &apos;function&apos;? rejectFunc : null;
+            if(this.status === status.pending){
+                if(resolvedFunc) this.resolvedArr.push(resolvedFunc);
+                if(rejectFunc) this.rejectedArr.push(rejectFunc);
+            }else if(this.status === status.fulfilled){
+                resolvedFunc();
+            }else if(this.status === status.rejected){
+                rejectFunc();
+            }
+
+        }
+    }
+
+    window.MyPromise = MyPromise;
+})()
+</code></pre><p><strong>4.Promise的执行顺序问题</strong></p>
+<pre><code>let p = new Promise((resolve,reject) =&gt; {
+
+    resolve(&apos;成功&apos;);
+});
+p.then(function (data){
+    console.log(&apos;sucess ,then执行&apos;,data)
+},function (){
+    console.log(&apos;失败then执行&apos;)    
+});
+
+console.log(&apos;我先执行&apos;);
+
+//给_resolve和_reject添加setTimeout
+
+;(function(){
+    const status = {
+        pending: &apos;Pending&apos;,
+        fulfilled: &apos;Fulfilled&apos;,
+        rejected: &apos;Rejected&apos;
+    }
+
+    class MyPromise{
+        constructor(func){
+            this.status = status.pending;
+            this._value = null;  // 记录resolve函数传入的参数
+            this._error = null;  // 记录reject函数传入的参数
+
+            // 收集成功状态要执行的函数
+            this.resolvedArr = [];
+            // 收集失败状态要执行的函数
+            this.rejectedArr = [];
+            this._handler(func);
+        }
+
+        _handler(func){
+            let done = false;
+            func((value)=&gt;{
+                if(done) return false;
+                done = true;
+                this._resolve(value);
+            },(error)=&gt;{
+                if(done) return false;
+                done = true;
+                this._reject(error);
+            });
+        }
+
+        _resolve(value){
+                _
+            setTimeout(()=&gt;{
+               this.status = status.fulfilled;
+                this._value = value;
+                this.resolvedArr.forEach(i=&gt;i(this._value)); 
+            });
+        }
+
+        _reject(error){
+            setTimeout(()=&gt;{
+                this.status = status.rejected;
+                this._error = error;
+                this.rejectedArr.forEach(i=&gt;i(this._error))
+            });
+        }
+
+        then(resolvedFunc,rejectFunc){
+            this._done(resolvedFunc,rejectFunc);
+        }
+
+        _done(resolvedFunc,rejectFunc){
+            resolvedFunc = typeof resolvedFunc === &apos;function&apos;? resolvedFunc : null;
+            rejectFunc = typeof rejectFunc === &apos;function&apos;? rejectFunc : null;
+            if(this.status === status.pending){
+                if(resolvedFunc) this.resolvedArr.push(resolvedFunc);
+                if(rejectFunc) this.rejectedArr.push(rejectFunc);
+            }else if(this.status === status.fulfilled){
+                resolvedFunc();
+            }else if(this.status === status.rejected){
+                rejectFunc();
+            }
+
+        }
+    }
+
+    window.MyPromise = MyPromise;
+})()
+</code></pre><p><strong>5.resolve为promise对象</strong>    </p>
+<pre><code>let p2 = new MyPromise((resolve,reject) =&gt; {
+    setTimeout(() =&gt; {
+        resolve(&apos;p2,成功&apos;);    
+    },5000)
+});
+
+p2.then((data) =&gt; {
+    console.log(&apos;p2then&apos;,data)
+})
+
+let p = new MyPromise((resolve,reject)=&gt;{
+    setTimeout(()=&gt;{
+        resolve(p2);
+    },3000)
+});
+
+p.then(function (data){
+    console.log(&apos;sucess ,then执行&apos;,data)
+},function (){
+    console.log(&apos;失败then执行&apos;)    
+});
+
+
+//实现thentable函数    
+;(function(){
+    const status = {
+        pending: &apos;Pending&apos;,
+        fulfilled: &apos;Fulfilled&apos;,
+        rejected: &apos;Rejected&apos;
+    }
+
+    class MyPromise{
+        constructor(func){
+            this.status = status.pending;
+            this._value = null;  // 记录resolve函数传入的参数
+            this._error = null;  // 记录reject函数传入的参数
+
+            // 收集成功状态要执行的函数
+            this.resolvedArr = [];
+            // 收集失败状态要执行的函数
+            this.rejectedArr = [];
+            this._handler(func);
+        }
+
+        _handler(func){
+            let done = false;
+            func((value)=&gt;{
+                if(done) return false;
+                done = true;
+                let then = this._getThen(value);
+                if(then){
+                    // 拿到对象的then之后，怎么知道这个promise对象完成了呢？
+                    // 在then函数上注册成功和失败函数就可以
+                    return this._handler(then.bind(value));
+                }
+
+                this._resolve(value);
+            },(error)=&gt;{
+                if(done) return false;
+                done = true;
+                let then = this._getThen(error);
+                if(then){
+                    return this._handler(then.bind(error));
+                }
+                this._reject(error);
+            });
+        }
+        _getThen(value){
+            let type = typeof value;
+            if(value &amp;&amp; (type === &apos;function&apos; || type === &apos;object&apos;)){
+                if(value.then) return value.then;
+            }
+            return null;
+        }
+        _resolve(value){
+            this.status = status.fulfilled;
+            this._value = value;
+            this.resolvedArr.forEach(i=&gt;i(this._value));
+        }
+
+        _reject(error){
+            this.status = status.rejected;
+            this._error = error;
+            this.rejectedArr.forEach(i=&gt;i(this._error))
+        }
+
+        then(resolvedFunc,rejectFunc){
+            this._done(resolvedFunc,rejectFunc);
+        }
+
+        _done(resolvedFunc,rejectFunc){
+            resolvedFunc = typeof resolvedFunc === &apos;function&apos;? resolvedFunc : null;
+            rejectFunc = typeof rejectFunc === &apos;function&apos;? rejectFunc : null;
+            if(this.status === status.pending){
+                if(resolvedFunc) this.resolvedArr.push(resolvedFunc);
+                if(rejectFunc) this.rejectedArr.push(rejectFunc);
+            }else if(this.status === status.fulfilled){
+                resolvedFunc();
+            }else if(this.status === status.rejected){
+                rejectFunc();
+            }
+
+        }
+    }
+
+    window.MyPromise = MyPromise;
+})()
+</code></pre><p><strong>6.实现then的链式调用</strong></p>
+<pre><code>let p = new MyPromise((resolve,reject)=&gt;{
+    setTimeout(()=&gt;{
+        resolve(&apos;sucess&apos;);
+    },3000)
+});
+
+
+p.then(function (data){
+    console.log(&apos;sucess ,then执行&apos;,data)
+    return 33;
+},function (){
+    console.log(&apos;失败then执行&apos;)    
+})
+.then((data)=&gt;{
+    console.log(&apos;第二个then&apos;,data);
+});
+
+;(function(){
+    const status = {
+        pending: &apos;Pending&apos;,
+        fulfilled: &apos;Fulfilled&apos;,
+        rejected: &apos;Rejected&apos;
+    }
+
+    class MyPromise{
+        constructor(func){
+            this.status = status.pending;
+            this._value = null;  // 记录resolve函数传入的参数
+            this._error = null;  // 记录reject函数传入的参数
+
+            // 收集成功状态要执行的函数
+            this.resolvedArr = [];
+            // 收集失败状态要执行的函数
+            this.rejectedArr = [];
+            this._handler(func);
+        }
+
+        _handler(func){
+            let done = false;
+            func((value)=&gt;{
+                if(done) return false;
+                done = true;
+                let then = this._getThen(value);
+                if(then){
+                    return this._handler(then.bind(value));
+                }
+
+                this._resolve(value);
+            },(error)=&gt;{
+                if(done) return false;
+                done = true;
+                let then = this._getThen(error);
+                if(then){
+                    return this._handler(then.bind(error));
+                }
+                this._reject(error);
+            });
+        }
+        _getThen(value){
+            let type = typeof value;
+            if(value &amp;&amp; (type === &apos;function&apos; || type === &apos;object&apos;)){
+                if(value.then) return value.then;
+            }
+            return null;
+        }
+        _resolve(value){
+            this.status = status.fulfilled;
+            this._value = value;
+            this.resolvedArr.forEach(i=&gt;i(this._value));
+        }
+
+        _reject(error){
+            this.status = status.rejected;
+            this._error = error;
+            this.rejectedArr.forEach(i=&gt;i(this._error))
+        }
+
+        then(resolvedFunc,rejectFunc){
+            //this._done(resolvedFunc,rejectFunc);
+            return new MyPromise((resolve,reject)=&gt;{
+                this._done((data)=&gt;{
+                    resolve(resolvedFunc(data))
+                },(error)=&gt;{
+                    reject(rejectFunc(error))
+                });
+            });
+        }
+
+        _done(resolvedFunc,rejectFunc){
+            resolvedFunc = typeof resolvedFunc === &apos;function&apos;? resolvedFunc : null;
+            rejectFunc = typeof rejectFunc === &apos;function&apos;? rejectFunc : null;
+            if(this.status === status.pending){
+                if(resolvedFunc) this.resolvedArr.push(resolvedFunc);
+                if(rejectFunc) this.rejectedArr.push(rejectFunc);
+            }else if(this.status === status.fulfilled){
+                resolvedFunc();
+            }else if(this.status === status.rejected){
+                rejectFunc();
+            }
+
+        }
+    }
+
+    window.MyPromise = MyPromise;
+})()
+</code></pre>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/14/javascript运行机制/" rel="next" title="javascript运行机制">
+                <i class="fa fa-chevron-left"></i> javascript运行机制
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="http://ocx1796s4.bkt.clouddn.com/cat01.jpg"
+                alt="hey" />
+            
+              <p class="site-author-name" itemprop="name">hey</p>
+              <p class="site-description motion-element" itemprop="description">生死由命，富贵在天</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">Artikel</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">Kategorien</span>
+                
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#实现自己的promise"><span class="nav-number">1.</span> <span class="nav-text">实现自己的promise</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hey</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

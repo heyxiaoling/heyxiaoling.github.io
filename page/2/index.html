@@ -248,7 +248,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/09/分类测试文章/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/06/正则表达式学习总结/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="hey">
@@ -267,7 +267,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/08/09/分类测试文章/" itemprop="url">分类测试文章</a></h1>
+                <a class="post-title-link" href="/2018/06/06/正则表达式学习总结/" itemprop="url">正则表达式学习总结</a></h1>
         
 
         <div class="post-meta">
@@ -279,8 +279,8 @@
               
                 <span class="post-meta-item-text">Veröffentlicht am</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-09T10:40:04+08:00">
-                2017-08-09
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-06T16:41:08+08:00">
+                2018-06-06
               </time>
             
 
@@ -302,8 +302,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/测试/" itemprop="url" rel="index">
-                    <span itemprop="name">测试</span>
+                  <a href="/categories/正则表达式/" itemprop="url" rel="index">
+                    <span itemprop="name">正则表达式</span>
                   </a>
                 </span>
 
@@ -341,13 +341,49 @@
       
         
           
-            <div align="center"><br>测试文章<br></div>
+            <h1 id="学习总结"><a href="#学习总结" class="headerlink" title="学习总结"></a>学习总结</h1><blockquote>
+<p>正则表达式是匹配模式，要么匹配字符，要么匹配位置。</p>
+</blockquote>
+<h3 id="工作机制，基本步骤"><a href="#工作机制，基本步骤" class="headerlink" title="工作机制，基本步骤"></a>工作机制，基本步骤</h3><ol>
+<li>编译。检查模板有没有错误，然后执行</li>
+<li>设置起始位置</li>
+<li>匹配每个正则表达式的字元。当匹配特定字元失败时，正则表达式将试图回溯到扫描之前的位置，然后进入正则表达式其他可能的路径,默认是贪婪匹配,优先级来说，从左往右的次序匹配 &gt; 贪婪 / 懒惰匹配。</li>
+<li>匹配成功或者失败。失败后正则表达式引擎回到第二部</li>
+</ol>
+<h3 id="回溯"><a href="#回溯" class="headerlink" title="回溯"></a>回溯</h3><ul>
+<li>简单总结就是，正因为有多种可能，所以要一个一个试。直到，要么到某一步时，整体匹配成功了；要么最<br>后都试完后，发现整体匹配不成功。</li>
+<li>分支结构，可能前面的子模式会形成了局部匹配，如果接下来表达式整体不匹配时，仍会继续尝试剩下的分<br>支。这种尝试也可以看成一种回溯。</li>
+<li>贪婪量词“试”的策略是：买衣服砍价。价钱太高了，便宜点，不行，再便宜点。</li>
+<li>惰性量词“试”的策略是：卖东西加价。给少了，再多给点行不，还有点少啊，再给点。</li>
+<li>分支结构“试”的策略是：货比三家。这家不行，换一家吧，还不行，再换。</li>
+</ul>
+<h3 id="方法总结"><a href="#方法总结" class="headerlink" title="方法总结"></a>方法总结</h3><h5 id="1-test"><a href="#1-test" class="headerlink" title="1. test"></a>1. test</h5><ul>
+<li>如果字符串 string 中含有与 RegExpObject 匹配的文本，则返回 true，否则返回 false。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">RegExpObject.test(string)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> str = <span class="string">"Visit W3School"</span>;</span><br><span class="line"><span class="keyword">var</span> patt1 = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">"W3School"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> result = patt1.test(str);</span><br><span class="line"></span><br><span class="line"><span class="built_in">document</span>.write(<span class="string">"Result: "</span> + result);</span><br><span class="line"><span class="comment">//匹配ip</span></span><br><span class="line">/((<span class="number">25</span>[<span class="number">0</span><span class="number">-5</span>])|(<span class="number">2</span>[<span class="number">0</span><span class="number">-4</span>]\d)|(<span class="number">1</span>\d&#123;<span class="number">2</span>&#125;)|([<span class="number">1</span><span class="number">-9</span>]?\d)\.)&#123;<span class="number">3</span>&#125;(<span class="number">25</span>[<span class="number">0</span><span class="number">-5</span>])|(<span class="number">2</span>[<span class="number">0</span><span class="number">-4</span>]\d)|(<span class="number">1</span>\d&#123;<span class="number">2</span>&#125;)|([<span class="number">1</span><span class="number">-9</span>]?\d)/.test(<span class="string">"10.243.19.86"</span>); <span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+<h5 id="2-match"><a href="#2-match" class="headerlink" title="2. match"></a>2. match</h5><ul>
+<li>存放匹配结果的数组。该数组的内容依赖于 regexp 是否具有全局标志 g。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str=<span class="string">"1 plus 2 equal 3"</span></span><br><span class="line">str.match(<span class="regexp">/\d+/g</span>)<span class="comment">//[1,2,3]</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h5 id="3-search"><a href="#3-search" class="headerlink" title="3. search"></a>3. search</h5><ul>
+<li>search() 方法用于检索字符串中指定的子字符串，或检索与正则表达式相匹配的子字符串。</li>
+<li>stringObject 中第一个与 regexp 相匹配的子串的起始位置。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str=<span class="string">"Visit W3School!"</span></span><br><span class="line">str.search(<span class="regexp">/W3School/</span>) <span class="comment">//6</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h5 id="4-replace"><a href="#4-replace" class="headerlink" title="4. replace"></a>4. replace</h5><ul>
+<li>replace() 方法用于在字符串中用一些字符替换另一些字符，或替换一个与正则表达式匹配的子串。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">        stringObject.replace(regexp/substr,replacement)</span><br><span class="line"> <span class="string">``</span><span class="string">`       </span></span><br><span class="line"><span class="string">- regexp/substr	必需。规定子字符串或要替换的模式的 RegExp 对象。</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">- 请注意，如果该值是一个字符串，则将它作为要检索的直接量文本模式，而不是首先被转换为 RegExp 对象。</span></span><br><span class="line"><span class="string">- replacement 必需。一个字符串值。规定了替换文本或生成替换文本的函数。</span></span><br><span class="line"><span class="string">- 一个新的字符串，是用 replacement 替换了 regexp 的第一次匹配或所有匹配之后得到的。</span></span><br><span class="line"><span class="string">- 字符串 stringObject 的 replace() 方法执行的是查找并替换的操作。它将在 stringObject 中查找与 regexp 相匹配的子字符串，然后用 replacement 来替换这些子串。如果 regexp 具有全局标志 g，那么 replace() 方法将替换所有匹配的子串。否则，它只替换第一个匹配子串。</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">- replacement 可以是字符串，也可以是函数。如果它是字符串，那么每个匹配都将由字符串替换。但是 replacement 中的 $ 字符具有特定的含义。</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">- $1、$2、...、$99	与 regexp 中的第 1 到第 99 个子表达式相匹配的文本。</span></span><br><span class="line"><span class="string">- $&amp;	与 regexp 相匹配的子串。</span></span><br><span class="line"><span class="string">- $`</span>	位于匹配子串左侧的文本。</span><br><span class="line">- $<span class="string">'	位于匹配子串右侧的文本。</span></span><br><span class="line"><span class="string">- $$	直接量符号。</span></span><br><span class="line"><span class="string">- ==第二个参数为函数时，每次匹配都会调用该函数，函数的返回值将作为替换文本执行匹配操作，同时函数可以接收于$为前缀的特殊字符组合，用来匹配文本的相关信息进行引用==</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">``` javascript</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        let s = "张三56分，李四74分，王五92分，赵六84分",</span></span><br><span class="line"><span class="string">    		a = s.match(/\d+/g),</span></span><br><span class="line"><span class="string">    		sum = 0;</span></span><br><span class="line"><span class="string">    		</span></span><br><span class="line"><span class="string">    	for(var i = 0; i&lt;a.length;i++)&#123;</span></span><br><span class="line"><span class="string">    		sum += parseFloat(a[i]);</span></span><br><span class="line"><span class="string">    	&#125;</span></span><br><span class="line"><span class="string">    	</span></span><br><span class="line"><span class="string">    	let avg = sum/a.length;</span></span><br><span class="line"><span class="string">    	</span></span><br><span class="line"><span class="string">    	function f(a,b,c)&#123;</span></span><br><span class="line"><span class="string">    		console.log('</span>a<span class="string">',a); //56分,74分,92分,84分//匹配内容</span></span><br><span class="line"><span class="string">    		console.log('</span>b<span class="string">',b); //56,74,92,84 //第一个子表达式匹配的文本</span></span><br><span class="line"><span class="string">    		console.log('</span>c<span class="string">',c); //2,8,14,20 //位置索引</span></span><br><span class="line"><span class="string">    		let n = parseFloat(arguments[1]);</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    		return n + '</span>分<span class="string">' + '</span>(<span class="string">' +  ((n &gt; avg) ? ('</span>超出平均分<span class="string">' + (n - avg)) : ('</span>低于平均分<span class="string">' + (avg-n))) +'</span>分)<span class="string">';</span></span><br><span class="line"><span class="string">    	&#125;</span></span><br><span class="line"><span class="string">    	let s2 = s.replace(/(\d+)分/g,f);</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    	console.log('</span>s2<span class="string">',s2); </span></span><br><span class="line"><span class="string">    	</span></span><br><span class="line"><span class="string">    	//s2 张三56分(低于平均分20.5分)，李四74分(低于平均分2.5分)，王五92分(超出平均分15.5分)，赵六84分(超出平均分7.5分)</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h5 id="5-exec"><a href="#5-exec" class="headerlink" title="5. exec"></a>5. exec</h5><ul>
+<li>返回一个数组，其中存放匹配的结果。如果未找到匹配，则返回值为 null。</li>
+<li><p>exec() 方法的功能非常强大，它是一个通用的方法，而且使用起来也比 test() 方法以及支持正则表达式的 String 对象的方法更为复杂。</p>
+</li>
+<li><p>如果 exec() 找到了匹配的文本，则返回一个结果数组。否则，返回 null。此数组的第 0 个元素是与正则表达式相匹配的文本，第 1 个元素是与 RegExpObject 的第 1 个子表达式相匹配的文本（如果有的话），第 2 个元素是与 RegExpObject 的第 2 个子表达式相匹配的文本（如果有的话），以此类推。除了数组元素和 length 属性之外，exec() 方法还返回两个属性。index 属性声明的是匹配文本的第一个字符的位置。input 属性则存放的是被检索的字符串 string。我们可以看得出，在调用非全局的 RegExp 对象的 exec() 方法时，返回的数组与调用方法 String.match() 返回的数组是相同的。</p>
+</li>
+<li><p>但是，当 RegExpObject 是一个全局正则表达式时，exec() 的行为就稍微复杂一些。它会在 RegExpObject 的 lastIndex 属性指定的字符处开始检索字符串 string。当 exec() 找到了与表达式相匹配的文本时，在匹配后，它将把 RegExpObject 的 lastIndex 属性设置为匹配文本的最后一个字符的下一个位置。这就是说，您可以通过反复调用 exec() 方法来遍历字符串中的所有匹配文本。当 exec() 再也找不到匹配的文本时，它将返回 null，并把 lastIndex 属性重置为 0。</p>
+</li>
+</ul>
 
-
-
-<div align="center"><br><img src="http://ocx1796s4.bkt.clouddn.com/wechat-qcode.jpg" alt="image"><br></div><br><div align="center"><br>欢迎您扫一扫上面的微信公众号，订阅我的博客！<br></div>
-
-<div align="center"><br><img src="http://ocx1796s4.bkt.clouddn.com/wechat-reward.png" alt="image"><br></div><br><div align="center"><br>—<br></div>
           
         
       
@@ -395,7 +431,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/21/面向切面方法/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/16/node小爬虫/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="hey">
@@ -414,7 +450,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/07/21/面向切面方法/" itemprop="url">面向切面方法</a></h1>
+                <a class="post-title-link" href="/2018/05/16/node小爬虫/" itemprop="url">node小爬虫</a></h1>
         
 
         <div class="post-meta">
@@ -426,8 +462,8 @@
               
                 <span class="post-meta-item-text">Veröffentlicht am</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-21T15:02:33+08:00">
-                2017-07-21
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-16T13:19:37+08:00">
+                2018-05-16
               </time>
             
 
@@ -488,8 +524,56 @@
       
         
           
-            <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  alert(<span class="number">2</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Function</span>.prototype.before = <span class="function"><span class="keyword">function</span>(<span class="params">fn</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> _this = <span class="keyword">this</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   <span class="keyword">if</span>(fn.apply(_this,<span class="built_in">arguments</span>) == <span class="literal">false</span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">return</span> _this.apply(_this,<span class="built_in">arguments</span>);</span><br><span class="line">  &#125;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Function</span>.prototype.after = <span class="function"><span class="keyword">function</span>(<span class="params">fn</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> _this = <span class="keyword">this</span>;</span><br><span class="line">  <span class="built_in">console</span>.log(_this);</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   <span class="keyword">var</span> result = _this.apply(_this,<span class="built_in">arguments</span>);<span class="comment">//执行了 before 的返回</span></span><br><span class="line">   <span class="keyword">if</span>(result == <span class="literal">false</span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">   &#125;</span><br><span class="line">   </span><br><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment">    *  也就是执行了fn.apply(_this,arguments);_this.apply(_this,arguments);</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   fn.apply(_this,<span class="built_in">arguments</span>);</span><br><span class="line">   <span class="keyword">return</span> result;</span><br><span class="line">  &#125;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">test.before(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  alert(<span class="number">1</span>);</span><br><span class="line">&#125;).after(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  alert(<span class="number">3</span>);</span><br><span class="line">&#125;)();</span><br><span class="line"></span><br><span class="line"><span class="comment">// test.after(function()&#123;</span></span><br><span class="line"><span class="comment">//   alert(3);</span></span><br><span class="line"><span class="comment">// &#125;).before(function()&#123;</span></span><br><span class="line"><span class="comment">//   alert(1);</span></span><br><span class="line"><span class="comment">// &#125;)();</span></span><br></pre></td></tr></table></figure>
+            <h3 id="node小爬虫"><a href="#node小爬虫" class="headerlink" title="node小爬虫"></a>node小爬虫</h3><blockquote>
+<p>实现一个爬取小说网页并提取关键字</p>
+</blockquote>
+<p>小说示例网站：<a href="https://www.xs8.cn/" target="_blank" rel="noopener">https://www.xs8.cn/</a></p>
+<h4 id="开启服务"><a href="#开启服务" class="headerlink" title="开启服务"></a>开启服务</h4><p>使用http，https，或者可以使用express，我这里使用http</p>
+<pre><code>http.createServer((req,res)=&gt;{
 
+    res.end(&apos;ok&apos;);
+}).listen(8888);
+</code></pre><h3 id="发送请求"><a href="#发送请求" class="headerlink" title="发送请求"></a>发送请求</h3><p>请求网站为https，需要引入，这里使用http.request()(可以使用superagent)</p>
+<pre><code>const https = require(&apos;https&apos;);
+//url为需要请求的网站地址
+//superagent.get(&apos;https://cnodejs.org/&apos;)
+const req = https.request(_url, (res) =&gt; {
+    res.setEncoding(&apos;utf8&apos;);
+    let arr = [];
+    res.on(&apos;data&apos;, (chunk) =&gt; {
+        arr.push(chunk);
+    });
+    res.on(&apos;end&apos;, () =&gt; {
+        //下一步处理
+
+    });
+});
+</code></pre><h3 id="处理请求的html"><a href="#处理请求的html" class="headerlink" title="处理请求的html"></a>处理请求的html</h3><p>使用jsdom，也可以使用cheerio </p>
+<pre><code>const JSDOM = require(&apos;jsdom&apos;).JSDOM
+res.on(&apos;end&apos;, () =&gt; {
+    let DOM = new JSDOM(arr);
+    let document = DOM.window.document;
+    var myHtml = document.querySelector(&apos;.read-content&apos;).innerHTML.replace(/&lt;\/?p&gt;/g,&apos;&apos;);
+    //下一步操作
+
+});
+</code></pre><h3 id="提取需要的关键字"><a href="#提取需要的关键字" class="headerlink" title="提取需要的关键字"></a>提取需要的关键字</h3><p>使用Segment分词插件</p>
+<pre><code>const Segment = require(&apos;segment&apos;);
+
+let seg = new Segment();
+seg.useDefault();
+
+res.on(&apos;end&apos;, () =&gt; {
+    let DOM = new JSDOM(arr);
+    let document = DOM.window.document;
+    var myHtml = document.querySelector(&apos;.read-content&apos;).innerHTML.replace(/&lt;\/?p&gt;/g,&apos;&apos;);
+
+    var _arr = seg.doSegment(myHtml);
+    console.log(_arr);
+    response.end(JSON.stringify(_arr));
+
+});
+</code></pre><h3 id="页面请求，处理数据，使用echarts图表化"><a href="#页面请求，处理数据，使用echarts图表化" class="headerlink" title="页面请求，处理数据，使用echarts图表化"></a>页面请求，处理数据，使用echarts图表化</h3>
           
         
       
@@ -537,7 +621,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/05/居中问题/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/14/HTTP 2.0新特性/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="hey">
@@ -556,7 +640,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/05/05/居中问题/" itemprop="url">居中问题</a></h1>
+                <a class="post-title-link" href="/2018/05/14/HTTP 2.0新特性/" itemprop="url">HTTP 2.0新特性</a></h1>
         
 
         <div class="post-meta">
@@ -568,8 +652,8 @@
               
                 <span class="post-meta-item-text">Veröffentlicht am</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-05T09:56:41+08:00">
-                2017-05-05
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-14T13:08:31+08:00">
+                2018-05-14
               </time>
             
 
@@ -630,31 +714,57 @@
       
         
           
-            <h3 id="一："><a href="#一：" class="headerlink" title="一："></a>一：</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"http://web.sanguosha.com/220_9/assets/winnerGeneral/full/17902.png"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span>&#123;</span><br><span class="line">    <span class="attribute">height</span>:<span class="number">400px</span>;</span><br><span class="line">    <span class="attribute">width</span>:<span class="number">400px</span>;</span><br><span class="line">    <span class="attribute">background</span>:<span class="number">#fff</span>;</span><br><span class="line">    <span class="attribute">position</span>:relative;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">img</span>&#123;</span><br><span class="line">    <span class="attribute">position</span>:absolute;</span><br><span class="line">    <span class="attribute">top</span>:<span class="number">0</span>;<span class="attribute">left</span>:<span class="number">0</span>;<span class="attribute">right</span>:<span class="number">0</span>;<span class="attribute">bottom</span>:<span class="number">0</span>;</span><br><span class="line">    <span class="attribute">margin</span>:auto;</span><br><span class="line">    <span class="attribute">display</span>:block;</span><br><span class="line">    <span class="comment">/*以上是绝对居中的css*/</span></span><br><span class="line">    </span><br><span class="line">    <span class="attribute">height</span>:auto;</span><br><span class="line">    <span class="attribute">width</span>:auto;</span><br><span class="line">    <span class="attribute">max-height</span>:<span class="number">300px</span>;</span><br><span class="line">    <span class="attribute">max-width</span>:<span class="number">300px</span>;</span><br><span class="line">    <span class="comment">/*以上是为了让图片不超出范围的css*/</span></span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    <span class="comment">/*一下纯粹是个人喜好。。。*/</span></span><br><span class="line">    <span class="attribute">border-radius</span>:<span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">box-shadow</span>:<span class="number">1px</span> <span class="number">1px</span> <span class="number">10px</span> <span class="number">#AE1E26</span>;</span><br><span class="line">    bor</span><br><span class="line">    <span class="selector-tag">der</span><span class="selector-pseudo">:1px</span> <span class="selector-tag">solid</span> <span class="selector-id">#EFD170</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="二："><a href="#二：" class="headerlink" title="二："></a>二：</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="css">    <span class="selector-class">.box</span>&#123;<span class="attribute">width</span>: <span class="number">800px</span>;<span class="attribute">height</span>: <span class="number">800px</span>;<span class="attribute">border</span>: <span class="number">3px</span> solid yellow;<span class="attribute">text-align</span>: center;&#125;</span></span><br><span class="line"><span class="css">    <span class="selector-tag">img</span>&#123;<span class="attribute">vertical-align</span>: middle;&#125;</span></span><br><span class="line"><span class="css">    <span class="selector-tag">span</span>&#123;<span class="attribute">display</span>:inline-block;<span class="attribute">height</span>: <span class="number">100%</span>;<span class="attribute">vertical-align</span>: middle;&#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"box"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"1.gif"</span>/&gt;</span><span class="tag">&lt;<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h3 id="三："><a href="#三：" class="headerlink" title="三："></a>三：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">position:absolute</span><br><span class="line">top:50%</span><br><span class="line">left:50%</span><br><span class="line">transform:translate3D:（-50%,-50%,0）</span><br></pre></td></tr></table></figure>
-<h3 id="四："><a href="#四：" class="headerlink" title="四："></a>四：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">css:</span><br><span class="line">.box&#123; width:800px;height:600px;border:2px solid #000;display:table;position:relative; overflow:hidden;&#125; </span><br><span class="line">span&#123; display:table-cell; text-align:center; vertical-align:middle;*position:absolute;left:50%;top:50%;&#125; </span><br><span class="line">img&#123; *position:relative; vertical-align:top;left:-50%;top:-50%;&#125;</span><br><span class="line">html:</span><br><span class="line">&lt;div class=&quot;box&quot;&gt;</span><br><span class="line">    &lt;span&gt;</span><br><span class="line">        &lt;img src=&quot;&quot; alt=&quot;&quot; width=&quot;300&quot; height=&quot;200&quot;&gt;</span><br><span class="line">    &lt;/span&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="五："><a href="#五：" class="headerlink" title="五："></a>五：</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"box"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="css"><span class="selector-class">.container</span>&#123;</span></span><br><span class="line"><span class="css">    <span class="selector-tag">border</span><span class="selector-pseudo">:1px</span> <span class="selector-tag">solid</span> <span class="selector-id">#000</span>;</span></span><br><span class="line"><span class="css">    <span class="selector-tag">height</span><span class="selector-pseudo">:300px</span>;</span></span><br><span class="line"><span class="css">    <span class="selector-tag">width</span><span class="selector-pseudo">:300px</span>;</span></span><br><span class="line"><span class="css">    <span class="selector-tag">position</span><span class="selector-pseudo">:relative</span>;</span></span><br><span class="line"><span class="undefined">&#125;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="css"><span class="selector-class">.box</span>&#123;</span></span><br><span class="line"><span class="css">    <span class="selector-tag">border</span><span class="selector-pseudo">:1px</span> <span class="selector-tag">solid</span> <span class="selector-id">#000</span>;</span></span><br><span class="line"><span class="css">    <span class="selector-tag">width</span><span class="selector-pseudo">:50px</span>;</span></span><br><span class="line"><span class="css">    <span class="selector-tag">height</span><span class="selector-pseudo">:50px</span>;</span></span><br><span class="line"><span class="css">    <span class="selector-tag">position</span><span class="selector-pseudo">:absolute</span>;</span></span><br><span class="line"><span class="css">    <span class="selector-tag">marign</span><span class="selector-pseudo">:auto</span>;</span></span><br><span class="line"><span class="css">    <span class="selector-tag">left</span><span class="selector-pseudo">:0px</span></span></span><br><span class="line"><span class="css">    <span class="selector-tag">top</span><span class="selector-pseudo">:0px</span>;</span></span><br><span class="line"><span class="css">    <span class="selector-tag">bottom</span><span class="selector-pseudo">:0px</span>;</span></span><br><span class="line"><span class="css">    <span class="selector-tag">right</span><span class="selector-pseudo">:0px</span>;</span></span><br><span class="line"><span class="undefined">&#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h3 id="六："><a href="#六：" class="headerlink" title="六："></a>六：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">.center &#123;</span><br><span class="line">    background: hsl(180,100%,97%);</span><br><span class="line">    position: relative;</span><br><span class="line">    min-height:500px;&#125;.center img &#123;</span><br><span class="line">    position: absolute;</span><br><span class="line">    top:50%; </span><br><span class="line">    left:50%;</span><br><span class="line">    transform: translate(-50%,-50%);</span><br><span class="line">    width:30%; </span><br><span class="line">    height:auto;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>但是有以下几种缺点:</p>
+            <h3 id="HTTP-2-0新特性"><a href="#HTTP-2-0新特性" class="headerlink" title="HTTP 2.0新特性"></a>HTTP 2.0新特性</h3><p><strong>增加二进制分帧</strong></p>
+<p>HTTP协议从0.9版本开始不断增加增加新的功能特性，但长远来看都是向前兼容的(现在的版本支持以后的版本数据)。</p>
+<p>HTTP 2.0在应用层跟传送层之间增加了一个二进制分帧层，从而能够达到在不改动HTTP的语义，HTTP方法，状态码，URI以及首部字段的情况下，突破HTTP 1.1的性能限制，改进传输性能，实现低延迟和高吞吐量 </p>
+<p><img src="http://cnt1992.xyz/img/nginx-http/binary.png" alt="image"></p>
+<p>在上图所示，在二进制分帧层上，HTTP 2.0会将所有传输的信息分割为更小的消息和帧，并对它们采用二进制格式的编码，其中HTTP 1.1的首部信息会被封装到Headers帧，而request body被封装到图中所示的DATA帧。相当于把部分数据塞进了二进制分帧层里，改进传输性能。</p>
+<p><strong>压缩头部</strong></p>
+<p>如下图所示： HTTP 2.0在客户端和服务端使用首部表来跟踪和存储之间发送的键-值对，对相同请求而言不需要再次发送请求和相应发送，通信期间几乎不会改变的通用键值,如user-Agent和content-Type值发送一次，相当于做了一层缓存。</p>
+<p><img src="http://cnt1992.xyz/img/nginx-http/header.png" alt="image"></p>
+<p>如果请求不包含首部，如：对同一资源的轮询请求，那首部开销为零字节<br>如果首部发生变化，那只需发送变化的数据在Headers帧里面，新增或修改的首部帧会被追加到首部表 </p>
+<p><strong>多路复用</strong></p>
+<p>一个入了门的前端开发在谈到性能优化的方法时都可以轻轻松松列举如下几点 </p>
 <ul>
-<li>CSS transform 在部分就浏览器上需要使用 前缀。</li>
-<li>不支持 IE9 以下的浏览器。</li>
-<li>外部容器需要设置height （或者用其他方式设置），因为不能获取 绝对定位 的内容的高度。</li>
-<li>如果内容包含文字，现在的浏览器合成技术会使文字模糊不清。</li>
+<li>CSS雪碧图合并-减少请求 </li>
+<li>合并压缩CSS跟JS代码-减少请求 </li>
+<li>CSS代码放在header头部里面，JS代码放到body结束之前，因为JS代码执行会阻塞 </li>
 </ul>
-<h3 id="七："><a href="#七：" class="headerlink" title="七："></a>七：</h3><p>使用Flexbox居中，当新旧语法差异和浏览器前缀消失时，这种方法会成为主流的居中方案。<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.center</span> &#123; </span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">hsl</span>(240,100%,97%);</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">justify-content</span>: center;</span><br><span class="line">    <span class="attribute">align-items</span>: center;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.center</span> <span class="selector-tag">img</span> &#123; </span><br><span class="line">    <span class="attribute">width</span>:<span class="number">30%</span>; <span class="attribute">height</span>:auto;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>在很多方面 flexbox 是一种简单的方案， 但是它有新旧两种语法以及早期版本的IE缺乏支持 （尽管可以使用 display: table-cell作为降级方案）。</p>
-<h3 id="八："><a href="#八：" class="headerlink" title="八："></a>八：</h3><p>使用calc居中,在某些情况下比flexbox更全面：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.center</span> &#123;</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">hsl</span>(300,100%,97%);</span><br><span class="line">    <span class="attribute">min-height</span>:<span class="number">600px</span>;</span><br><span class="line">    <span class="attribute">position</span>: relative;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.center</span> <span class="selector-tag">img</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>:<span class="number">40%</span>;</span><br><span class="line">    <span class="attribute">height</span>:auto;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">    <span class="attribute">top</span>: <span class="built_in">calc</span>(50%-20%);</span><br><span class="line">    <span class="attribute">left</span>: <span class="built_in">calc</span>(50%-20%);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>很简单，calc 允许你基于当前的页面布局计算尺寸。在上面的简单计算中， 50% 是容器元素的中心点，但是如果只设置50%会使图片的左上角对齐div的中心位置。 我们需要把图片向左和向上各移动图片宽高的一半。计算公式为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">top: calc(50%-(40%/2));</span><br><span class="line">left: calc(50%-(40%/2));</span><br></pre></td></tr></table></figure></p>
-<p>在现在的浏览其中你会发现，这种方法更适用于当内容的宽高为固定尺寸：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.center img &#123;</span><br><span class="line">    width:500px; height:500px;</span><br><span class="line">    position: absolute;</span><br><span class="line">    top: calc(50%-(300px/2));</span><br><span class="line">    left: calc(50%-(300px–2));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>我在 这篇文章 中详细讲解了calc。<br>这种方案和flex一样有许多相同的缺点： 虽然在现代浏览器中有良好的支持，但是在较早的版本中仍然需要浏览器前缀，并且不支持IE8。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.center img &#123;</span><br><span class="line">    width:40%; height:auto;</span><br><span class="line">    position: absolute;</span><br><span class="line">    top: calc(50%-20%);</span><br><span class="line">    left: calc(50%-20%);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="弹窗垂直居中。（泛指需要居中在整个视窗中间的绝对定位元素）"><a href="#弹窗垂直居中。（泛指需要居中在整个视窗中间的绝对定位元素）" class="headerlink" title="弹窗垂直居中。（泛指需要居中在整个视窗中间的绝对定位元素）"></a>弹窗垂直居中。（泛指需要居中在整个视窗中间的绝对定位元素）</h3><p>解决方案：<br>移动端强烈推荐使用translate(-50%,-50%)搞定，方便简单无副作用。<br>PC端就比较蛋疼一点，若是元素宽高固定，那传统做法使用负值margin就可以搞定，但宽高不固定呢？</p>
-<p>给大家推荐一个非常好用的方法，给遮罩层加一个:afrer并设置其高度100%撑满容器，但由于其宽度为0所以其实不占位，然后将需要垂直居中的元素都设置为dislpay:inline-block从而将问题转换为行内元素如何垂直居中问题</p>
-<p><img src="http://ocx1796s4.bkt.clouddn.com/e651aa9713_b.png" alt="image"></p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.pop</span>&#123;</span><br><span class="line">    <span class="attribute">position</span>:absolute;</span><br><span class="line">    <span class="attribute">left</span>:<span class="number">0</span>;</span><br><span class="line">    <span class="attribute">top</span>:<span class="number">0</span>;</span><br><span class="line">    <span class="attribute">width</span>:<span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">height</span>:<span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">background-color</span>:<span class="built_in">rgba</span>(0,0,0,0.5);</span><br><span class="line">    <span class="attribute">text-align</span>:center;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.pop</span><span class="selector-pseudo">:after</span>&#123;</span><br><span class="line">    <span class="attribute">content</span>:<span class="string">""</span>;</span><br><span class="line">    <span class="attribute">display</span>: inline-block;</span><br><span class="line">    <span class="attribute">height</span>:<span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">vertical-align</span>: middle;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.box</span>&#123;</span><br><span class="line">    <span class="attribute">border</span>:<span class="number">1px</span> solid <span class="number">#ddd</span>;</span><br><span class="line">    <span class="attribute">padding</span>:<span class="number">20px</span>;</span><br><span class="line">    <span class="attribute">background-color</span>:<span class="number">#fff</span>;</span><br><span class="line">    <span class="attribute">display</span>:inline-block;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"pop"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"box"</span>&gt;</span>这是一个不确定宽高的弹窗<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>但HTTP 2.0的多路复用让我们回到最原始最自然的写码状态，先看下图</p>
+<p><img src="http://cnt1992.xyz/img/nginx-http/multiplexing.png" alt="image"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5281821-ce9d374b7d0adf09.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/654/format/webp" alt="image"></p>
+<p>对HTTP 1.1而言，浏览器通常有并行连接的限制，即最多几个并行链接。而多路复用允许通过单一的HTTP 2.0连接发起多重的请求-相应消息</p>
+<p>这意味着HTTP 2.0的通信都在一个连接上完成了，这个连接可以承载任意数量的双向数据流，直观来说，就是上面我们所做的优化已经不需要了。</p>
+<p><strong>请求优先级</strong></p>
+<p>所有资源可以并行交错发送， 那想要优先拿到CSS和JS而不是图片怎么办，在每个HTTP 2.0的流里面有个优先值，这个优先值确定着客户端跟服务器处理不同的流采取不同的优先级策略，高优先级优先发送，但这不是绝对的(绝对等待会导致首队阻塞问题)</p>
+<p>为了能方便流的传输顺序,HTTP/2.0提出,使每个流都有一个权重和依赖.</p>
+<ul>
+<li>每个流的权重值在1~256之间</li>
+<li>每个流可以详细给出对其他流的依赖</li>
+<li>流权重和依赖的结合使客户端可以构造和通信一个优先级二叉树来表达它更想得到哪种响应.然后服务端可以按权重分配硬件资源(CPU,内存)</li>
+</ul>
+<p><img src="https://upload-images.jianshu.io/upload_images/5281821-a424cc207432cde0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/666/format/webp" alt="image"></p>
+<p>在HTTP/2 ,一个流的依赖可以显式用其他流的标志来表达,如果省略了标志,则说明它的依赖是根流.</p>
+<p>一般来说,父流应该在它的依赖流之前分配资源,例如D应该是C之前被发送.依赖于同一父节点的应该按照他们的权重分配资源。</p>
+<p>例如A结点的权重为12,它的兄弟结点B的结点的权重为4.然后按比例分资源,A占12/16,B占4/16.如上面所述,流的依赖和权重提供了一种很好的表达式语言来表达资源的优先级。</p>
+<p>但是我们应该明白,流的依赖和权重只是提供了一种传输偏好,而不是说一定是这样的比例.</p>
+<p><strong>流量控制</strong></p>
+<p>流量控制是一种机制,用来阻止发送者发送大量的接收者不需要,或者没能力处理的数据.接收者可能会在重负下很繁忙,或者只愿意分配固定的资源给特定的流。</p>
+<p>例如,客户端可能以高的优先级请求大量的视频数据,然后用户暂停了视频,那么客户端现在想要停止或者减少服务端的传输来避免取和缓存没必要的数据.或者一个代理服务器连接有很快的下流,很慢的上流,同样的也要控制以多大的流速传输数据,从而匹配上流的速度,从而控制资源的使用.</p>
+<p>这些需求可能让你想起了TCP流量控制,由于HTTP/2的那些流是在一个TCP的连接上.那么TCP连接不够细粒度,也没能提供应用级的API来控制单个流的传输.为了应对这种情况,HTTP/2提供了一系列的简单修筑块,来允许客户端和服务端实现他们自己的流级别的,连接级别的流量控制.</p>
+<ul>
+<li>流量控制是有方向的.对于每个流和连接,每个接收者可以设置它想要窗口大小.</li>
+<li>流量控制是基于信用的。每个接收者通告其初始连接和流量控制窗口（以字节为单位），只要发送者发送数据帧并通过接受者发送的WINDOW_UPDATE帧递增，该窗口就会减少。</li>
+<li><p>流量控制不能禁用.当建立HTTP / 2连接时，客户端和服务器交换SETTINGS帧，这些帧设置双向流量控制窗口的大小。流量控制窗口的默认值设置为65,535字节，但接收方可以设置更大的最大窗口大小（2的31次方-1字节），并通过在接收到任何数据时发送WINDOW_UPDATE帧来维护它。</p>
+</li>
+<li><p>流量控制是逐跳的,而不是端到端的.也就是说,一个中介可以使用它控制资源的使用,从而根据自己的标准和启发式实现资源分配机制.</p>
+</li>
+</ul>
+<p>HTTP / 2没有规定用于实现流量控制的任何特定算法。相反，它提供了简单的构建模块并将实现推迟到客户端和服务器，这可以用它来实现自定义策略来调节资源使用和分配，以及实现新的传输功能，这可能有助于提高Web应用程序真实性和感知性。</p>
+<p>例如，应用程序层流控量制允许浏览器仅提取特定资源的一部分，通过将流量控制窗口降至零来暂停提取，然后稍后恢复 - 例如，获取预览或第一次浏览图像，显示图像并允许进行其他高优先级操作取来操作，并在关键资源完成加载后又开始取。</p>
+<p><strong>服务器推送</strong></p>
+<p>HTTP 2.0新增加服务器提示，可以先于客户端检测到将要请求的资源，提前通知客户端，服务器不发送所有资源的实体，只发送资源的URL，客户端接到提示后会进行验证缓存，如果真需要这些资源，则正式发起请求（服务器主动更新静态资源）</p>
+<p>HTTP / 2的另一个强大的新功能是服务器为单个客户端请求发送多个响应的能力。也就是说，除了对原始请求的响应之外，服务器还可以向客户端推送额外的资源（图12-5），而不需要客户端明确请求每一个资源！</p>
 
           
         
@@ -703,7 +813,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/04/轮询、长轮询与Web-Socket的前端实现/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/13/HTTP版本特性/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="hey">
@@ -722,7 +832,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/05/04/轮询、长轮询与Web-Socket的前端实现/" itemprop="url">轮询、长轮询与Web Socket的前端实现</a></h1>
+                <a class="post-title-link" href="/2018/05/13/HTTP版本特性/" itemprop="url">HTTP 2.0新特性</a></h1>
         
 
         <div class="post-meta">
@@ -734,8 +844,8 @@
               
                 <span class="post-meta-item-text">Veröffentlicht am</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-04T16:25:43+08:00">
-                2017-05-04
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-13T11:33:31+08:00">
+                2018-05-13
               </time>
             
 
@@ -796,20 +906,23 @@
       
         
           
-            <h4 id="Web-Socket"><a href="#Web-Socket" class="headerlink" title="Web Socket"></a>Web Socket</h4><ul>
-<li>应用场景:实现即时通讯:如股票交易行情分析、聊天室、在线游戏等，替代轮询和长轮询<h4 id="轮询"><a href="#轮询" class="headerlink" title="轮询"></a>轮询</h4></li>
-<li><p>轮询是在特定的的时间间隔（如每1秒），由浏览器对服务器发出HTTP request，然后由服务器返回最新的数据给客户端的浏览器。这种传统的HTTP request 的模式带来很明显的缺点 – 浏览器需要不断的向服务器发出请求，然而HTTP request 的header是非常长的，里面包含的有用数据可能只是一个很小的值，这样会占用很多的带宽。</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var xhr = new XMLHttpRequest();</span><br><span class="line">setInterval(function()&#123;</span><br><span class="line">    xhr.open(&apos;GET&apos;,&apos;/user&apos;);</span><br><span class="line">    xhr.onreadystatechange = function()&#123;</span><br><span class="line"></span><br><span class="line">    &#125;;</span><br><span class="line">    xhr.send();</span><br><span class="line">&#125;,1000)</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h4 id="长轮询"><a href="#长轮询" class="headerlink" title="长轮询:"></a>长轮询:</h4><ul>
-<li>ajax实现:在发送ajax后,服务器端会阻塞请求直到有数据传递或超时才返回。 客户端JavaScript响应处理函数会在处理完服务器返回的信息后，再次发出请求，重新建立连接。  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function ajax()&#123;</span><br><span class="line">    var xhr = new XMLHttpRequest();</span><br><span class="line">    xhr.open(&apos;GET&apos;,&apos;/user&apos;);</span><br><span class="line">    xhr.onreadystatechange = function()&#123;</span><br><span class="line">          ajax();</span><br><span class="line">    &#125;;</span><br><span class="line">    xhr.send();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h4 id="Web-Socket-1"><a href="#Web-Socket-1" class="headerlink" title="Web Socket:"></a>Web Socket:</h4><ul>
-<li><p>轮询与长轮询都是基于HTTP的，两者本身存在着缺陷:轮询需要更快的处理速度；长轮询则更要求处理并发的能力;两者都是“被动型服务器”的体现:服务器不会主动推送信息，而是在客户端发送ajax请求后进行返回的响应。而理想的模型是”在服务器端数据有了变化后，可以主动推送给客户端”,这种”主动型”服务器是解决这类问题的很好的方案。Web Sockets就是这样的方案。</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">//需要先npm install ws</span><br><span class="line"></span><br><span class="line">//服务器端</span><br><span class="line">var Server = require(&apos;ws&apos;).Server;</span><br><span class="line">var wss = new Server(&#123;</span><br><span class="line">    port:2000</span><br><span class="line">&#125;);</span><br><span class="line">wss.on(&apos;connection&apos;,function(ws)&#123;</span><br><span class="line">    ws.on(&apos;message&apos;,function(data)&#123;</span><br><span class="line">        ws.send(&apos;你好,客户端,我是服务器!&apos;);</span><br><span class="line">        console.log(data);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">//node客户端</span><br><span class="line"></span><br><span class="line">var WebSocket = require(&apos;ws&apos;);</span><br><span class="line">var socket = new WebSocket(&apos;ws://localhost:2000/&apos;);</span><br><span class="line">socket.on(&apos;open&apos;,function()&#123;</span><br><span class="line">    socket.send(&apos;你好，服务器,我是客户端&apos;);</span><br><span class="line">&#125;);</span><br><span class="line">socket.on(&apos;message&apos;,function(event)&#123;</span><br><span class="line">    console.log(event);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">//html客户端(注:浏览器客户端与node客户端只需要一种)</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var socket = new WebSocket(&apos;ws://localhost:2000/&apos;);</span><br><span class="line">    socket.onopen = function()&#123;</span><br><span class="line"></span><br><span class="line">    &#125;;</span><br><span class="line">    socket.onmessage = function(event)&#123;</span><br><span class="line">        console.log(event.data)</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure></li>
-</ul>
+            <h3 id="HTTP版本特性"><a href="#HTTP版本特性" class="headerlink" title="HTTP版本特性"></a>HTTP版本特性</h3><h4 id="HTTP1-0-HTTP-1-1主要区别"><a href="#HTTP1-0-HTTP-1-1主要区别" class="headerlink" title="HTTP1.0 HTTP 1.1主要区别"></a>HTTP1.0 HTTP 1.1主要区别</h4><p><strong>长连接</strong></p>
+<p>HTTP 1.0需要使用keep-alive参数来告知服务器端要建立一个长连接，而HTTP1.1默认支持长连接。</p>
+<p>HTTP是基于TCP/IP协议的，创建一个TCP连接是需要经过三次握手的,有一定的开销，如果每次通讯都要重新建立连接的话，对性能有影响。因此最好能维持一个长连接，可以用个长连接来发多个请求。<br>节约带宽</p>
+<p>HTTP 1.1支持只发送header信息(不带任何body信息)，如果服务器认为客户端有权限请求服务器，则返回100，否则返回401。客户端如果接受到100，才开始把请求body发送到服务器。</p>
+<p>这样当服务器返回401的时候，客户端就可以不用发送请求body了，节约了带宽。<br>另外HTTP还支持传送内容的一部分。这样当客户端已经有一部分的资源后，只需要跟服务器请求另外的部分资源即可。这是支持文件断点续传的基础。</p>
+<p><strong>HOST域</strong></p>
+<p>现在可以web server例如tomat，设置虚拟站点是非常常见的，也即是说，web server上的多个虚拟站点可以共享同一个ip和端口。</p>
+<p>HTTP1.0是没有host域的，HTTP1.1才支持这个参数。</p>
+<h4 id="HTTP1-1-HTTP-2-0主要区别"><a href="#HTTP1-1-HTTP-2-0主要区别" class="headerlink" title="HTTP1.1 HTTP 2.0主要区别"></a>HTTP1.1 HTTP 2.0主要区别</h4><p><strong>多路复用</strong></p>
+<p>HTTP2.0使用了多路复用的技术，做到同一个连接并发处理多个请求，而且并发请求的数量比HTTP1.1大了好几个数量级。</p>
+<p>当然HTTP1.1也可以多建立几个TCP连接，来支持处理更多并发的请求，但是创建TCP连接本身也是有开销的。</p>
+<p>TCP连接有一个预热和保护的过程，先检查数据是否传送成功，一旦成功过，则慢慢加大传输速度。因此对应瞬时并发的连接，服务器的响应就会变慢。所以最好能使用一个建立好的连接，并且这个连接可以支持瞬时并发的请求。</p>
+<p><strong>数据压缩</strong></p>
+<p>HTTP1.1不支持header数据的压缩，HTTP2.0使用HPACK算法对header的数据进行压缩，这样数据体积小了，在网络上传输就会更快</p>
+<p><strong>服务器推送</strong></p>
+<p>意思是说，当我们对支持HTTP2.0的web server请求数据的时候，服务器会顺便把一些客户端需要的资源一起推送到客户端，免得客户端再次创建连接发送请求到服务器端获取。这种方式非常合适加载静态资源。</p>
+<p>服务器端推送的这些资源其实存在客户端的某处地方，客户端直接从本地加载这些资源就可以了，不用走网络，速度自然是快很多的。</p>
 
           
         
@@ -853,12 +966,12 @@
   
   
 
-  <article class="post post-type-react" itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
   
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/03/es6和react/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/09/防抖函数与节流函数/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="hey">
@@ -877,7 +990,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/05/03/es6和react/" itemprop="url">es6和react</a></h1>
+                <a class="post-title-link" href="/2018/05/09/防抖函数与节流函数/" itemprop="url">防抖函数与节流函数</a></h1>
         
 
         <div class="post-meta">
@@ -889,8 +1002,8 @@
               
                 <span class="post-meta-item-text">Veröffentlicht am</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-03T15:21:01+08:00">
-                2017-05-03
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-09T13:08:31+08:00">
+                2018-05-09
               </time>
             
 
@@ -912,8 +1025,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/React/" itemprop="url" rel="index">
-                    <span itemprop="name">React</span>
+                  <a href="/categories/Basic/" itemprop="url" rel="index">
+                    <span itemprop="name">Basic</span>
                   </a>
                 </span>
 
@@ -951,269 +1064,608 @@
       
         
           
-            <h2 id="组件的状态state"><a href="#组件的状态state" class="headerlink" title="组件的状态state"></a>组件的状态state</h2><ul>
-<li>一个js对象，存储着组件当前的状态以及其值的集合。</li>
-<li>个人觉得这也是react的创新点之一，可以把组件看成一个“状态机”. 根据不同的status有不同的UI展示。只要使用setState改变状态值，根据diff算法算出来有差以后，就会执行ReactDom的render方法，重新渲染页面。</li>
-<li>这避免了开发者直接操作dom对象已达到重新渲染页面。开发者只需要关注state这个中间人，控制它就可以控制页面刷新。第二篇中评论框的渲染就是使用的state来控制。</li>
-<li>是不是感觉和props有些类似？一般区分两个的原则是，可变的放在state中，不可变的放在props中。</li>
+            <h3 id="防抖函数与节流函数"><a href="#防抖函数与节流函数" class="headerlink" title="防抖函数与节流函数"></a>防抖函数与节流函数</h3><p><strong>应用场景</strong></p>
+<blockquote>
+<p>实际工作中，我们经常性的会通过监听某些事件完成对应的需求，比如：</p>
+<ol>
+<li>通过监听 scroll 事件，检测滚动位置，根据滚动位置显示返回顶部按钮</li>
+<li>通过监听 resize 事件，对某些自适应页面调整DOM的渲染（通过CSS实现的自适应不再此范围内）</li>
+<li>通过监听 keyup 事件，监听文字输入并调用接口进行模糊匹配</li>
+<li>…</li>
+</ol>
+</blockquote>
+<p>常规实现，以监听 scroll 事件为例<br>我们先来看一下scroll事件的触发频率</p>
+<pre><code>window.onscroll  = function () {
+    //滚动条位置
+    let scrollTop = document.body.scrollTop ||         document.documentElement.scrollTop;
+　　console.log(&apos;滚动条位置：&apos; + scrollTop);
+}
+</code></pre><p>效果如下：</p>
+<p><img src="https://images2017.cnblogs.com/blog/632130/201712/632130-20171205141546659-746486565.gif" alt="image"></p>
+<p>从效果上，我们可以看到，在页面滚动的时候，会在短时间内触发多次绑定事件。<br>我们知道DOM操作是很耗费性能的，如果在监听中，做了一些DOM操作，那无疑会给浏览器造成大量性能损失。</p>
+<p>下面我们进入主题，一起来探究，如何对此进行优化。</p>
+<h4 id="函数防抖"><a href="#函数防抖" class="headerlink" title="函数防抖"></a>函数防抖</h4><ul>
+<li>定义：多次触发事件后，事件处理函数只执行一次，并且是在触发操作结束时执行。</li>
+<li>原理：对处理函数进行延时操作，若设定的延时到来之前，再次触发事件，则清除上一次的延时操作定时器，重新定时。</li>
 </ul>
-<h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//es5</span></span><br><span class="line"><span class="class"><span class="keyword">class</span>***<span class="title">extendsReact</span>.<span class="title">Component</span></span>&#123;</span><br><span class="line">  getInitialState: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;<span class="attr">liked</span>: <span class="literal">false</span>&#125;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//es6</span></span><br><span class="line"><span class="class"><span class="keyword">class</span>***<span class="title">extendsReact</span>.<span class="title">Component</span></span>&#123;</span><br><span class="line">   <span class="keyword">constructor</span>(props) &#123;</span><br><span class="line">    <span class="keyword">super</span>(props);</span><br><span class="line">    <span class="keyword">this</span>.state = &#123;<span class="attr">liked</span>: <span class="literal">false</span>&#125;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="修改值"><a href="#修改值" class="headerlink" title="修改值"></a>修改值</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">es5和es6中使用方法相同。</span><br><span class="line">this.setState(新的state对象);</span><br></pre></td></tr></table></figure>
-<h3 id="读取值"><a href="#读取值" class="headerlink" title="读取值"></a>读取值</h3><ul>
-<li>其实就是读取一个js对象。</li>
+<p>scroll 的一个简单例子</p>
+<pre><code>let timer;
+window.onscroll  = function () {
+    if(timer){
+        clearTimeout(timer)
+    }
+    timer = setTimeout(function () {
+        //滚动条位置
+        let scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+        console.log(&apos;滚动条位置：&apos; + scrollTop);
+        timer = undefined;
+    },200)
+}
+</code></pre><p>效果如下：滚动结束触发事件</p>
+<p><img src="https://images2017.cnblogs.com/blog/632130/201712/632130-20171205143240534-931062718.gif" alt="image"></p>
+<p><strong>防抖函数的封装使用</strong></p>
+<pre><code>/**
+ * 防抖函数
+ * @param method 事件触发的操作
+ * @param delay 多少毫秒内连续触发事件，不会执行
+ * @returns {Function}
+ */
+function debounce(method,delay) {
+    let timer = null;
+    return function () {
+        let self = this,
+            args = arguments;
+        timer &amp;&amp; clearTimeout(timer);
+        timer = setTimeout(function () {
+            method.apply(self,args);
+        },delay);
+    }
+}
+
+window.onscroll = debounce(function () {
+    let scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+    console.log(&apos;滚动条位置：&apos; + scrollTop);
+},200)
+</code></pre><p><strong>函数防抖的适用性：</strong></p>
+<p>通过上面的例子，我们知道我们可以通过函数防抖，解决了多次触发事件时的性能问题。</p>
+<ol>
+<li>比如，我们在监听滚动条位置，控制是否显示返回顶部按钮时，就可以将防抖函数应用其中。</li>
+<li>但依然有些功能并不适用：</li>
+<li>当我们做图片懒加载（lazyload）时，需要通过滚动位置，实时显示图片时，如果使用防抖函数，懒加载（lazyload）函数将会不断被延时，</li>
+<li>只有停下来的时候才会被执行，对于这种需要实时触发事件的情况，就显得不是很友好了。</li>
+</ol>
+<p>下面开始介绍函数节流，通过设定时间片，控制事件函数间断性的触发。</p>
+<h4 id="函数节流"><a href="#函数节流" class="headerlink" title="函数节流"></a>函数节流</h4><ul>
+<li>定义：触发函数事件后，短时间间隔内无法连续调用，只有上一次函数执行后，过了规定的时间间隔，才能进行下一次的函数调用。</li>
+<li>原理：对处理函数进行延时操作，若设定的延时到来之前，再次触发事件，则清除上一次的延时操作定时器，重新定时。</li>
 </ul>
-<h3 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h3><ul>
-<li>事件名和属性名类似，到了react中，事件名也成了驼峰命名法，比如onclick变为了onClick</li>
-</ul>
-<h3 id="事件定义"><a href="#事件定义" class="headerlink" title="事件定义"></a>事件定义</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//一定要注意es6中元素如何使用自定义事件。见代码。</span></span><br><span class="line"><span class="comment">//es5</span></span><br><span class="line">varNewDom = React.createClass(&#123;<span class="comment">//类名一定要大写开头</span></span><br><span class="line">    btnClick:<span class="function"><span class="keyword">function</span>(<span class="params">ele</span>)</span>&#123;</span><br><span class="line">       <span class="built_in">console</span>.info(ele);</span><br><span class="line">       <span class="built_in">console</span>.info(<span class="keyword">this</span>.refs.tex);</span><br><span class="line">    &#125;,</span><br><span class="line">    render: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">       <span class="keyword">return</span> &lt;div &gt;</span><br><span class="line">          &lt;input type="text" ref="tex" /&gt;</span><br><span class="line">          &lt;input type="button" onClick=&#123;this.btnClick&#125; value='click me' /&gt;</span><br><span class="line">       &lt;/div&gt;;</span><br><span class="line">       //变量用花括号标识</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">//es6</span><br><span class="line">classNewDomextendsReact.Component&#123;</span><br><span class="line">    btnClick()&#123;</span><br><span class="line">        console.info(this);//this为该组件类</span><br><span class="line">        console.info(this.refs.tex);//this.refs.tex为组件里面索引为tex的</span><br><span class="line">    &#125;</span><br><span class="line">    render() &#123;</span><br><span class="line">        return &lt;div &gt;</span><br><span class="line">            &lt;input type="text" ref="tex" /&gt;</span><br><span class="line">            &lt;input type="button" onClick=&#123;this.btnClick.bind(this)&#125; value='click me' /&gt;</span><br><span class="line">        &lt;/div&gt;;//注意bind后面的this</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="事件target"><a href="#事件target" class="headerlink" title="事件target"></a>事件target</h3><p>下面是一个事件对应要执行的函数的定义：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">handleChange: <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.setState(&#123;<span class="attr">value</span>: event.target.value&#125;);<span class="comment">//event.target.value元素的值</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>每个控件取值不一样，value是指input控件，下拉框为selected，radiobutton为checked。a标签是innerHtml。可以自己通过console.info(e.target) 调试出自己想要的那个字段</p>
-<h3 id="ES6的坑"><a href="#ES6的坑" class="headerlink" title="ES6的坑"></a>ES6的坑</h3><p>类名(组件名)一定要用大写开头，否则自定义的组件无法编译，识别不出来。<br>类中定义render函数要注意两点，见代码注释。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">render() &#123;</span><br><span class="line">  <span class="comment">//开头花括号一定要和小括号隔一个空格，否则识别不出来return &lt;ol&gt;</span></span><br><span class="line">  <span class="comment">//标签前一半一定要和return一行</span></span><br><span class="line">     &#123;</span><br><span class="line">        React.Children.map(<span class="keyword">this</span>.props.children, <span class="function"><span class="keyword">function</span>(<span class="params">child</span>)</span>&#123;</span><br><span class="line">           <span class="keyword">return</span> &lt;li&gt;&#123;child&#125;&lt;/li&gt;;</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>在class中使用class的变量或者方法，一定要加个this。如this.handlerclick。<br>es6 绑定事件需要onClick={this.func1.bind(this)}。<br>这样func1和bind里面的参数‘this’的作用域才绑定到了一起（注意es5是不需要这个bind(this)的），func1中如果有this.name这类语句，相当于是使用参数‘this’里面的变量值;或者使用箭头函数func1= (e)=&gt; {函数体}</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-react" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/03/react生命周期/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="hey">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ocx1796s4.bkt.clouddn.com/cat01.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hey">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/05/03/react生命周期/" itemprop="url">react生命周期</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-03T10:06:15+08:00">
-                2017-05-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/React/" itemprop="url" rel="index">
-                    <span itemprop="name">React</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><img src="http://ocx1796s4.bkt.clouddn.com/clipboard.png" alt="image"></p>
-<h4 id="初始化："><a href="#初始化：" class="headerlink" title="初始化："></a>初始化：</h4><ul>
-<li>（1） getDefaultProps  获取实例的默认属性</li>
-<li>（2） getInitialState  获取实例的初始化状态</li>
-<li>（3） componentWillMount  组件即将被装载，即将被渲染到页面上（还没有被渲染）</li>
-<li>（4） render 渲染节点</li>
-<li>（5）componentDidMount 组件已经被渲染</li>
-</ul>
-<h4 id="运行中："><a href="#运行中：" class="headerlink" title="运行中："></a>运行中：</h4><ul>
-<li>（1）componentWillReceiveProps  在组件将要接收到属性，接收到属性之前触发（修改属性，更新状态）</li>
-<li>（2）shouldComponentUpdate 在组件接收到新属性新状态是触发(可以判断组件是否要更新)</li>
-<li>（3）componentWillUpdate  更新</li>
-<li>（4） render</li>
-<li>（5）componentDidUpdate  已经更新</li>
-</ul>
-<h4 id="销毁："><a href="#销毁：" class="headerlink" title="销毁："></a>销毁：</h4><ul>
-<li>（1）componentWillUnmunt  销毁操作之行之前，给开发者最后的机会判断是否销毁之类操作</li>
-</ul>
-<h4 id="初始化阶段可以使用的函数："><a href="#初始化阶段可以使用的函数：" class="headerlink" title="初始化阶段可以使用的函数："></a>初始化阶段可以使用的函数：</h4><pre><code>getDefaultProps：只调用一次，实例之间共享引用
-getInitialState：初始化每个实例特有的状态
-componentWillMount：render之前最后一次修改状态的机会
-render：只能访问this.props和this.state，只有一个顶层组件，不允许修改状态和DOM输出
-componentDidMount：成功render并渲染完成真实DOM之后触发，可以修改DOM
-</code></pre><h4 id="运行中阶段可以使用的函数："><a href="#运行中阶段可以使用的函数：" class="headerlink" title="运行中阶段可以使用的函数："></a>运行中阶段可以使用的函数：</h4><pre><code>componentWillReceiveProps：父组件修改属性触发，可以修改新属性、修改状态
-shouldComponentUpdate：返回false会阻止render调用
-componentWillUpdate：不能修改属性和状态
-render：只能访问this.props和this.state，只有一个顶层组件，不允许修改状态和DOM输出
-componentDidUpdate：可以修改DOM
-</code></pre><h4 id="下面是一个例子"><a href="#下面是一个例子" class="headerlink" title="下面是一个例子"></a>下面是一个例子</h4><pre><code>var React = require(&apos;react&apos;);
-var ReactDOM = require(&apos;react-dom&apos;);
-
-require(&apos;../css/index&apos;);
-
-var Message = React.createClass({
-    getInitialState:function(){
-        console.log(&apos;getInitialState&apos;);
-        return {
-            titleMessage:&apos;hello lifecyle&apos;
+<p>scroll 的一个简单例子</p>
+<pre><code>let startTime = Date.now(); //开始时间
+let time = 500; //间隔时间
+let timer;
+window.onscroll = function throttle(){
+    let currentTime = Date.now();
+    if(currentTime - startTime &gt;= time){
+        let scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+        console.log(&apos;滚动条位置：&apos; + scrollTop);
+        startTime = currentTime;
+    }else{
+        clearTimeout(timer);
+        timer = setTimeout(function () {
+            throttle()
+        }, 50);
+    }
+}
+</code></pre><p>效果如下：每隔500毫秒触发一次事件</p>
+<p><img src="https://images2017.cnblogs.com/blog/632130/201712/632130-20171205173245597-704143487.gif" alt="image"></p>
+<p><strong>防抖函数的封装使用</strong></p>
+<pre><code>/**
+ * 节流函数
+ * @param method 事件触发的操作
+ * @param mustRunDelay 间隔多少毫秒需要触发一次事件
+ */
+function throttle(method, mustRunDelay) {
+    let timer,
+        args = arguments,
+        start;
+    return function loop() {
+        let self = this;
+        let now = Date.now();
+        if(!start){
+            start = now;
         }
-    },
-    getDefaultProps:function(){
-        console.log(&apos;getDefaultProps&apos;);
-    },
-    componentWillMount:function(){
-        this.setState({
-            titleMessage:&apos;ssssss&apos;
-        })
-        console.log(&apos;componentWillMount&apos;);
-    },
-    componentDidMount:function(){
-        console.log(&apos;componentDidMountDidMount&apos;);
-        console.log( ReactDOM.findDOMNode(this) );
-    },
-    componentWillUnmount:function(){
-        console.log(&apos;componentWillUnmount&apos;);
-    },
-    killMySelf:function(){
-        ReactDOM.unmountComponentAtNode(div); 
-    },
-    render:function(){
-        return (
-            &lt;div&gt;
-                &lt;h1&gt;{this.state.titleMessage}&lt;/h1&gt;
-                &lt;button onClick={this.killMySelf}&gt;删除组件&lt;/button&gt;
-                &lt;ul&gt;
-                    &lt;MessageList /&gt;
-                &lt;/ul&gt;
-            &lt;/div&gt;
-        )
+        if(timer){
+            clearTimeout(timer);
+        }
+        if(now - start &gt;= mustRunDelay){
+            method.apply(self, args);
+            start = now;
+        }else {
+            timer = setTimeout(function () {
+                loop.apply(self, args);
+            }, 50);
+        }
     }
-});
+}
+window.onscroll = throttle(function () {
+    let scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+    console.log(&apos;滚动条位置：&apos; + scrollTop);
+},800)
+</code></pre><h4 id="函数节流2"><a href="#函数节流2" class="headerlink" title="函数节流2"></a>函数节流2</h4><ul>
+<li>方法一：使用时间戳。<blockquote>
+<p>当触发事件的时候，我们取出当前的时间戳，然后减去之前的时间戳(最一开始值设为0)，如果大于设置的时间周期，就执行函数，然后更新时间戳为当前的时间戳，如果小于，就不执行。</p>
+</blockquote>
+</li>
+</ul>
+<p><strong>缺陷：第一次事件会立即执行，停止触发后没办法再激活事件。</strong></p>
+<pre><code>function throttle(fn, interval) {
+    var previousTime = +new Date()
 
-var MessageList = React.createClass({
-    render:function(){
-        return (
-            &lt;li&gt;list1&lt;/li&gt;
-        )
+    return function () {
+        var that = this
+        var args = arguments
+        var now = +new Date()
+        if (now - previousTime &gt;= interval) {
+            previousTime = now
+            fn.apply(that, args)
+        }
+   }
+}
+</code></pre><ul>
+<li>方法二：使用定时器</li>
+</ul>
+<blockquote>
+<p>当触发事件的时候，我们设置一个定时器，再触发事件的时候，如果定时器存在，就不执行，直到定时器执行，然后执行函数，清空定时器，这样就可以设置下个定时器。</p>
+</blockquote>
+<p><strong>缺陷：第一次事件会在n秒后执行，停止触发后依然会再执行一次事件。</strong></p>
+<pre><code>function throttle(fn, interval) {
+    var timer
+    return function (){
+        var that = this
+        var args = arguments
+
+   if(!timer){
+        timer = setTimeout(function () {
+            fn.apply(that, args)
+            timer = null
+         }, interval)
+        }
     }
+}
+</code></pre><ul>
+<li><p>方法三：优化</p>
+<blockquote>
+<p>鼠标移入能立刻执行，停止触发的时候还能再执行一次。</p>
+</blockquote>
+<p>  var throttle = function(func,delay){</p>
+<pre><code>var timer = null;
+var startTime = Date.now();
+
+return function(){
+    var curTime = Date.now();
+    var remaining = delay-(curTime-startTime);
+    var context = this;
+    var args = arguments;
+
+    clearTimeout(timer);
+    if(remaining&lt;=0){
+        func.apply(context,args);
+        startTime = Date.now();
+    }else{
+        timer = setTimeout(func,remaining);
+    }
+}
+</code></pre><p>  }</p>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/08/搭建git服务器/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hey">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ocx1796s4.bkt.clouddn.com/cat01.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hey">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/08/搭建git服务器/" itemprop="url">搭建git服务器</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-08T13:19:37+08:00">
+                2018-05-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Basic/" itemprop="url" rel="index">
+                    <span itemprop="name">Basic</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="搭建git服务器"><a href="#搭建git服务器" class="headerlink" title="搭建git服务器"></a>搭建git服务器</h3><pre><code>//git密码：1357huang
+</code></pre><h4 id="服务器端-Git-打开-RSA-认证"><a href="#服务器端-Git-打开-RSA-认证" class="headerlink" title="服务器端 Git 打开 RSA 认证"></a>服务器端 Git 打开 RSA 认证</h4><p>进入 /etc/ssh 目录，编辑 sshd_config，打开以下三个配置的注释：</p>
+<pre><code>RSAAuthentication yes
+PubkeyAuthentication yes
+AuthorizedKeysFile .ssh/authorized_keys
+</code></pre><p>保存并重启 sshd 服务：</p>
+<pre><code>[root@localhost ssh]# /etc/rc.d/init.d/sshd restart
+</code></pre><blockquote>
+<p>如果你是用 git init –bare mygit.git 建立的仓库.<br>该仓库是没有工作目录的.但问题中你说找不到工作目录.说明远程服务可能是部署工作,需要包含工作目录.</p>
+</blockquote>
+<p><a href="https://segmentfault.com/q/1010000010633417?sort=created" target="_blank" rel="noopener">https://segmentfault.com/q/1010000010633417?sort=created</a></p>
+<p><a href="https://www.cnblogs.com/dee0912/p/5815267.html" target="_blank" rel="noopener">参照文章</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/04/图片上传/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hey">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ocx1796s4.bkt.clouddn.com/cat01.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hey">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/04/图片上传/" itemprop="url">图片上传</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-04T10:08:31+08:00">
+                2018-05-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Basic/" itemprop="url" rel="index">
+                    <span itemprop="name">Basic</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="图片上传"><a href="#图片上传" class="headerlink" title="图片上传"></a>图片上传</h3><pre><code>&lt;input type=&quot;file&quot; id=&quot;file&quot; name=&quot;file&quot;accept=&quot;image/*&quot; multiple=&quot;multiple&quot; &gt;
+
+$(&apos;#camera-file&apos;).on(&apos;change&apos;,function(event){
+    event.preventDefault();
+    event.stopPropagation();
+
+    var files = event.target.files;
+
+    if(!files || files.length &lt;= 0) return false;
+
+    var _len = files.length;
+    if(files.length &gt; 6 || (picPaths.length + files.length) &gt; 6) alert(&quot;最多上传六张图片！&quot;); 
+
+    if((picPaths.length + files.length) &gt; 6) _len = 6 - picPaths.length;
+
+    for(var i = 0; i &lt; _len; i++){ 
+
+        var imageType = /^image\//;                              
+        if (!imageType.test(files[i].type)) {                   
+            alert(&quot;请选择图片！&quot;);                    
+            return false;                
+        }
+
+        var imageType = /^image\//;  
+
+        if (!imageType.test(files[0].type)) {                   
+            alert(&quot;请选择图片！&quot;);                    
+            return false;                
+        }
+
+        var size=files[i].size/1024;
+
+          if(size &gt; 1024 * 20){
+            alert(&apos;请您选择小于20M的图片&apos;);
+            return false;
+        }
+
+        upload(files[i]);
+
+    }
+
+    return false;
 })
-var div = document.createElement(&apos;div&apos;);
 
-document.body.appendChild(div);
+//预览
+function readerImage(file){
+    var reader;              
+    if (window.FileReader) {                    
+        reader = new FileReader();                
+    }else{                    
+        alert(&quot;您的设备不支持图片预览功能，如需该功能请升级您的设备！&quot;);
+        return false;                
+    } 
 
-ReactDOM.render(&lt;Message /&gt;,div,function(){
-    console.log(&apos;渲染完成了&apos;);
+    reader.onload = function(e) {
+        var li = &apos;&lt;li&gt;&lt;img src=&quot;&apos; + e.target.result + &apos;&quot; /&gt;&lt;span&gt;&lt;/span&gt;&lt;/li&gt;&apos;;
+        $(&apos;.image-box ul&apos;).prepend(li);
+
+        e.preventDefault();
+
+    };
+
+    reader.onerror = function(e){
+
+    }
+    reader.readAsDataURL(file);
+}
+
+//上传图片，没有压缩
+function upload(file,cb){
+    var formData = new FormData();
+
+    formData.append(&quot;imageType&quot;, 3);
+    formData.append(&quot;userId&quot;, userId);
+    formData.append(&quot;sessionId&quot;, sessionId);
+    formData.append(&quot;sign&quot;,&apos;&apos;);
+    formData.append(&quot;file&quot;,file);
+
+    $.ajax({  
+        url: basePath + &apos;/general/picUpdate&apos;,  
+        type: &quot;POST&quot;,  
+        data : formData,  
+        dataType:&quot;json&quot;,
+        processData: false,
+        contentType: false,
+        cache: false,  
+        success : function(data) {
+            if(data.code === 200){
+                picPaths.push(data.data.url);
+                localStorage.setItem(&apos;picPaths&apos;,JSON.stringify(picPaths));
+                readerImage(file)
+            }else{
+                alert(JSON.stringify(data));
+            }
+        },
+        error : function(error){
+            let _error = JSON.stringify(error) 
+            alert(_error);
+            console.log(_error);
+        }  
+    }); 
+}
+</code></pre><h4 id="监控history-back-1"><a href="#监控history-back-1" class="headerlink" title="监控history.back(-1)"></a>监控history.back(-1)</h4><pre><code>var isPageHide = false;
+window.addEventListener(&apos;pageshow&apos;, function () {   
+    if (isPageHide) {   
+      window.location.reload();   
+    }   
+}); 
+
+window.addEventListener(&apos;pagehide&apos;, function () {   
+    isPageHide = true;   
 });
-
-
-
-//更新顺序
-
-shouldComponentUpdate:function(nextProps, nextState){
-    console.log(&apos;shouldComponentUpdate&apos;);
-    return true;
-},
-componentWillUpdate :function(){
-    console.log(&apos;componentWillUpdate &apos;);
-},
-componentDidUpdate :function(nextProp,nextState){
-    console.log(&apos;componentDidUpdate&apos;);
-    return true;
+</code></pre><h4 id="获取参数"><a href="#获取参数" class="headerlink" title="获取参数"></a>获取参数</h4><pre><code>function getUrlParam(name) {
+    return decodeURIComponent((new RegExp(&apos;[?|&amp;]&apos; + name + &apos;=&apos; + &apos;([^&amp;;]+?)(&amp;|#|;|$)&apos;, &quot;ig&quot;).exec(location.search) || [, &quot;&quot;])[1].replace(/\+/g, &apos;%20&apos;)) || null;
 }
 </code></pre>
           
@@ -1263,7 +1715,7 @@ componentDidUpdate :function(nextProp,nextState){
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/26/像素/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/28/配置静态文件/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="hey">
@@ -1282,7 +1734,7 @@ componentDidUpdate :function(nextProp,nextState){
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/04/26/像素/" itemprop="url">像素</a></h1>
+                <a class="post-title-link" href="/2018/04/28/配置静态文件/" itemprop="url">配置静态文件</a></h1>
         
 
         <div class="post-meta">
@@ -1294,8 +1746,8 @@ componentDidUpdate :function(nextProp,nextState){
               
                 <span class="post-meta-item-text">Veröffentlicht am</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-26T11:12:44+08:00">
-                2017-04-26
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-28T17:56:41+08:00">
+                2018-04-28
               </time>
             
 
@@ -1356,797 +1808,345 @@ componentDidUpdate :function(nextProp,nextState){
       
         
           
-            <h4 id="设备像素"><a href="#设备像素" class="headerlink" title="设备像素"></a>设备像素</h4><ul>
-<li>（又叫物理像素）(大小是固定的，是不可变的)</li>
-</ul>
-<h4 id="设备独立像素"><a href="#设备独立像素" class="headerlink" title="设备独立像素"></a>设备独立像素</h4><ul>
-<li>（也叫密度无关像素，一般来讲是css里面的像素，在android机中CSS 像素就不叫”CSS 像素”了而是叫”设备独立像素”）(大小可变的)</li>
-</ul>
-<p>在PC端可以通过 screen.width/height属性来获取设备独立像素值，在PC端这个值把它当 成我们常说的屏幕分辨率（实际上它不是，但是由于在PC端设备像素和设备独立像素数值 相等，才有这么一个不准确的说法）。</p>
-<p>但你把浏览器切换到设备模式时，也就是在移动端   环境下通过上面的<br>screen.width/height获取的不是移动设备的分辨率，而是移动设备的屏宽/高（这里只是猜测），如：Iphone 5s下screen.width =320、screen.height =568。<br>本以为是浏览器里的设备环境没有完全模拟真实的移动设备环境，可是用真机测试时，还是出现同样的结果screen.width =320、screen.height=568。<br>值得注意的是：不管你手机是否切换到横屏，这两个值还是一样的。</p>
-<p>所以不管是移动端还是PC端通过screen.width/height获取的这个值是设备独立像素（CSS像素），而不是设备的屏幕分辨率，因为设备的屏幕分辨率对于WEB开发者来说是无法通过代码来获得的，是完全透明的。<br>#</p>
-<h5 id="设备像素和设备独立像素的关系"><a href="#设备像素和设备独立像素的关系" class="headerlink" title="设备像素和设备独立像素的关系"></a>设备像素和设备独立像素的关系</h5><ul>
-<li>pc:一个物理像素 = 一个设备独立像素</li>
-<li>ipone: 不确定</li>
-</ul>
-<h5 id="DPI与PPI（像素密度（pixeldensity）"><a href="#DPI与PPI（像素密度（pixeldensity）" class="headerlink" title="DPI与PPI（像素密度（pixeldensity）"></a>DPI与PPI（像素密度（pixeldensity）</h5><ul>
-<li>DPI（Dots Per Inch）是印刷行业中用来度量空间点密度用的，这个值是打印机每英寸可以喷的墨汁点数。计算机显示设备从打印机中借鉴了DPI的概念，由于计算机显示设备中的原子单位不是墨汁点而是像素，所以就创造了PPI（Pixels Per Inch），这个值是屏幕每英寸的像素数量，即像素密度（Screen density）。</li>
-<li>由于各种原因，目前PPI(主要是iOS)和DPI(比如在Android中)都会用在计算机显示设备的参数描述中，不过二者的意思是一样的，都是代表像素密度。</li>
-<li>PPI 全称是（pixel perinch）翻译下就是每英寸内有多少个像素点，这个像素点指的是设备像素点（物理像素），说得接地气点PPI就是像素密度（pixeldensity）。PPI的值越高，画质越好，也就是越细腻，看起来更有逼格。我来看看它的公式。</li>
-</ul>
-<p><img src="http://yunkus.com/wp-content/uploads/2016/07/physical-pixel-device-independent-pixels-1.jpg" alt=""></p>
-<p><img src="http://yunkus.com/wp-content/uploads/2016/07/physical-pixel-device-independent-pixels-2-1.png" alt=""></p>
-<blockquote>
-<p>以ipone6  Math.sqrt(Math.pow(1334,2) + Math.pow(750,2)) / 4.7 ~= 325.6122832234167 </p>
-</blockquote>
-<h5 id="HD与4K"><a href="#HD与4K" class="headerlink" title="HD与4K"></a>HD与4K</h5><ul>
-<li><p>现在移动设备、智能电视宣传最多的两个关键词估计就是HD、4K，这二者都是用来描述显示设备分辨率的标准，到底二者之间有什么区别？</p>
-</li>
-<li><p>HD(High-Definition)的分辨率要高于1280x720px或者720p。</p>
-</li>
-<li><p>Full HD的分辨率要高于1920x1080px，目前是主流电视以及高端手机（比如Galaxy SIV, HTC one, Sony Xperia Z, Nexus5等）采用的是这个分辨率。</p>
-</li>
-<li><p>4K（也叫做Quad HD或者Ultra HD）的分辨率从3840x2160起步，主要是现在高端电视的分辨率；其还有一个更高的4096x2160的标准，主要用于电影放映机或者专业相机。</p>
-</li>
-</ul>
-<h4 id="Retina"><a href="#Retina" class="headerlink" title="Retina"></a>Retina</h4><ul>
-<li>所谓“Retina”是一种显示技术，可以把更多的像素点压缩至一块屏幕里，从而达到更高的分辨率并提高屏幕显示的细腻程度。由摩托罗拉公司研发。最初该技术是用于Moto Aura上。这种分辨率在正常观看距离下足以使人肉眼无法分辨其中的单独像素。也被称为视网膜显示屏。</li>
-<li><p>一般来说，手机屏幕PPI达到300就可以叫做retina屏幕，视线距离在35CM左右，电脑屏幕PPI在220以上就可以称为retina屏幕，视线距离在60CM左右。macbook pro retina PPI为220，iPhone PPI为326，都被苹果命名retina屏幕。</p>
-</li>
-<li><p>Retina指的是像素视角的一个界限,即一个像素在视野里占有的角度,小于某个角度即为Retina.Retina宣传时通常使用像素密度来描述,即单位面积像素个数,常用单位是ppi.(已经假定了人眼离屏幕的距离)Retina不是分辨率指标.所以你无法比较二者的分辨率</p>
-</li>
-</ul>
-<h4 id="DP-PT-SP"><a href="#DP-PT-SP" class="headerlink" title="DP/PT/SP"></a>DP/PT/SP</h4><ul>
-<li><p>随着移动设备屏幕PPI的不断提高，对于开发者来说以前用物理像素(Physical Pixel)来度量显示元素的方法已经不奏效了。为了解决这个问题，两大平台都提出了抽象像素的概念：iOS叫做PT（Point，显示点），Android中叫做DP/DiP（Device independent Pixel，设备无关像素），如果没有特殊说明，以下统一用DP来进行描述。</p>
-</li>
-<li><p>举个例子，44x44dp的元素在非Retina屏幕中等于44x44px，在Retina屏幕中等于88x88px（变为4倍）。</p>
-</li>
-<li>SP（Scale-independent pixel）是缩放无关的像素，与DP和PT一样都是抽象像素，只不过用于描述字体的大小。</li>
-</ul>
-<h4 id="iOS中处理PPI"><a href="#iOS中处理PPI" class="headerlink" title="iOS中处理PPI"></a>iOS中处理PPI</h4><ul>
-<li><p>iOS中处理不同PPI显示的方法很简单：首先规定在多高的PPI下1DP等于1px，并以这个PPI作为基准（1x multiplier），如果显示设备的PPI是基准PPI的2倍，那么1DP等于2px（2x multiplier），其实就是简单的小学乘法。</p>
-</li>
-<li><p>在iPhone系列中，3G/S为1x multiplier，其他为2x multiplier：</p>
-</li>
-<li>在iOS中，同一个应用在非Retina屏幕和Retina屏幕显示的资源是不同的，其规则是： name.png为非Retina资源，<a href="mailto:name@2x.png" target="_blank" rel="noopener">name@2x.png</a>为Retina资源，所以对于设计人员来说，在你设计的时候需要考虑到Retina屏幕和非Retina屏幕</li>
-</ul>
-<h4 id="Android中处理PPI"><a href="#Android中处理PPI" class="headerlink" title="Android中处理PPI"></a>Android中处理PPI</h4><ul>
-<li>由于Android系统是开放的系统，要适配的PPI非常多，所以它对PPI划分的非常细：<ul>
-<li>ldpi (low) ~120dpi</li>
-<li>mdpi (medium) ~160dpi</li>
-<li>hdpi (high) ~240dpi</li>
-<li>xhdpi (extra-high) ~320dpi</li>
-<li>xxhdpi (extra-extra-high) ~480dpi</li>
-<li>xxxhdpi (extra-extra-extra-high) ~640dpi</li>
-</ul>
-</li>
-</ul>
-<h4 id="设备像素比"><a href="#设备像素比" class="headerlink" title="设备像素比"></a>设备像素比</h4><blockquote>
-<p>设备像素比 = 设备像素/设备独立像素 // 在某一方向上，x方向或者y方向</p>
-</blockquote>
-<blockquote>
-<p>你可以通过JavaScript 中的window.devicePixelRatio来获取设备中的像素比值。在css中，可以通过-webkit-device-pixel-ratio，-webkit-min-device-pixel-ratio和 -webkit-max-device-pixel-ratio进行媒体查询，对不同dpr的设备，做一些样式适配(这里只针对webkit内核的浏览器和webview)。</p>
-</blockquote>
-<blockquote>
-<p>在我自己电脑上测试 chrome 为2 ，360兼容模式undefined,极速模式为1</p>
-</blockquote>
-<p>#</p>
-<p>以iphone6为例：</p>
-<p>设备宽高为375×667，可以理解为设备独立像素(或css像素)。<br>dpr为2，根据上面的计算公式，其物理像素就应该×2，为750×1334。<br>用一张图来表现，就是这样(原谅我的盗图)：<br><img src="http://divio.qiniudn.com/FpXnQbkqJ8sqP82mmrIjYBxfliQL" alt=""></p>
-<p>上图中可以看出，对于这样的css样式：</p>
-<p><code>width: 2px;
-height: 2px;</code></p>
-<p>在不同的屏幕上(普通屏幕 vs retina屏幕)，css像素所呈现的大小(物理尺寸)是一致的，不同的是1个css像素所对应的物理像素个数是不一致的。</p>
-<p>在普通屏幕下，1个css像素 对应 1个物理像素(1:1)。<br>在retina 屏幕下，1个css像素对应 4个物理像素(1:4)。</p>
-<p>#</p>
-<h4 id="位图像素"><a href="#位图像素" class="headerlink" title="位图像素"></a>位图像素</h4><p>一个位图像素是栅格图像(如：png, jpg, gif等)最小的数据单元。每一个位图像素都包含着一些自身的显示信息(如：显示位置，颜色值，透明度等)。</p>
-<p>谈到这里，就得说一下，retina下图片的展示情况？</p>
-<p>理论上，1个位图像素对应于1个物理像素，图片才能得到完美清晰的展示。</p>
-<p>在普通屏幕下是没有问题的，但是在retina屏幕下就会出现位图像素点不够，从而导致图片模糊的情况。</p>
-<p>用一张图来表示：<br><img src="http://divio.qiniudn.com/Fuex59zSiV9pbaJG-s9wg_UpCERP" alt=""></p>
-<p>如上图：对于dpr=2的retina屏幕而言，1个位图像素对应于4个物理像素，由于单个位图像素不可以再进一步分割，所以只能就近取色，从而导致图片模糊(注意上述的几个颜色值)。</p>
-<p>所以，对于图片高清问题，比较好的方案就是两倍图片(@2x)。</p>
-<p>如：200×300(css pixel)img标签，就需要提供400×600的图片。</p>
-<p>如此一来，位图像素点个数就是原来的4倍，在retina屏幕下，位图像素点个数就可以跟物理像素点个数形成 1 : 1的比例，图片自然就清晰了(这也解释了之前留下的一个问题，为啥视觉稿的画布大小要×2？)。</p>
-<p>#</p>
-<p>这里就还有另一个问题，如果普通屏幕下，也用了两倍图片，会怎样呢？</p>
-<p>很明显，在普通屏幕下，200×300(css pixel)img标签，所对应的物理像素个数就是200×300个，而两倍图片的位图像素个数则是200×300*4，所以就出现一个物理像素点对应4个位图像素点，所以它的取色也只能通过一定的算法(显示结果就是一张只有原图像素总数四分之一，我们称这个过程叫做downsampling)，肉眼看上去虽然图片不会模糊，但是会觉得图片缺少一些锐利度，或者是有点色差(但还是可以接受的)。</p>
-<p>用一张图片来表示：</p>
-<p><img src="http://divio.qiniudn.com/FsYhT3m0Zq3ce-HLBOOlQfY9W2DD" alt=""></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/07/从浏览器输入url到显示/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="hey">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ocx1796s4.bkt.clouddn.com/cat01.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hey">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/03/07/从浏览器输入url到显示/" itemprop="url">从浏览器输入url到显示</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-07T13:19:37+08:00">
-                2017-03-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Basic/" itemprop="url" rel="index">
-                    <span itemprop="name">Basic</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="流程图"><a href="#流程图" class="headerlink" title="流程图"></a>流程图</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">graph TD</span><br><span class="line">A((URL)) --&gt; B[查看浏览器缓存]</span><br><span class="line">B --&gt; C&#123;有缓存&#125;</span><br><span class="line">B --&gt; D&#123;无缓存&#125;</span><br><span class="line">C --&gt; E[缓存未过期]</span><br><span class="line">C --&gt; F[缓存过期]</span><br><span class="line">F --&gt; H[请求资源,进入解析步骤]</span><br><span class="line">E --&gt; G[转码,渲染]</span><br><span class="line">D --&gt; I[解析url,获得协议,主机,端口,ip]</span><br><span class="line">I --&gt; J[组装成一个http请求]</span><br><span class="line">J --&gt; K[与服务器建立TCP连接]</span><br><span class="line">K --&gt; M[发送http请求]</span><br><span class="line">M --&gt; N[服务器接受请求,解析]</span><br><span class="line">N --&gt; |服务器检查请求头,验证缓存新鲜|O[服务器根据请求响应]</span><br><span class="line">O --&gt; P[通过TCP把响应报文发回浏览器]</span><br><span class="line">P --&gt; Q[浏览器接收http响应]</span><br><span class="line">P --&gt; 1[浏览器根据情况选择关闭TCP或者保持]</span><br><span class="line">Q --&gt; R[浏览器根据状态码做出处理]</span><br><span class="line">R --&gt; 2[资源可以缓存,进行缓存]</span><br><span class="line">R --&gt; S[对资源进行解码,如gzip解码]</span><br><span class="line">S --&gt; |解析html文档,构建DOM树,CSS树,执行脚本|3[渲染]</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">graph TD</span><br><span class="line">A((浏览器解析ip)) --&gt; B&#123;浏览器缓存&#125;</span><br><span class="line">B --&gt; C[本机缓存]</span><br><span class="line">C --&gt; D[hosts文件]</span><br><span class="line">D --&gt; E[路由器缓存]</span><br><span class="line">E --&gt; F[DNS缓存]</span><br><span class="line">F --&gt; G[isp网络供应商缓存]</span><br><span class="line">G --&gt; I[DNS递归查询]</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/03/理解CSRF/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="hey">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ocx1796s4.bkt.clouddn.com/cat01.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hey">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/03/03/理解CSRF/" itemprop="url">理解CSRF</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-03T10:31:01+08:00">
-                2017-03-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Basic/" itemprop="url" rel="index">
-                    <span itemprop="name">Basic</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="csrf-cross-site-reques-forgery跨站请求伪造"><a href="#csrf-cross-site-reques-forgery跨站请求伪造" class="headerlink" title="csrf(cross site reques forgery跨站请求伪造)"></a>csrf(cross site reques forgery跨站请求伪造)</h2><h3 id="csrf漏洞挖掘"><a href="#csrf漏洞挖掘" class="headerlink" title="csrf漏洞挖掘"></a>csrf漏洞挖掘</h3><ul>
-<li>目标表单是否有有效的token随机串</li>
-<li>目标表单是否有验证码</li>
-<li>目标是否判断了Referer来源</li>
-<li>网站根目录下的crossdomain.xml的“allow-access-from domain”是否是通配符</li>
-<li>目标json数据是否可以自定义callback函数</li>
-</ul>
-<h3 id="csrf实例"><a href="#csrf实例" class="headerlink" title="csrf实例"></a>csrf实例</h3><ul>
-<li>CSRF 攻击可以在受害者毫不知情的情况下以受害者名义伪造请求发送给受攻击站点，从而在并未授权的情况下执行在权限保护之下的操作。比如说，受害者 Bob 在银行有一笔存款，通过对银行的网站发送请求 <a href="http://bank.example/withdraw?account=bob&amp;amount=1000000&amp;for=bob2" target="_blank" rel="noopener">http://bank.example/withdraw?account=bob&amp;amount=1000000&amp;for=bob2</a> 可以使 Bob 把 1000000 的存款转到 bob2 的账号下。通常情况下，该请求发送到网站后，服务器会先验证该请求是否来自一个合法的 session，并且该 session 的用户 Bob 已经成功登陆。黑客 Mallory 自己在该银行也有账户，他知道上文中的 URL 可以把钱进行转帐操作。Mallory 可以自己发送一个请求给银行：<a href="http://bank.example/withdraw?account=bob&amp;amount=1000000&amp;for=Mallory。但是这个请求来自" target="_blank" rel="noopener">http://bank.example/withdraw?account=bob&amp;amount=1000000&amp;for=Mallory。但是这个请求来自</a> Mallory 而非 Bob，他不能通过安全认证，因此该请求不会起作用。这时，Mallory 想到使用 CSRF 的攻击方式，他先自己做一个网站，在网站中放入如下代码： src=”<a href="http://bank.example/withdraw?account=bob&amp;amount=1000000&amp;for=Mallory" target="_blank" rel="noopener">http://bank.example/withdraw?account=bob&amp;amount=1000000&amp;for=Mallory</a> ”，并且通过广告等诱使 Bob 来访问他的网站。当 Bob 访问该网站时，上述 url 就会从 Bob 的浏览器发向银行，而这个请求会附带 Bob 浏览器中的 cookie 一起发向银行服务器。大多数情况下，该请求会失败，因为他要求 Bob 的认证信息。但是，如果 Bob 当时恰巧刚访问他的银行后不久，他的浏览器与银行网站之间的 session 尚未过期，浏览器的 cookie 之中含有 Bob 的认证信息。这时，悲剧发生了，这个 url 请求就会得到响应，钱将从 Bob 的账号转移到 Mallory 的账号，而 Bob 当时毫不知情。等以后 Bob 发现账户钱少了，即使他去银行查询日志，他也只能发现确实有一个来自于他本人的合法请求转移了资金，没有任何被攻击的痕迹。而 Mallory 则可以拿到钱后逍遥法外。</li>
-</ul>
-<h3 id="理解csrf"><a href="#理解csrf" class="headerlink" title="理解csrf"></a>理解csrf</h3><ul>
-<li>在讨论如何抵御 CSRF 之前，先要明确 CSRF 攻击的对象，也就是要保护的对象。从以上的例子可知，CSRF<br>攻击是黑客借助受害者的 cookie 骗取服务器的信任，但是黑客并不能拿到 cookie，也看不到 cookie<br>的内容。另外，对于服务器返回的结果，由于浏览器同源策略的限制，黑客也无法进行解析。因此，黑客无法从返回的结果中得到任何东西，他所能做的就是给服务器发送请求，以执行请求中所描述的命令，在服务器端直接改变数据的值，而非窃取服务器中的数据。<br>所以，我们要保护的对象是那些可以直接产生数据改变的服务，而对于读取数据的服务，则不需要进行 CSRF 的保护。比如银行系统中转账的请求会直接改变账户的金额，会遭到 CSRF 攻击，需要保护。而查询余额是对金额的读取操作，不会改变数据，CSRF 攻击无法解析服务器返回的结果，无需保护。</li>
-</ul>
-<h3 id="防御csrf"><a href="#防御csrf" class="headerlink" title="防御csrf"></a>防御csrf</h3><ul>
-<li><p>判断Referer</p>
-<ul>
-<li>Referer 的值是由浏览器提供的，虽然 HTTP 协议上有明确的要求，但是每个浏览器对于 Referer 的具体实现可能有差别，并不能保证浏览器自身没有安全漏洞。使用验证 Referer 值的方法，就是把安全性都依赖于第三方（即浏览器）来保障，从理论上来讲，这样并不安全。事实上，对于某些浏览器，比如 IE6 或 FF2，目前已经有一些方法可以篡改 Referer 值。</li>
-<li>如果 bank.example 网站支持 IE6 浏览器，黑客完全可以把用户浏览器的 Referer 值设为以 bank.example 域名开头的地址，这样就可以通过验证，从而进行 CSRF 攻击。</li>
-<li>即便是使用最新的浏览器，黑客无法篡改 Referer 值，这种方法仍然有问题。因为 Referer 值会记录下用户的访问来源，有些用户认为这样会侵犯到他们自己的隐私权，特别是有些组织担心 Referer 值会把组织内网中的某些信息泄露到外网中。因此，用户自己可以设置浏览器使其在发送请求时不再提供 Referer。当他们正常访问银行网站时，网站会因为请求没有 Referer 值而认为是 CSRF 攻击，拒绝合法用户的访问。</li>
-</ul>
-</li>
-<li><p>token</p>
-<ul>
-<li>CSRF 主流防御方式是在后端生成表单的时候生成一串随机 token ，内置到表单里成为一个字段，同时，将此串 token 置入 session 中。每次表单提交到后端时都会检查这两个值是否一致，以此来判断此次表单提交是否是可信的。提交过一次之后，如果这个页面没有生成 CSRF token ，那么 token 将会被清空，如果有新的需求，那么 token 会被更新。</li>
-<li>CSRF 攻击之所以能够成功，是因为黑客可以完全伪造用户的请求，该请求中所有的用户验证信息都是存在于 cookie 中，因此黑客可以在不知道这些验证信息的情况下直接利用用户自己的 cookie 来通过安全验证。要抵御 CSRF，关键在于在请求中放入黑客所不能伪造的信息，并且该信息不存在于 cookie 之中。可以在 HTTP 请求中以参数的形式加入一个随机产生的 token，并在服务器端建立一个拦截器来验证这个 token，如果请求中没有 token 或者 token 内容不正确，则认为可能是 CSRF 攻击而拒绝该请求。</li>
-<li><font color="#f00">这种方法要比检查 Referer 要安全一些，token 可以在用户登陆后产生并放于 session 之中，然后在每次请求时把 token 从 session 中拿出，与请求中的 token 进行比对。</font></li>
-<li><p>但这种方法的难点在于如何把 token 以参数的形式加入请求。对于 GET 请求，token 将附在请求地址之后，这样 URL 就变成 <a href="http://url?csrftoken=tokenvalue。" target="_blank" rel="noopener">http://url?csrftoken=tokenvalue。</a> 而对于 POST 请求来说，要在 form 的最后加上</p>
-<pre><code>&lt;input type=”hidden” name=”csrftoken” value=”tokenvalue”/&gt;
-</code></pre></li>
-<li><p>这样就把 token 以参数的形式加入请求了。<br>但是，在一个网站中，可以接受请求的地方非常多，要对于每一个请求都加上 token 是很麻烦的，并且很容易漏掉，通常使用的方法就是在每次页面加载时，使用 javascript 遍历整个 dom 树，对于 dom 中所有的 a 和 form 标签后加入 token。这样可以解决大部分的请求，但是对于在页面加载之后动态生成的 html 代码，这种方法就没有作用，还需要程序员在编码时手动添加 token。</p>
-</li>
-<li>该方法还有一个缺点是难以保证 token 本身的安全。特别是在一些论坛之类支持用户自己发表内容的网站，黑客可以在上面发布自己个人网站的地址。由于系统也会在这个地址后面加上 token，黑客可以在自己的网站上得到这个 token，并马上就可以发动 CSRF 攻击。为了避免这一点，系统可以在添加 token 的时候增加一个判断，如果这个链接是链到自己本站的，就在后面添加 token，如果是通向外网则不加。不过，即使这个 csrftoken 不以参数的形式附加在请求之中，黑客的网站也同样可以通过 Referer 来得到这个 token 值以发动 CSRF 攻击。这也是一些用户喜欢手动关闭浏览器 Referer 功能的原因。</li>
-</ul>
-</li>
-<li><p>在 HTTP 头中自定义属性并验证</p>
-<ul>
-<li>这种方法也是使用 token 并进行验证，和上一种方法不同的是，这里并不是把 token 以参数的形式置于 HTTP 请求之中，而是把它放到 HTTP 头中自定义的属性里。通过 XMLHttpRequest 这个类，可以一次性给所有该类请求加上 csrftoken 这个 HTTP 头属性，并把 token 值放入其中。这样解决了上种方法在请求中加入 token 的不便，同时，通过 XMLHttpRequest 请求的地址不会被记录到浏览器的地址栏，也不用担心 token 会透过 Referer 泄露到其他网站中去。</li>
-<li><p>然而这种方法的局限性非常大。XMLHttpRequest 请求通常用于 Ajax 方法中对于页面局部的异步刷新，并非所有的请求都适合用这个类来发起，而且通过该类请求得到的页面不能被浏览器所记录下，从而进行前进，后退，刷新，收藏等操作，给用户带来不便。另外，对于没有进行 CSRF 防护的遗留系统来说，要采用这种方法来进行防护，要把所有请求都改为 XMLHttpRequest 请求，这样几乎是要重写整个网站，这代价无疑是不能接受的。</p>
-<pre><code>//HTTP 头中自定义属性
-//服务器端模拟http请求，XMLHttpRequest
-</code></pre></li>
-</ul>
-</li>
-</ul>
-<p>参考文章：<a href="http://www.ibm.com/developerworks/cn/web/1102_niugang_csrf/" target="_blank" rel="noopener">CSRF的攻击应对之道</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/02/移动端常用布局方法/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="hey">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ocx1796s4.bkt.clouddn.com/cat01.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hey">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/03/02/移动端常用布局方法/" itemprop="url">移动端常用布局方法</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-02T17:34:39+08:00">
-                2017-03-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Basic/" itemprop="url" rel="index">
-                    <span itemprop="name">Basic</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="1，使用meta-固定width"><a href="#1，使用meta-固定width" class="headerlink" title="1，使用meta,固定width"></a>1，使用meta,固定width</h3><pre><code>&lt;meta name=&quot;viewport&quot; content=&quot;width=320&quot;&gt;
-&lt;meta name=&quot;viewport&quot; content=&quot;width=640&quot;&gt;
-&lt;meta name=&quot;viewport&quot; content=&quot;width=640, user-scalable=no, target-densitydpi=device-dpi&quot;&gt;
-</code></pre><ul>
-<li>固定宽度，viewport 缩放<br>视觉稿、页面宽度、viewport width 使用统一宽度，利用浏览器自身缩放完成适配。页面样式（包括图像元素）完全按照视觉稿的尺寸，使用定值单位 （px、em）即可完成。</li>
-<li>如<a href="http://m.lizhi.fm/" target="_blank" rel="noopener">荔枝FM</a></li>
-<li><p>是这样的，WebKit内核默认按照160的DPI来排版。假如设备真实DPI是480，宽度是1080，在WebKit会按160DPI，360宽度来排版。排版结束后在放大到1080宽。<br>所以当取window.innerwidth之类的值的时候，取的是WebKit实际排版宽度360，而不是1080.target-densitydpi=device-dpi可以强制内核以480DPI排版，使画面更精细，window.innerwidth也将为屏幕宽度1080.但WebKit从去年开始取消了对target-densitydpi的支持。</p>
-<h4 id="优点："><a href="#优点：" class="headerlink" title="优点："></a>优点：</h4><ul>
-<li>开发简单    缩放交给浏览器，完全按视觉稿切图。</li>
-<li>还原精准    绝对等比例缩放，可以精准还原视觉稿（不考虑清晰度的情况下）。</li>
-<li>测试方便    在PC端即可完成大部分测试，手机端只需酌情调整一些细节（比如图标、字体混合排列时，因为字体不同造成的对齐问题）。<h4 id="不足："><a href="#不足：" class="headerlink" title="不足："></a>不足：</h4></li>
-<li>像素丢失     对于一些分辨率较低的手机，可能设备像素还未达到指定的 viewport 宽度，此时屏幕的渲染可能就不准确了。比较常见的是边框“消失”了，不过随着手机硬件的更新，这个问题会越来越少的。</li>
-<li>缩放失效     某些安卓机不能正常的根据 meta 标签中 width 的值来缩放 viewport，需要配合initial-scale 。（缩放失效问题可以通过 js 动态设定 initial-scale。）</li>
-<li>文本折行    存在于缩放失效的机型中，某些手机为了便于文本的阅读，在文本到达 viewport 边缘（非元素容器的边缘）时即进行折行，而当 viewport 宽度被修正后，浏览器并没有正确的重绘，所以就发现文本没有占满整行。一些常用的段落性文本标签会存在该问题。</li>
-</ul>
-</li>
-</ul>
-<h3 id="2，使用meta-弹性布局"><a href="#2，使用meta-弹性布局" class="headerlink" title="2，使用meta,弹性布局"></a>2，使用meta,弹性布局</h3><pre><code>&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no&quot;&gt;
-//文字流式，控件弹性，图片等比缩放
-//使用vm, vh，%
-</code></pre><h3 id="3，设置一系列分辨率"><a href="#3，设置一系列分辨率" class="headerlink" title="3，设置一系列分辨率"></a>3，设置一系列分辨率</h3><pre><code>/*公共media query查询 1rem初始设置为12px
-dpr为2时对应750的效果图 dpr为3时对应1080的效果图
-查询区间间隔暂时设置为30px 对应3倍图时 1rem大小变化1px
-对于dpr为2的有额外百分之4.2增大的兼容*/
-html{font-size:12px}
-@media screen and (max-width: 320px) {
-    html,body{font-size:62.5%}
+            <h3 id="配置静态文件"><a href="#配置静态文件" class="headerlink" title="配置静态文件"></a>配置静态文件</h3><p><a href="https://github.com/webpack-contrib/url-loader" target="_blank" rel="noopener">github:url-loader</a></p>
+<p>安装：</p>
+<pre><code>npm install url-loader file-loader --save-dev
+</code></pre><p>在js中引入：</p>
+<pre><code>require(&quot;url-loader?limit=10000!./xx/x.jpg&quot;);
+import homeBg1 from &apos;./image/homeBg1.jpg&apos;;
+</code></pre><p>webpack配置：</p>
+<pre><code>{
+    test: /\.(gif|jpg|png|woff|svg|eot|ttf)\??.*$/, 
+    loader: &apos;url-loader?limit=8192&apos;
 }
-@media screen and (min-width: 321px) and (max-width:350px) {
-    @media screen and (-webkit-min-device-pixel-ratio: 2){
-        html,body{font-size:71.62%}
-    }
-    @media screen and (-webkit-min-device-pixel-ratio: 3){
-        html,body{font-size:68.75%}
-    }
-}
-@media screen and (min-width: 351px) and (max-width:380px) {
-        html,body{font-size:75%}
-}
-@media screen and (min-width: 381px) and (max-width:410px) {
-    @media screen and (-webkit-min-device-pixel-ratio: 2){
-        html,body{font-size:84.64%}
-    }
-    @media screen and (-webkit-min-device-pixel-ratio: 3){
-        html,body{font-size:81.25%}
-    }
-}
-@media screen and (min-width: 411px) and (max-width:440px) {
-    @media screen and (-webkit-min-device-pixel-ratio: 2){
-        html,body{font-size:91.15%}
-    }
-    @media screen and (-webkit-min-device-pixel-ratio: 3){
-        html,body{font-size:87.5%}
-    }
-}
-@media screen and (min-width: 441px) and (max-width:470px) {
-    @media screen and (-webkit-min-device-pixel-ratio: 2){
-        html,body{font-size:97.66%}
-    }
-    @media screen and (-webkit-min-device-pixel-ratio: 3){
-        html,body{font-size:93.75%}
-    }
-}
-@media screen and (min-width: 471px) and (max-width:500px) {
-    @media screen and (-webkit-min-device-pixel-ratio: 2){
-        html,body{font-size:104.17%}
-    }
-    @media screen and (-webkit-min-device-pixel-ratio: 3){
-        html,body{font-size:100%}
-    }
-}
-@media screen and (min-width: 501px) and (max-width:539px) {
-    @media screen and (-webkit-min-device-pixel-ratio: 2){
-        html,body{font-size:110.68%}
-    }
-    @media screen and (-webkit-min-device-pixel-ratio: 3){
-        html,body{font-size:106.25%}
-    }
-}
-@media screen and (min-width: 540px) {
-    html,body{font-size: 150%}
-}
-</code></pre><h3 id="4，使用rem作为单位"><a href="#4，使用rem作为单位" class="headerlink" title="4，使用rem作为单位"></a>4，使用rem作为单位</h3><pre><code>/*
-// 例如: .px2rem(height, 80);
-.px2rem(@name, @px){
-    @{name}: @px / 640 * 1rem;
-}
-
-所以，对于宽高640×300px的div，我们用less就这样写：
-
-.px2rem(width, 640);
-.px2rem(height, 300);
-
-*/
-
-(function(d,psdW){
-    var dele = d.documentElement;
-    var w = dele.clientWidth; //window.screen.width
-    //psd宽度,以设计稿为准,这里假设设计稿为640
-    var psdW = psdW;
-    //换算比列,这里写上100,标示1rem=100px; 
-    //当宽度为400时，为4rem;
-    var  n = 100;
-
-    //设备宽度除以设计稿宽度，分割设计稿为n份
-    //超出某个宽度后处理
-    if( w &gt; psdW) w = psdW;
-
-    dele.style.fontSize = w / psdW * n + &apos;px&apos;;
-
-})(document,640)
-</code></pre><h3 id="5，devicePixelRatio控制meta缩放，并使用rem单位"><a href="#5，devicePixelRatio控制meta缩放，并使用rem单位" class="headerlink" title="5，devicePixelRatio控制meta缩放，并使用rem单位"></a>5，devicePixelRatio控制meta缩放，并使用rem单位</h3><pre><code>var dpr, rem, scale;
-var docEl = document.documentElement;
-var fontEl = document.createElement(&apos;style&apos;);
-var metaEl = document.querySelector(&apos;meta[name=&quot;viewport&quot;]&apos;);
-
-dpr = window.devicePixelRatio || 1;
-rem = window.screen.width * dpr / 10;
-scale = 1 / dpr;
-
-
-// 设置viewport，进行缩放，达到高清效果
-metaEl.setAttribute(&apos;content&apos;, &apos;width=&apos; + dpr * docEl.clientWidth + &apos;,initial-scale=&apos; + scale + &apos;,maximum-scale=&apos; + scale + &apos;, minimum-scale=&apos; + scale + &apos;,user-scalable=no&apos;);
-
-// 设置data-dpr属性，留作的css hack之用
-docEl.setAttribute(&apos;data-dpr&apos;, dpr);
-
-// 动态写入样式
-docEl.firstElementChild.appendChild(fontEl);
-fontEl.innerHTML = &apos;html{font-size:&apos; + rem + &apos;px!important;}&apos;;
-
-// 给js调用的，某一dpr下rem和px之间的转换函数
-window.rem2px = function(v) {
-v = parseFloat(v);
-return v * rem;
+</code></pre><p>我发现url-loader，只能一张一张的处理图片,gg？</p>
+<p><img src="http://image.xiaoyuandoudou.com/cat01.jpg" alt=""></p>
+<p>how（知乎大神提出来被我看到，但是感觉好麻烦）:</p>
+<pre><code>const requireContext = require.context(&quot;./images&quot;, true, /^\.\/.*\.png$/);
+const images = requireContext.keys().map(requireContext);
+</code></pre><p><a href="https://webpack.github.io/docs/context.html#require-context" target="_blank" rel="noopener">context</a><br><a href="http://stackoverflow.com/questions/37313954/how-to-url-loader-multiple-images-in-webpack" target="_blank" rel="noopener">- How to url-loader multiple images in webpack?</a></p>
+<pre><code>var map = {
+    &quot;./moni.png&quot;: 1127,
+    &quot;./neishi.png&quot;: 1135,
+    &quot;./neiwai.png&quot;: 1136,
+    &quot;./qimian.png&quot;: 1137,
+    &quot;./wai.png&quot;: 1138
 };
-window.px2rem = function(v) {
-    v = parseFloat(v);
-    return v / rem;
+function webpackContext(req) {
+    return __webpack_require__(webpackContextResolve(req));
 };
+function webpackContextResolve(req) {
+    return map[req] || (function() { throw new Error(&quot;Cannot find module &apos;&quot; + req + &quot;&apos;.&quot;) }());
+};
+webpackContext.keys = function webpackContextKeys() {
+    return Object.keys(map);
+};
+webpackContext.resolve = webpackContextResolve;
+module.exports = webpackContext;
+webpackContext.id = 1134;
+</code></pre><p>这是webpack内部的实现，通过</p>
+<pre><code>requireContext.keys().map(requireContext) 
+</code></pre><p>返回的是一个images的数组，比如</p>
+<pre><code>[
+    &quot;http://192.168.1.164:9060/3eae22a5480a5979b97ce6dba16036d6.png&quot;,             &quot;http://192.168.1.164:9060/571df4837e973a16cc2ea060f2570fce.png&quot;,             &quot;http://192.168.1.164:9060/5849c45e33c05f1b4ef95bef477dd7a4.png&quot;,             &quot;http://192.168.1.164:9060/3b70d432b0e5f69ec1e2771aa29684b9.png&quot;,             &quot;http://192.168.1.164:9060/b81fb4bc26ebc1bd4d84d257c0292990.png&quot;
+]
+</code></pre><p>直接用就可以了，需要注意的是生成最上那个map的时候会按照文件名排序。</p>
+<p>或者搞个数组然后做个循环</p>
 
-window.dpr = dpr;
-window.rem = rem;
+          
+        
+      
+    </div>
+    
+    
+    
 
-假设设计稿750×1334
-如果有一个区块，在psd文件中量出：宽高750×300px的div，那么如何转换成rem单位呢？
+    
 
-公式如下：
+    
 
-rem = px / 基准值;
-对于一个iphone6的视觉稿，它的基准值就是75(之前有提到);
+    
 
-//less写一个mixin，像这样：
+    <footer class="post-footer">
+      
 
-// 例如: .px2rem(height, 80);
-.px2rem(@name, @px){
-    @{name}: @px / 75 * 1rem;
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-about" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/28/安静的鱼/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hey">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ocx1796s4.bkt.clouddn.com/cat01.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hey">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/28/安静的鱼/" itemprop="url">安静的鱼</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-28T19:05:26+08:00">
+                2018-03-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/about/" itemprop="url" rel="index">
+                    <span itemprop="name">about</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <div align="center"><br><img src="http://image.xiaoyuandoudou.com/IMG_0974.JPG" alt="image"><br></div><br><div align="center"><br><img src="http://image.xiaoyuandoudou.com/IMG_0969.JPG" alt="image"><br></div><br><div align="center"><br><img src="http://image.xiaoyuandoudou.com/IMG_0970.JPG" alt="image"><br></div><br><div align="center"><br><img src="http://image.xiaoyuandoudou.com/IMG_0972.JPG" alt="image"><br></div><br><div align="center"><br><img src="http://image.xiaoyuandoudou.com/IMG_0971.JPG" alt="image"><br></div>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/18/导出模块在node和js环境都能使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hey">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ocx1796s4.bkt.clouddn.com/cat01.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hey">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/01/18/导出模块在node和js环境都能使用/" itemprop="url">导出模块</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-18T17:56:41+08:00">
+                2018-01-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Basic/" itemprop="url" rel="index">
+                    <span itemprop="name">Basic</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="导出模块在node和js环境都能使用"><a href="#导出模块在node和js环境都能使用" class="headerlink" title="导出模块在node和js环境都能使用"></a>导出模块在node和js环境都能使用</h3><blockquote>
+<p>最近配置一个环境，需要引入一个path，node环境，和js环境都使用同一个，不想写两个，使用一个文件，导入就行了</p>
+</blockquote>
+<p>node：<br>config/config.js</p>
+<pre><code>let config = {
+    // BASEPATH = &apos;http://10.243.19.12:8898/platform&apos; //xx
+    BASEPATH: &apos;http://10.243.19.192:8898/platform&apos; //xx
 }
 
-//所以，对于宽高750×300px的div，我们用less就这样写：
-
-.px2rem(width, 750);
-.px2rem(height, 300);
-//转换成html，就是这样：
-
-width: 10rem; // -&gt; 750px
-height: 4rem; // -&gt; 300px
-
-//最后因为dpr为2，页面scale了0.5，所以在手机屏幕上显示的真实宽高应该是375×150px，就刚刚好。
-
-倘若页面并没有scale 0.5，我们的代码就得这样：
-
-.px2rem(width, 375);
-.px2rem(height, 150);
-
-
-
-//设计要求：任何手机屏幕上字体大小都要统一 
-//否则可以用rem标示字体
-
-font-size: 16px;
-[data-dpr=&quot;2&quot;] input {
-  font-size: 32px;
-}
-
-.px2px(@name, @px){
-    @{name}: round(@px / 2) * 1px;
-    [data-dpr=&quot;2&quot;] &amp; {
-        @{name}: @px * 1px;
-    }
-    // for mx3
-    [data-dpr=&quot;2.5&quot;] &amp; {
-        @{name}: round(@px * 2.5 / 2) * 1px;
-    }
-    // for 小米note
-    [data-dpr=&quot;2.75&quot;] &amp; {
-        @{name}: round(@px * 2.75 / 2) * 1px;
-    }
-    [data-dpr=&quot;3&quot;] &amp; {
-        @{name}: round(@px / 2 * 3) * 1px
-    }
-    // for 三星note4
-    [data-dpr=&quot;4&quot;] &amp; {
-        @{name}: @px * 2px;
-    }
-}
-[]() http://div.io/topic/1092
-</code></pre><h4 id="优点：-1"><a href="#优点：-1" class="headerlink" title="优点："></a>优点：</h4><ul>
-<li>清晰度高，能达到物理像素的清晰度。</li>
-<li>能解决 DPR 引起的“1像素”问题。</li>
-<li>向后兼容较好，即便屏幕宽度增加、PPI 增加该方案依旧适用。</li>
-</ul>
-<h4 id="缺点："><a href="#缺点：" class="headerlink" title="缺点："></a>缺点：</h4><ul>
-<li>适配 js 需尽可能早进入，减少（避免）viewport 变化引起的重绘。</li>
-<li>某些Android机会丢掉 rem 小数部分。</li>
-<li>需要预编译库进行单位转换。</li>
-</ul>
-<h3 id="5-使用阿里flexible"><a href="#5-使用阿里flexible" class="headerlink" title="5,使用阿里flexible"></a>5,使用阿里flexible</h3><pre><code>https://github.com/amfe/article/issues/17
-使用flexible
-http://www.cnblogs.com/lyzg/p/5058356.html
-优点：
-对任意的设计搞都可以很好适配
-</code></pre><h3 id="6-使用hotcss"><a href="#6-使用hotcss" class="headerlink" title="6,使用hotcss"></a>6,使用hotcss</h3><p><a href=""></a><a href="http://imochen.github.io/hotcss/" target="_blank" rel="noopener">http://imochen.github.io/hotcss/</a></p>
-
+exports = module.exports = config;
+</code></pre><p>引入使用(js和node一样)：</p>
+<pre><code>const config = require(&apos;../config/config&apos;)
+</code></pre>
           
         
       
@@ -2185,7 +2185,7 @@ http://www.cnblogs.com/lyzg/p/5058356.html
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2235,7 +2235,7 @@ http://www.cnblogs.com/lyzg/p/5058356.html
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">Artikel</span>
                 </a>
               </div>

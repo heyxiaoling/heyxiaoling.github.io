@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="随想" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="nginx实现跨域跨域产生的原因 nginx跨域原理 首先，直接在浏览器地址栏中，输入某接口地址。是不会产生跨域问题的。只有当在某域名的页面中，由该页面发起的接口请求。才可能会跨域。nginx就类似于这个浏览器，它接收到外部对它的请求（ 注意，nginx只会接收别人对它的请求，而不会拦截浏览器的请求 ），再类似浏览器地址栏一样去请求某个接口。最后将请求到的内容返回回去 前端利用host结合ngin">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nginx实现跨">
+<meta property="og:url" content="http://yoursite.com/2018/06/28/nginx实现跨域/index.html">
+<meta property="og:site_name" content="Hey">
+<meta property="og:description" content="nginx实现跨域跨域产生的原因 nginx跨域原理 首先，直接在浏览器地址栏中，输入某接口地址。是不会产生跨域问题的。只有当在某域名的页面中，由该页面发起的接口请求。才可能会跨域。nginx就类似于这个浏览器，它接收到外部对它的请求（ 注意，nginx只会接收别人对它的请求，而不会拦截浏览器的请求 ），再类似浏览器地址栏一样去请求某个接口。最后将请求到的内容返回回去 前端利用host结合ngin">
+<meta property="og:image" content="http://image.xiaoyuandoudou.com/QQ%E6%88%AA%E5%9B%BE20181112160735.png">
+<meta property="og:image" content="http://image.xiaoyuandoudou.com/nginx01.png">
+<meta property="og:image" content="http://image.xiaoyuandoudou.com/nginx02.png">
+<meta property="og:image" content="http://image.xiaoyuandoudou.com/nginx03.png">
+<meta property="og:image" content="http://image.xiaoyuandoudou.com/nginx04.png">
+<meta property="og:updated_time" content="2018-12-01T12:00:07.582Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="nginx实现跨">
+<meta name="twitter:description" content="nginx实现跨域跨域产生的原因 nginx跨域原理 首先，直接在浏览器地址栏中，输入某接口地址。是不会产生跨域问题的。只有当在某域名的页面中，由该页面发起的接口请求。才可能会跨域。nginx就类似于这个浏览器，它接收到外部对它的请求（ 注意，nginx只会接收别人对它的请求，而不会拦截浏览器的请求 ），再类似浏览器地址栏一样去请求某个接口。最后将请求到的内容返回回去 前端利用host结合ngin">
+<meta name="twitter:image" content="http://image.xiaoyuandoudou.com/QQ%E6%88%AA%E5%9B%BE20181112160735.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/06/28/nginx实现跨域/"/>
+
+
+
+
+
+  <title>nginx实现跨 | Hey</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hey</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-fe">
+          <a href="/fe/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-arrows-alt"></i> <br />
+            
+            fe
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            Über
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/28/nginx实现跨域/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hey">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ocx1796s4.bkt.clouddn.com/cat01.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hey">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">nginx实现跨</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-28T19:05:26+08:00">
+                2018-06-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Basic/" itemprop="url" rel="index">
+                    <span itemprop="name">Basic</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="nginx实现跨域"><a href="#nginx实现跨域" class="headerlink" title="nginx实现跨域"></a>nginx实现跨域</h3><h4 id="跨域产生的原因"><a href="#跨域产生的原因" class="headerlink" title="跨域产生的原因"></a>跨域产生的原因</h4><p><img src="http://image.xiaoyuandoudou.com/QQ%E6%88%AA%E5%9B%BE20181112160735.png" alt="image"></p>
+<h4 id="nginx跨域原理"><a href="#nginx跨域原理" class="headerlink" title="nginx跨域原理"></a>nginx跨域原理</h4><ul>
+<li>首先，直接在浏览器地址栏中，输入某接口地址。是不会产生跨域问题的。<br>只有当在某域名的页面中，由该页面发起的接口请求。才可能会跨域。<br>nginx就类似于这个浏览器，它接收到外部对它的请求（ 注意，nginx只会接收别人对它的请求，而不会拦截浏览器的请求 ），再类似浏览器地址栏一样去请求某个接口。最后将请求到的内容返回回去</li>
+<li>前端利用host结合nginx实现跨域的运行流程：<br>Brower =》 host =》 nginx =》 目标地址<br>服务器数据 =》 nginx =》 Brower<br>也就是说，nginx并不是通过监听brower的请求。<br>而是作为一个服务器，接收外部对本机的请求。<br>所以是先通过host，让请求指向本机，才会经过nginx。才能进行转发。</li>
+</ul>
+<h4 id="nginx作为反向代理"><a href="#nginx作为反向代理" class="headerlink" title="nginx作为反向代理"></a>nginx作为反向代理</h4><ul>
+<li>反向代理（Reverse Proxy）方式是指以代理服务器来接受internet上的连接请求，然后将请求转发给内部网络上的服务器，并将从服务器上得到的结果返回给internet上请求连接的客户端，此时代理服务器对外就表现为一个反向代理服务器。</li>
+<li>普通的Web代理服务器不支持外部对内部网络的访问请求。当一个代理服务器能够代理外部网络上的主机，访问内部网络时，这种代理服务的方式称为反向代理服务。</li>
+<li><h4 id="代理方式"><a href="#代理方式" class="headerlink" title="代理方式"></a>代理方式</h4></li>
+</ul>
+<p>接口地址：<a href="http://47.107.162.202:7777/getMsg，" target="_blank" rel="noopener">http://47.107.162.202:7777/getMsg，</a></p>
+<p><strong>（1）使用nginx服务器</strong><br><img src="http://image.xiaoyuandoudou.com/nginx01.png" alt="image"><br><img src="http://image.xiaoyuandoudou.com/nginx02.png" alt="image"></p>
+<p><strong>（2）使用node起的服务</strong><br><img src="http://image.xiaoyuandoudou.com/nginx03.png" alt="image"><br><img src="http://image.xiaoyuandoudou.com/nginx04.png" alt="image"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/06/正则表达式常用/" rel="next" title="正则表达式常用">
+                <i class="fa fa-chevron-left"></i> 正则表达式常用
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/07/linxu下mongodb安装/" rel="prev" title="mongodb安装">
+                mongodb安装 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="http://ocx1796s4.bkt.clouddn.com/cat01.jpg"
+                alt="hey" />
+            
+              <p class="site-author-name" itemprop="name">hey</p>
+              <p class="site-description motion-element" itemprop="description">生死由命，富贵在天</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">Artikel</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">Kategorien</span>
+                
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#nginx实现跨域"><span class="nav-number">1.</span> <span class="nav-text">nginx实现跨域</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#跨域产生的原因"><span class="nav-number">1.1.</span> <span class="nav-text">跨域产生的原因</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#nginx跨域原理"><span class="nav-number">1.2.</span> <span class="nav-text">nginx跨域原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#nginx作为反向代理"><span class="nav-number">1.3.</span> <span class="nav-text">nginx作为反向代理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代理方式"><span class="nav-number">1.4.</span> <span class="nav-text">代理方式</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hey</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
