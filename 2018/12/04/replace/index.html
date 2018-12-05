@@ -79,16 +79,19 @@
 
 
 
-<meta name="description" content="创建自己的命令工具1. 创建文件夹mkdir heyxiaoyuandoudou //为了不重复     2. 初始化npm init -y 创建bin文件夹并创建文件index.js,内容如下（也可不创建bin文件夹） console.log(&amp;apos;hello&amp;apos;); 修改package.json &amp;quot;bin&amp;quot;: {     &amp;quot;heyxiaoyuando">
+<meta name="description" content="replace()方法定义和用法  replace() 方法用于在字符串中用一些字符替换另一些字符，或替换一个与正则表达式匹配的子串。语法  stringObject.replace(regexp/substr,replacement)  参数 描述 regexp/substr 必需。规定子字符串或要替换的模式的 RegExp 对象。请注意，如果该值是一个字符串，则将它作为要检索的直接量文本模式，">
 <meta property="og:type" content="article">
-<meta property="og:title" content="创建自己的命令工具">
-<meta property="og:url" content="http://yoursite.com/2018/08/10/创建自己的命令/index.html">
+<meta property="og:title" content="replace">
+<meta property="og:url" content="http://yoursite.com/2018/12/04/replace/index.html">
 <meta property="og:site_name" content="Hey">
-<meta property="og:description" content="创建自己的命令工具1. 创建文件夹mkdir heyxiaoyuandoudou //为了不重复     2. 初始化npm init -y 创建bin文件夹并创建文件index.js,内容如下（也可不创建bin文件夹） console.log(&amp;apos;hello&amp;apos;); 修改package.json &amp;quot;bin&amp;quot;: {     &amp;quot;heyxiaoyuando">
-<meta property="og:updated_time" content="2018-08-20T13:00:37.100Z">
+<meta property="og:description" content="replace()方法定义和用法  replace() 方法用于在字符串中用一些字符替换另一些字符，或替换一个与正则表达式匹配的子串。语法  stringObject.replace(regexp/substr,replacement)  参数 描述 regexp/substr 必需。规定子字符串或要替换的模式的 RegExp 对象。请注意，如果该值是一个字符串，则将它作为要检索的直接量文本模式，">
+<meta property="og:image" content="http://image.xiaoyuandoudou.com/replace01.png">
+<meta property="og:image" content="http://image.xiaoyuandoudou.com/replace02.png">
+<meta property="og:updated_time" content="2018-12-05T12:23:33.553Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="创建自己的命令工具">
-<meta name="twitter:description" content="创建自己的命令工具1. 创建文件夹mkdir heyxiaoyuandoudou //为了不重复     2. 初始化npm init -y 创建bin文件夹并创建文件index.js,内容如下（也可不创建bin文件夹） console.log(&amp;apos;hello&amp;apos;); 修改package.json &amp;quot;bin&amp;quot;: {     &amp;quot;heyxiaoyuando">
+<meta name="twitter:title" content="replace">
+<meta name="twitter:description" content="replace()方法定义和用法  replace() 方法用于在字符串中用一些字符替换另一些字符，或替换一个与正则表达式匹配的子串。语法  stringObject.replace(regexp/substr,replacement)  参数 描述 regexp/substr 必需。规定子字符串或要替换的模式的 RegExp 对象。请注意，如果该值是一个字符串，则将它作为要检索的直接量文本模式，">
+<meta name="twitter:image" content="http://image.xiaoyuandoudou.com/replace01.png">
 
 
 
@@ -118,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/08/10/创建自己的命令/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/12/04/replace/"/>
 
 
 
 
 
-  <title>创建自己的命令工具 | Hey</title>
+  <title>replace | Hey</title>
   
 
 
@@ -251,7 +254,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/10/创建自己的命令/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/04/replace/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="hey">
@@ -268,7 +271,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">创建自己的命令工具</h1>
+          <h1 class="post-title" itemprop="name headline">replace</h1>
         
 
         <div class="post-meta">
@@ -280,8 +283,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-10T21:00:00+08:00">
-                2018-08-10
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-04T17:00:00+08:00">
+                2018-12-04
               </time>
             
 
@@ -340,101 +343,56 @@
       
 
       
-        <h3 id="创建自己的命令工具"><a href="#创建自己的命令工具" class="headerlink" title="创建自己的命令工具"></a>创建自己的命令工具</h3><h4 id="1-创建文件夹"><a href="#1-创建文件夹" class="headerlink" title="1. 创建文件夹"></a>1. 创建文件夹</h4><pre><code>mkdir heyxiaoyuandoudou //为了不重复    
-</code></pre><h4 id="2-初始化"><a href="#2-初始化" class="headerlink" title="2. 初始化"></a>2. 初始化</h4><pre><code>npm init -y
-</code></pre><p>创建bin文件夹并创建文件index.js,内容如下（也可不创建bin文件夹）</p>
-<pre><code>console.log(&apos;hello&apos;);
-</code></pre><p>修改package.json</p>
-<pre><code>&quot;bin&quot;: {
-    &quot;heyxiaoyuandoudou&quot;: &quot;./bin/index.js&quot;
-},
-</code></pre><p>login ，publish</p>
-<pre><code>npm login //输入用户名密码邮箱
-npm publish
-</code></pre><blockquote>
-<p>可以在C:\Users\用户\AppData\Roaming\npm\node_modules下面找到heyxiaoyuandoudou文件夹，其实是系统变量存储在这里</p>
-</blockquote>
-<h4 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h4><pre><code>npm install -g heyxiaoyuandoudou
-heyxiaoyuandoudou  //hello
-</code></pre><h4 id="如何更新"><a href="#如何更新" class="headerlink" title="如何更新"></a>如何更新</h4><p>修改package.json的version,(顺便修改./bin/index.js)</p>
-<pre><code>&quot;version&quot;: &quot;1.0.1&quot;,
-console.log(&apos;hello 更新版本&apos;);
+        <h3 id="replace-方法"><a href="#replace-方法" class="headerlink" title="replace()方法"></a>replace()方法</h3><p><strong>定义和用法</strong></p>
+<ul>
+<li><p>replace() 方法用于在字符串中用一些字符替换另一些字符，或替换一个与正则表达式匹配的子串。<br>语法</p>
+</li>
+<li><p>stringObject.replace(regexp/substr,replacement)</p>
+<ul>
+<li>参数 描述</li>
+<li>regexp/substr 必需。规定子字符串或要替换的模式的 RegExp 对象。请注意，如果该值是一个字符串，则将它作为要检索的直接量文本模式，而不是首先被转换为 RegExp 对象。</li>
+<li>replacement 必需。一个字符串值。规定了替换文本或生成替换文本的函数。</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>返回值</p>
+<ul>
+<li>一个新的字符串，是用 replacement 替换了 regexp 的第一次匹配或所有匹配之后得到的。</li>
+</ul>
+</li>
+<li><p>说明</p>
+<ul>
+<li>字符串 stringObject 的 replace() 方法执行的是查找并替换的操作。它将在 stringObject 中查找与 regexp 相匹配的子字符串，然后用 replacement 来替换这些子串。如果 regexp 具有全局标志 g，那么 replace() 方法将替换所有匹配的子串。否则，它只替换第一个匹配子串。</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>replacement 可以是字符串，也可以是函数。如果它是字符串，那么每个匹配都将由字符串替换。但是 replacement 中的 $ 字符具有特定的含义。如下表所示，它说明从模式匹配得到的字符串将用于替换。</li>
+</ul>
+<p><strong>$的用法</strong></p>
+<p>$1,$2..&amp;99</p>
+<pre><code>var s = &quot;javascript&quot;;
+s.relpace(/(java)(script)/,&quot;$2-$1&quot;); //&quot;script-java&quot;
+</code></pre><p>$&amp; 与正则表达式相匹配的的子字符串</p>
+<pre><code>s.replace(/.*/,&quot;$&amp;$&amp;&quot;); //javascriptjavascript;
+</code></pre><p>&amp;` 位于匹配字符串左侧的文本</p>
+<pre><code>s.replace(/scri/,&apos;$`&apos;); // javajavapt
+</code></pre><p>$’ 位于匹配子字符串右侧的文本</p>
+<pre><code>s.replace(/scri/,&quot;$`&quot;); // javaptpt
+</code></pre><p>$$ 表示$符号</p>
+<p><strong>匹配价格</strong></p>
+<pre><code>1234567899&quot;.replace(/(?=\d{3}$)/,&quot;,&quot;);  //123456,789
+&quot;123456789&quot;.replace(/(?=(\d{3})+$)/,&quot;,&quot;); //,123,456,789
+&quot;123456789&quot;.replace(/(?!^)(?=(\d{3})+$)/,&quot;,&quot;); //123,456,789
+&quot;12345 123456789&quot;.replace(/(?!\b)(?=(\d{3})+\b)/g,&quot;,&quot;); //12,345 123,456,789
+&quot;12345 123456789&quot;.replace(/\B(?=(\d{3})+\b)/g,&quot;,&quot;); // 12,345 123,456,789
 
-//提交到npm
-npm publish //命令不变 //提示+ heyxiaoyuandoudou@1.0.0
+new Number(1888).toFixed(2).replace(/(?!^)(?=(\d{3})+\b)/g,&quot;、&quot;).replace(/^/,&quot;$$ &quot;);
+new Number(1888).toFixed(2).replace(/(?!^)(?=(\d{3})+\b)/g,&quot;、&quot;).replace(/^/,&quot;$ &quot;);
+</code></pre><p><img src="http://image.xiaoyuandoudou.com/replace01.png" alt="image"></p>
+<p><img src="http://image.xiaoyuandoudou.com/replace02.png" alt="image"></p>
 
-//更新使用
-npm updata heyxiaoyuandoudou -g
-
-//使用
-heyxiaoyuandoudou
-//hello 更新版本
-</code></pre><h4 id="使用辅助模块"><a href="#使用辅助模块" class="headerlink" title="使用辅助模块"></a>使用辅助模块</h4><ol>
-<li>commander：命令行开发工具</li>
-<li>chalk：命令行样式风格控制器</li>
-<li>minimist：命令行参数解析器</li>
-</ol>
-<h4 id="commander使用"><a href="#commander使用" class="headerlink" title="commander使用"></a>commander使用</h4><pre><code>npm i commander / yarn add commander
-//引入
-const program = require(&apos;commander&apos;);
-
-.parse(process.argv)
-//解析用户在命令行中输入的参数内容
-//process.argv：一个包含了命令行参数的数组
-
-//默认选项
-//-h, --help    打印输出使用（帮助）信息
-.version()
-version(str: string, flags?: string): Command
-//设置工具版本信息
-//同时会自动添加一个选项
--V, --version    //查看当前版本
-//可以通过 flags 修改默认的 -V, --version 选项
-version(&apos;1.0.0&apos;, &apos;-v, --version&apos;)
-
-.usage()
-usage(str: string): Command
-//设置程序的usage说明
-
-.arguments()
-arguments(desc: string): Command
-//设置参数
-</code></pre><h4 id="搭配使用"><a href="#搭配使用" class="headerlink" title="搭配使用"></a>搭配使用</h4><pre><code>const program = require(&apos;commander&apos;);
-const fs = require(&apos;fs&apos;);
-const chalk = require(&apos;chalk&apos;);
-program
-.command(&apos;create &lt;project_app&gt;&apos;)
-.description(&apos;创建项目&apos;)
-.action(function(project_app) {
-
-let projectPath = __dirname + &quot;/&quot; + project_app;
-
-if (fs.existsSync(projectPath)) {
-    console.log( chalk.red(`项目：${project_app} 已经存在了` ) );
-    return;
-}
-
-console.log( chalk.yellow(`即将创建项目：${project_app}` ) );
-console.log(&apos;projectPath&apos;,projectPath);
-fs.mkdirSync(projectPath);
-console.log( chalk.green(`项目目录创建成功` ) );
-
-fs.writeFileSync(projectPath + &apos;/index.html&apos;);
-console.log( chalk.green(`项目首页创建成功` ) );
-
-fs.mkdirSync(projectPath + &apos;/css&apos;);
-console.log( chalk.green(`项目css文件夹创建成功` ) );
-
-fs.mkdirSync(projectPath + &apos;/js&apos;);
-console.log( chalk.green(`项目js文件夹创建成功` ) );
-
-console.log( chalk.green(`项目构建完成` ) );
-
-});
-
-
-program.parse( process.argv );
-</code></pre>
       
     </div>
     
@@ -458,8 +416,8 @@ program.parse( process.argv );
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/08/08/nuxt.js初探/" rel="next" title="nuxt.js初探">
-                <i class="fa fa-chevron-left"></i> nuxt.js初探
+              <a href="/2018/11/28/仿照promise/" rel="next" title="实现自己的promise">
+                <i class="fa fa-chevron-left"></i> 实现自己的promise
               </a>
             
           </div>
@@ -468,8 +426,8 @@ program.parse( process.argv );
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/08/20/使用0.0.0.0/" rel="prev" title="使用0.0.0.0">
-                使用0.0.0.0 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/12/04/位置匹配/" rel="prev" title="位置匹配">
+                位置匹配 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -597,7 +555,7 @@ program.parse( process.argv );
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建自己的命令工具"><span class="nav-number">1.</span> <span class="nav-text">创建自己的命令工具</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-创建文件夹"><span class="nav-number">1.1.</span> <span class="nav-text">1. 创建文件夹</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-初始化"><span class="nav-number">1.2.</span> <span class="nav-text">2. 初始化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如何使用"><span class="nav-number">1.3.</span> <span class="nav-text">如何使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如何更新"><span class="nav-number">1.4.</span> <span class="nav-text">如何更新</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用辅助模块"><span class="nav-number">1.5.</span> <span class="nav-text">使用辅助模块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#commander使用"><span class="nav-number">1.6.</span> <span class="nav-text">commander使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#搭配使用"><span class="nav-number">1.7.</span> <span class="nav-text">搭配使用</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#replace-方法"><span class="nav-number">1.</span> <span class="nav-text">replace()方法</span></a></li></ol></div>
             
 
           </div>
