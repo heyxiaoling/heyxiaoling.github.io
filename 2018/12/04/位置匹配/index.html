@@ -85,7 +85,7 @@
 <meta property="og:url" content="http://yoursite.com/2018/12/04/位置匹配/index.html">
 <meta property="og:site_name" content="Hey">
 <meta property="og:description" content="位置匹配 在 ES5 中，共有 6 个锚：^、$、\b、\B、(?=p)、(?!p)把位置理解空字符，是对位置非常有效的理解方式。  ^ 和 $ ^（脱字符）匹配开头，在多行匹配中匹配行开头。 $（美元符号）匹配结尾，在多行匹配中匹配行结尾。比如我们把字符串的开头和结尾用 “#” 替换（位置可以替换成字符的！）： var result = &amp;quot;hello&amp;quot;.replace(/^|">
-<meta property="og:updated_time" content="2018-12-05T12:23:44.164Z">
+<meta property="og:updated_time" content="2018-12-08T00:50:00.768Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="位置匹配">
 <meta name="twitter:description" content="位置匹配 在 ES5 中，共有 6 个锚：^、$、\b、\B、(?=p)、(?!p)把位置理解空字符，是对位置非常有效的理解方式。  ^ 和 $ ^（脱字符）匹配开头，在多行匹配中匹配行开头。 $（美元符号）匹配结尾，在多行匹配中匹配行结尾。比如我们把字符串的开头和结尾用 “#” 替换（位置可以替换成字符的！）： var result = &amp;quot;hello&amp;quot;.replace(/^|">
@@ -184,7 +184,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Home
+            Startseite
           </a>
         </li>
       
@@ -204,7 +204,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
-            About
+            Über
           </a>
         </li>
       
@@ -214,7 +214,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archives
+            Archiv
           </a>
         </li>
       
@@ -278,7 +278,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-04T17:00:00+08:00">
                 2018-12-04
@@ -299,7 +299,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -362,12 +362,11 @@ console.log(result);
 </ul>
 <h4 id="b-和-B"><a href="#b-和-B" class="headerlink" title="\b 和 \B"></a>\b 和 \B</h4><ul>
 <li>\b 是单词边界，具体就是 \w 与 \W 之间的位置，也包括 \w 与 ^ 之间的位置，和 \w 与 $ 之间的位置。</li>
-<li>\B非单词边界。 \w 与 \w、 \W 与 \W、^ 与 \W，\W 与 $ 之间的位置。</li>
-</ul>
+<li><p>\B非单词边界。 \w 与 \w、 \W 与 \W、^ 与 \W，\W 与 $ 之间的位置。</p>
 <pre><code>var result = &quot;[JS] Lesson_01.mp4&quot;.replace(/\b/g, &apos;#&apos;);
 console.log(result);
 // =&gt; &quot;[#JS#] #Lesson_01#.#mp4#&quot;
-</code></pre><ul>
+</code></pre></li>
 <li><p>\w =&gt; [a-z0-9A-Z_] \W =&gt; [^0-9a-zA-Z_]</p>
 <pre><code>var result = &quot;[JS] Lesson_01.mp4&quot;.replace(/\B/g, &apos;#&apos;);
 console.log(result);
@@ -386,26 +385,13 @@ console.log(result);
 // =&gt; &quot;#h#ell#o#&quot; 
 </code></pre></li>
 </ul>
-<h4 id="lt-p-和-lt-p"><a href="#lt-p-和-lt-p" class="headerlink" title="(?&lt;=p) 和 (?&lt;!p)"></a>(?&lt;=p) 和 (?&lt;!p)</h4><p>(?=exp)”  匹配exp前面的位置</p>
-<p>(?&lt;=exp)  匹配exp后面的位置<br>(?&lt;!exp)  匹配前面不是exp的位置</p>
-<pre><code>&apos;1654654165.544&apos;.match(/(?&lt;!\.)\d+/)
-[&quot;1654654165&quot;, index: 0, input: &quot;1654654165.544&quot;, groups: undefined]
+<h4 id="lt-p-和-lt-p"><a href="#lt-p-和-lt-p" class="headerlink" title="(?&lt;=p) 和 (?&lt;!p)"></a>(?&lt;=p) 和 (?&lt;!p)</h4><ul>
+<li>(?=exp)”  匹配exp前面的位置</li>
+<li>(?&lt;=exp)  匹配exp后面的位置</li>
+<li><p>(?&lt;!exp)  匹配前面不是exp的位置</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'1654654165.544'</span>.match(<span class="regexp">/(?&lt;!\.)\d+/</span>)</span><br><span class="line">[<span class="string">"1654654165"</span>, <span class="attr">index</span>: <span class="number">0</span>, <span class="attr">input</span>: <span class="string">"1654654165.544"</span>, <span class="attr">groups</span>: <span class="literal">undefined</span>]</span><br><span class="line"></span><br><span class="line"><span class="string">'1654654165.544'</span>.match(<span class="regexp">/(?&lt;=\.)\d+/</span>)</span><br><span class="line">[<span class="string">"544"</span>, <span class="attr">index</span>: <span class="number">11</span>, <span class="attr">input</span>: <span class="string">"1654654165.544"</span>, <span class="attr">groups</span>: <span class="literal">undefined</span>]</span><br><span class="line"></span><br><span class="line"><span class="string">'1654654165.544'</span>.match(<span class="regexp">/\.\d+/</span>)</span><br><span class="line">[<span class="string">".544"</span>, <span class="attr">index</span>: <span class="number">10</span>, <span class="attr">input</span>: <span class="string">"1654654165.544"</span>, <span class="attr">groups</span>: <span class="literal">undefined</span>]</span><br><span class="line"></span><br><span class="line"><span class="string">'1654654165.544'</span>.match(<span class="regexp">/\d+\./</span>)</span><br><span class="line">[<span class="string">"1654654165."</span>, <span class="attr">index</span>: <span class="number">0</span>, <span class="attr">input</span>: <span class="string">"1654654165.544"</span>, <span class="attr">groups</span>: <span class="literal">undefined</span>]</span><br><span class="line"></span><br><span class="line"><span class="string">'1654654165.544'</span>.match(<span class="regexp">/(?=\.)\.\d+/</span>)</span><br><span class="line">[<span class="string">".544"</span>, <span class="attr">index</span>: <span class="number">10</span>, <span class="attr">input</span>: <span class="string">"1654654165.544"</span>, <span class="attr">groups</span>: <span class="literal">undefined</span>]</span><br><span class="line"></span><br><span class="line"><span class="string">'1654654165.544'</span>.match(<span class="regexp">/(?&lt;!\.)\d+$/</span>)</span><br><span class="line">[<span class="string">"44"</span>, <span class="attr">index</span>: <span class="number">12</span>, <span class="attr">input</span>: <span class="string">"1654654165.544"</span>, <span class="attr">groups</span>: <span class="literal">undefined</span>]</span><br></pre></td></tr></table></figure></li>
+</ul>
 
-&apos;1654654165.544&apos;.match(/(?&lt;=\.)\d+/)
-[&quot;544&quot;, index: 11, input: &quot;1654654165.544&quot;, groups: undefined]
-
-&apos;1654654165.544&apos;.match(/\.\d+/)
-[&quot;.544&quot;, index: 10, input: &quot;1654654165.544&quot;, groups: undefined]
-
-&apos;1654654165.544&apos;.match(/\d+\./)
-[&quot;1654654165.&quot;, index: 0, input: &quot;1654654165.544&quot;, groups: undefined]
-
-&apos;1654654165.544&apos;.match(/(?=\.)\.\d+/)
-[&quot;.544&quot;, index: 10, input: &quot;1654654165.544&quot;, groups: undefined]
-
-&apos;1654654165.544&apos;.match(/(?&lt;!\.)\d+$/)
-[&quot;44&quot;, index: 12, input: &quot;1654654165.544&quot;, groups: undefined]
-</code></pre>
       
     </div>
     
@@ -491,10 +477,10 @@ console.log(result);
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
+            Inhaltsverzeichnis
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
+            Übersicht
           </li>
         </ul>
       
@@ -519,7 +505,7 @@ console.log(result);
                 <a href="/archives/">
               
                   <span class="site-state-item-count">34</span>
-                  <span class="site-state-item-name">posts</span>
+                  <span class="site-state-item-name">Artikel</span>
                 </a>
               </div>
             
@@ -530,7 +516,7 @@ console.log(result);
               <div class="site-state-item site-state-categories">
                 
                   <span class="site-state-item-count">6</span>
-                  <span class="site-state-item-name">categories</span>
+                  <span class="site-state-item-name">Kategorien</span>
                 
               </div>
             
@@ -594,7 +580,7 @@ console.log(result);
 </div>
 
 
-  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
 
 
 
