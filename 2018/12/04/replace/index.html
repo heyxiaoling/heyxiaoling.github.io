@@ -87,7 +87,7 @@
 <meta property="og:description" content="replace()方法定义和用法  replace() 方法用于在字符串中用一些字符替换另一些字符，或替换一个与正则表达式匹配的子串。语法  stringObject.replace(regexp/substr,replacement)  参数 描述 regexp/substr 必需。规定子字符串或要替换的模式的 RegExp 对象。请注意，如果该值是一个字符串，则将它作为要检索的直接量文本模式，">
 <meta property="og:image" content="http://image.xiaoyuandoudou.com/replace01.png">
 <meta property="og:image" content="http://image.xiaoyuandoudou.com/replace02.png">
-<meta property="og:updated_time" content="2018-12-08T00:59:07.452Z">
+<meta property="og:updated_time" content="2018-12-08T01:01:02.897Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="replace">
 <meta name="twitter:description" content="replace()方法定义和用法  replace() 方法用于在字符串中用一些字符替换另一些字符，或替换一个与正则表达式匹配的子串。语法  stringObject.replace(regexp/substr,replacement)  参数 描述 regexp/substr 必需。规定子字符串或要替换的模式的 RegExp 对象。请注意，如果该值是一个字符串，则将它作为要检索的直接量文本模式，">
@@ -187,7 +187,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Startseite
+            Home
           </a>
         </li>
       
@@ -207,7 +207,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
-            Über
+            About
           </a>
         </li>
       
@@ -217,7 +217,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archiv
+            Archives
           </a>
         </li>
       
@@ -281,7 +281,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-04T17:00:00+08:00">
                 2018-12-04
@@ -302,7 +302,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -377,8 +377,9 @@
 <p>$’ 位于匹配子字符串右侧的文本<br>    <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s.replace(<span class="regexp">/scri/</span>,<span class="string">"$`"</span>); <span class="comment">// javaptpt</span></span><br></pre></td></tr></table></figure></p>
 <p>$$ 表示$符号</p>
 <p><strong>匹配价格</strong><br>    <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1234567899</span><span class="string">".replace(/(?=\d&#123;3&#125;$)/,"</span>,<span class="string">");  //123456,789</span></span><br><span class="line"><span class="string">"</span><span class="number">123456789</span><span class="string">".replace(/(?=(\d&#123;3&#125;)+$)/,"</span>,<span class="string">"); //,123,456,789</span></span><br><span class="line"><span class="string">"</span><span class="number">123456789</span><span class="string">".replace(/(?!^)(?=(\d&#123;3&#125;)+$)/,"</span>,<span class="string">"); //123,456,789</span></span><br><span class="line"><span class="string">"</span><span class="number">12345</span> <span class="number">123456789</span><span class="string">".replace(/(?!\b)(?=(\d&#123;3&#125;)+\b)/g,"</span>,<span class="string">"); //12,345 123,456,789</span></span><br><span class="line"><span class="string">"</span><span class="number">12345</span> <span class="number">123456789</span><span class="string">".replace(/\B(?=(\d&#123;3&#125;)+\b)/g,"</span>,<span class="string">"); // 12,345 123,456,789</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">new Number(1888).toFixed(2).replace(/(?!^)(?=(\d&#123;3&#125;)+\b)/g,"</span>、<span class="string">").replace(/^/,"</span>$$ <span class="string">");</span></span><br><span class="line"><span class="string">new Number(1888).toFixed(2).replace(/(?!^)(?=(\d&#123;3&#125;)+\b)/g,"</span>、<span class="string">").replace(/^/,"</span>$ <span class="string">");</span></span><br></pre></td></tr></table></figure></p>
-<p><img src="http://image.xiaoyuandoudou.com/replace01.png" alt="image"></p>
-<p><img src="http://image.xiaoyuandoudou.com/replace02.png" alt="image"></p>
+<div align="left"><br><img src="http://image.xiaoyuandoudou.com/replace01.png" alt="image"><br></div>   
+
+<div align="left"><br><img src="http://image.xiaoyuandoudou.com/replace02.png" alt="image"><br></div>   
 
       
     </div>
@@ -403,8 +404,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/11/28/仿照promise/" rel="next" title="实现自己的promise">
-                <i class="fa fa-chevron-left"></i> 实现自己的promise
+              <a href="/2018/12/04/位置匹配/" rel="next" title="位置匹配">
+                <i class="fa fa-chevron-left"></i> 位置匹配
               </a>
             
           </div>
@@ -412,10 +413,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/12/04/位置匹配/" rel="prev" title="位置匹配">
-                位置匹配 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -469,10 +466,10 @@
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Inhaltsverzeichnis
+            Table of Contents
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Übersicht
+            Overview
           </li>
         </ul>
       
@@ -497,7 +494,7 @@
                 <a href="/archives/">
               
                   <span class="site-state-item-count">34</span>
-                  <span class="site-state-item-name">Artikel</span>
+                  <span class="site-state-item-name">posts</span>
                 </a>
               </div>
             
@@ -508,7 +505,7 @@
               <div class="site-state-item site-state-categories">
                 
                   <span class="site-state-item-count">6</span>
-                  <span class="site-state-item-name">Kategorien</span>
+                  <span class="site-state-item-name">categories</span>
                 
               </div>
             
@@ -572,7 +569,7 @@
 </div>
 
 
-  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
 
 
 
