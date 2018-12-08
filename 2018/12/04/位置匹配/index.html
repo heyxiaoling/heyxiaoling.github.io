@@ -85,7 +85,7 @@
 <meta property="og:url" content="http://yoursite.com/2018/12/04/位置匹配/index.html">
 <meta property="og:site_name" content="Hey">
 <meta property="og:description" content="位置匹配 在 ES5 中，共有 6 个锚： ^、$、\b、\B、(?=p)、(?!p) 把位置理解空字符，是对位置非常有效的理解方式。  ^ 和 $ ^（脱字符）匹配开头，在多行匹配中匹配行开头。 $（美元符号）匹配结尾，在多行匹配中匹配行结尾。比如我们把字符串的开头和结尾用 “#” 替换（位置可以替换成字符的！）：   123var result = &quot;hello&quot;.replace(/^|$/g">
-<meta property="og:updated_time" content="2018-12-08T01:22:32.312Z">
+<meta property="og:updated_time" content="2018-12-08T01:26:58.078Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="位置匹配">
 <meta name="twitter:description" content="位置匹配 在 ES5 中，共有 6 个锚： ^、$、\b、\B、(?=p)、(?!p) 把位置理解空字符，是对位置非常有效的理解方式。  ^ 和 $ ^（脱字符）匹配开头，在多行匹配中匹配行开头。 $（美元符号）匹配结尾，在多行匹配中匹配行结尾。比如我们把字符串的开头和结尾用 “#” 替换（位置可以替换成字符的！）：   123var result = &quot;hello&quot;.replace(/^|$/g">
@@ -184,7 +184,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Startseite
+            Home
           </a>
         </li>
       
@@ -204,7 +204,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
-            Über
+            About
           </a>
         </li>
       
@@ -214,7 +214,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archiv
+            Archives
           </a>
         </li>
       
@@ -278,7 +278,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-04T17:00:00+08:00">
                 2018-12-04
@@ -299,7 +299,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -357,12 +357,15 @@
 <h4 id="b-和-B"><a href="#b-和-B" class="headerlink" title="\b 和 \B"></a>\b 和 \B</h4><ul>
 <li>\b 是单词边界，具体就是 \w 与 \W 之间的位置，也包括 \w 与 ^ 之间的位置，和 \w 与 $ 之间的位置。</li>
 <li><p>\B非单词边界。 \w 与 \w、 \W 与 \W、^ 与 \W，\W 与 $ 之间的位置。</p>
-  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">        <span class="keyword">var</span> result = <span class="string">"[JS] Lesson_01.mp4"</span>.replace(<span class="regexp">/\b/g</span>, <span class="string">'#'</span>);</span><br><span class="line">        <span class="built_in">console</span>.log(result);</span><br><span class="line">        <span class="comment">// =&gt; "[#JS#] #Lesson_01#.#mp4#"</span></span><br><span class="line"></span><br><span class="line">    <span class="string">``</span><span class="string">`    </span></span><br><span class="line"><span class="string">- \w =&gt; [a-z0-9A-Z_] \W =&gt; [^0-9a-zA-Z_]</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    `</span><span class="string">``</span> javascript    </span><br><span class="line">        <span class="keyword">var</span> result = <span class="string">"[JS] Lesson_01.mp4"</span>.replace(<span class="regexp">/\B/g</span>, <span class="string">'#'</span>);</span><br><span class="line">        <span class="built_in">console</span>.log(result);</span><br><span class="line">        <span class="comment">// =&gt; "#[J#S]# L#e#s#s#o#n#_#0#1.m#p#4"</span></span><br></pre></td></tr></table></figure>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = <span class="string">"[JS] Lesson_01.mp4"</span>.replace(<span class="regexp">/\b/g</span>, <span class="string">'#'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(result);</span><br><span class="line"><span class="comment">// =&gt; "[#JS#] #Lesson_01#.#mp4#"</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>\w =&gt; [a-z0-9A-Z_] \W =&gt; [^0-9a-zA-Z_]</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = <span class="string">"[JS] Lesson_01.mp4"</span>.replace(<span class="regexp">/\B/g</span>, <span class="string">'#'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(result);</span><br><span class="line"><span class="comment">// =&gt; "#[J#S]# L#e#s#s#o#n#_#0#1.m#p#4"</span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h4 id="p-和-p-是正向先行断言和负向先行断言"><a href="#p-和-p-是正向先行断言和负向先行断言" class="headerlink" title="(?=p) 和 (?!p) 是正向先行断言和负向先行断言"></a>(?=p) 和 (?!p) 是正向先行断言和负向先行断言</h4><ul>
 <li><p>(?=p)，其中 p 是一个子模式，即 p 前面的位置，或者说，该位置后面的字符要匹配 p。</p>
-  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = <span class="string">"hello"</span>.replace(<span class="regexp">/(?=l)/g</span>, <span class="string">'#'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(result);</span><br><span class="line"><span class="comment">// =&gt; "he#l#lo"</span></span><br></pre></td></tr></table></figure>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = <span class="string">"hello"</span>.replace(<span class="regexp">/(?=l)/g</span>, <span class="string">'#'</span>);</span><br><span class="line">    <span class="built_in">console</span>.log(result);</span><br><span class="line">    <span class="comment">// =&gt; "he#l#lo"</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>(?!p) 就是 (?=p) 的反面意思，要求当前是一个位置，但不是 \b 前面的位置，其实 (?!\b) 说的就是 \B。</p>
   <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = <span class="string">"hello"</span>.replace(<span class="regexp">/(?!l)/g</span>, <span class="string">'#'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(result);</span><br><span class="line"><span class="comment">// =&gt; "#h#ell#o#"</span></span><br></pre></td></tr></table></figure>
@@ -398,8 +401,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/12/04/replace/" rel="next" title="replace">
-                <i class="fa fa-chevron-left"></i> replace
+              <a href="/2018/11/28/仿照promise/" rel="next" title="实现自己的promise">
+                <i class="fa fa-chevron-left"></i> 实现自己的promise
               </a>
             
           </div>
@@ -407,6 +410,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/04/replace/" rel="prev" title="replace">
+                replace <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -460,10 +467,10 @@
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Inhaltsverzeichnis
+            Table of Contents
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Übersicht
+            Overview
           </li>
         </ul>
       
@@ -488,7 +495,7 @@
                 <a href="/archives/">
               
                   <span class="site-state-item-count">34</span>
-                  <span class="site-state-item-name">Artikel</span>
+                  <span class="site-state-item-name">posts</span>
                 </a>
               </div>
             
@@ -499,7 +506,7 @@
               <div class="site-state-item site-state-categories">
                 
                   <span class="site-state-item-count">6</span>
-                  <span class="site-state-item-name">Kategorien</span>
+                  <span class="site-state-item-name">categories</span>
                 
               </div>
             
@@ -563,7 +570,7 @@
 </div>
 
 
-  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
 
 
 
