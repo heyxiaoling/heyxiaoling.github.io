@@ -85,7 +85,7 @@
 <meta property="og:url" content="http://yoursite.com/2018/12/04/位置匹配/index.html">
 <meta property="og:site_name" content="Hey">
 <meta property="og:description" content="位置匹配 在 ES5 中，共有 6 个锚： ^、$、\b、\B、(?=p)、(?!p) 把位置理解空字符，是对位置非常有效的理解方式。  ^ 和 $ ^（脱字符）匹配开头，在多行匹配中匹配行开头。 $（美元符号）匹配结尾，在多行匹配中匹配行结尾。比如我们把字符串的开头和结尾用 “#” 替换（位置可以替换成字符的！）：   123var result = &quot;hello&quot;.replace(/^|$/g">
-<meta property="og:updated_time" content="2018-12-08T00:54:48.769Z">
+<meta property="og:updated_time" content="2018-12-08T01:22:32.312Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="位置匹配">
 <meta name="twitter:description" content="位置匹配 在 ES5 中，共有 6 个锚： ^、$、\b、\B、(?=p)、(?!p) 把位置理解空字符，是对位置非常有效的理解方式。  ^ 和 $ ^（脱字符）匹配开头，在多行匹配中匹配行开头。 $（美元符号）匹配结尾，在多行匹配中匹配行结尾。比如我们把字符串的开头和结尾用 “#” 替换（位置可以替换成字符的！）：   123var result = &quot;hello&quot;.replace(/^|$/g">
@@ -347,7 +347,7 @@
 </ul>
 <h4 id="和"><a href="#和" class="headerlink" title="^ 和 $"></a>^ 和 $</h4><ul>
 <li>^（脱字符）匹配开头，在多行匹配中匹配行开头。</li>
-<li><p>$（美元符号）匹配结尾，在多行匹配中匹配行结尾。<br>比如我们把字符串的开头和结尾用 “#” 替换（位置可以替换成字符的！）：</p>
+<li><p>$（美元符号）匹配结尾，在多行匹配中匹配行结尾。<br>比如我们把字符串的开头和结尾用 “#” 替换（位置可以替换成字符的！）<br>：</p>
   <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = <span class="string">"hello"</span>.replace(<span class="regexp">/^|$/g</span>, <span class="string">'#'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(result);</span><br><span class="line"><span class="comment">// =&gt; "#hello#"</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>多行匹配模式（即有修饰符 m）时，二者是行的概念，这一点需要我们注意：</p>
@@ -356,7 +356,8 @@
 </ul>
 <h4 id="b-和-B"><a href="#b-和-B" class="headerlink" title="\b 和 \B"></a>\b 和 \B</h4><ul>
 <li>\b 是单词边界，具体就是 \w 与 \W 之间的位置，也包括 \w 与 ^ 之间的位置，和 \w 与 $ 之间的位置。</li>
-<li>\B非单词边界。 \w 与 \w、 \W 与 \W、^ 与 \W，\W 与 $ 之间的位置。  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">        <span class="keyword">var</span> result = <span class="string">"[JS] Lesson_01.mp4"</span>.replace(<span class="regexp">/\b/g</span>, <span class="string">'#'</span>);</span><br><span class="line">        <span class="built_in">console</span>.log(result);</span><br><span class="line">        <span class="comment">// =&gt; "[#JS#] #Lesson_01#.#mp4#"</span></span><br><span class="line">    <span class="string">``</span><span class="string">`    </span></span><br><span class="line"><span class="string">- \w =&gt; [a-z0-9A-Z_] \W =&gt; [^0-9a-zA-Z_]</span></span><br><span class="line"><span class="string">    `</span><span class="string">``</span> javascript    </span><br><span class="line">        <span class="keyword">var</span> result = <span class="string">"[JS] Lesson_01.mp4"</span>.replace(<span class="regexp">/\B/g</span>, <span class="string">'#'</span>);</span><br><span class="line">        <span class="built_in">console</span>.log(result);</span><br><span class="line">        <span class="comment">// =&gt; "#[J#S]# L#e#s#s#o#n#_#0#1.m#p#4"</span></span><br></pre></td></tr></table></figure>
+<li><p>\B非单词边界。 \w 与 \w、 \W 与 \W、^ 与 \W，\W 与 $ 之间的位置。</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">        <span class="keyword">var</span> result = <span class="string">"[JS] Lesson_01.mp4"</span>.replace(<span class="regexp">/\b/g</span>, <span class="string">'#'</span>);</span><br><span class="line">        <span class="built_in">console</span>.log(result);</span><br><span class="line">        <span class="comment">// =&gt; "[#JS#] #Lesson_01#.#mp4#"</span></span><br><span class="line"></span><br><span class="line">    <span class="string">``</span><span class="string">`    </span></span><br><span class="line"><span class="string">- \w =&gt; [a-z0-9A-Z_] \W =&gt; [^0-9a-zA-Z_]</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    `</span><span class="string">``</span> javascript    </span><br><span class="line">        <span class="keyword">var</span> result = <span class="string">"[JS] Lesson_01.mp4"</span>.replace(<span class="regexp">/\B/g</span>, <span class="string">'#'</span>);</span><br><span class="line">        <span class="built_in">console</span>.log(result);</span><br><span class="line">        <span class="comment">// =&gt; "#[J#S]# L#e#s#s#o#n#_#0#1.m#p#4"</span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h4 id="p-和-p-是正向先行断言和负向先行断言"><a href="#p-和-p-是正向先行断言和负向先行断言" class="headerlink" title="(?=p) 和 (?!p) 是正向先行断言和负向先行断言"></a>(?=p) 和 (?!p) 是正向先行断言和负向先行断言</h4><ul>
