@@ -543,26 +543,13 @@
 <li>replacement 可以是字符串，也可以是函数。如果它是字符串，那么每个匹配都将由字符串替换。但是 replacement 中的 $ 字符具有特定的含义。如下表所示，它说明从模式匹配得到的字符串将用于替换。</li>
 </ul>
 <p><strong>$的用法</strong></p>
-<p>$1,$2..&amp;99</p>
-<pre><code>var s = &quot;javascript&quot;;
-s.relpace(/(java)(script)/,&quot;$2-$1&quot;); //&quot;script-java&quot;
-</code></pre><p>$&amp; 与正则表达式相匹配的的子字符串</p>
-<pre><code>s.replace(/.*/,&quot;$&amp;$&amp;&quot;); //javascriptjavascript;
-</code></pre><p>&amp;` 位于匹配字符串左侧的文本</p>
-<pre><code>s.replace(/scri/,&apos;$`&apos;); // javajavapt
-</code></pre><p>$’ 位于匹配子字符串右侧的文本</p>
-<pre><code>s.replace(/scri/,&quot;$`&quot;); // javaptpt
-</code></pre><p>$$ 表示$符号</p>
-<p><strong>匹配价格</strong></p>
-<pre><code>1234567899&quot;.replace(/(?=\d{3}$)/,&quot;,&quot;);  //123456,789
-&quot;123456789&quot;.replace(/(?=(\d{3})+$)/,&quot;,&quot;); //,123,456,789
-&quot;123456789&quot;.replace(/(?!^)(?=(\d{3})+$)/,&quot;,&quot;); //123,456,789
-&quot;12345 123456789&quot;.replace(/(?!\b)(?=(\d{3})+\b)/g,&quot;,&quot;); //12,345 123,456,789
-&quot;12345 123456789&quot;.replace(/\B(?=(\d{3})+\b)/g,&quot;,&quot;); // 12,345 123,456,789
-
-new Number(1888).toFixed(2).replace(/(?!^)(?=(\d{3})+\b)/g,&quot;、&quot;).replace(/^/,&quot;$$ &quot;);
-new Number(1888).toFixed(2).replace(/(?!^)(?=(\d{3})+\b)/g,&quot;、&quot;).replace(/^/,&quot;$ &quot;);
-</code></pre><p><img src="http://image.xiaoyuandoudou.com/replace01.png" alt="image"></p>
+<p>$1,$2..&amp;99<br>    <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s = <span class="string">"javascript"</span>;</span><br><span class="line">s.relpace(<span class="regexp">/(java)(script)/</span>,<span class="string">"$2-$1"</span>); <span class="comment">//"script-java"</span></span><br></pre></td></tr></table></figure></p>
+<p>$&amp; 与正则表达式相匹配的的子字符串<br>    <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s.replace(<span class="regexp">/.*/</span>,<span class="string">"$&amp;$&amp;"</span>); <span class="comment">//javascriptjavascript;</span></span><br></pre></td></tr></table></figure></p>
+<p>&amp;` 位于匹配字符串左侧的文本<br>    <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s.replace(<span class="regexp">/scri/</span>,<span class="string">'$`'</span>); <span class="comment">// javajavapt</span></span><br></pre></td></tr></table></figure></p>
+<p>$’ 位于匹配子字符串右侧的文本<br>    <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s.replace(<span class="regexp">/scri/</span>,<span class="string">"$`"</span>); <span class="comment">// javaptpt</span></span><br></pre></td></tr></table></figure></p>
+<p>$$ 表示$符号</p>
+<p><strong>匹配价格</strong><br>    <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1234567899</span><span class="string">".replace(/(?=\d&#123;3&#125;$)/,"</span>,<span class="string">");  //123456,789</span></span><br><span class="line"><span class="string">"</span><span class="number">123456789</span><span class="string">".replace(/(?=(\d&#123;3&#125;)+$)/,"</span>,<span class="string">"); //,123,456,789</span></span><br><span class="line"><span class="string">"</span><span class="number">123456789</span><span class="string">".replace(/(?!^)(?=(\d&#123;3&#125;)+$)/,"</span>,<span class="string">"); //123,456,789</span></span><br><span class="line"><span class="string">"</span><span class="number">12345</span> <span class="number">123456789</span><span class="string">".replace(/(?!\b)(?=(\d&#123;3&#125;)+\b)/g,"</span>,<span class="string">"); //12,345 123,456,789</span></span><br><span class="line"><span class="string">"</span><span class="number">12345</span> <span class="number">123456789</span><span class="string">".replace(/\B(?=(\d&#123;3&#125;)+\b)/g,"</span>,<span class="string">"); // 12,345 123,456,789</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">new Number(1888).toFixed(2).replace(/(?!^)(?=(\d&#123;3&#125;)+\b)/g,"</span>、<span class="string">").replace(/^/,"</span>$$ <span class="string">");</span></span><br><span class="line"><span class="string">new Number(1888).toFixed(2).replace(/(?!^)(?=(\d&#123;3&#125;)+\b)/g,"</span>、<span class="string">").replace(/^/,"</span>$ <span class="string">");</span></span><br></pre></td></tr></table></figure></p>
+<p><img src="http://image.xiaoyuandoudou.com/replace01.png" alt="image"></p>
 <p><img src="http://image.xiaoyuandoudou.com/replace02.png" alt="image"></p>
 
           
